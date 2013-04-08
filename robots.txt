@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://harole.github.com/sitemap.xml 
