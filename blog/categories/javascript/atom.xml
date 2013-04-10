@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | Harole's blog]]></title>
+  <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://harole.github.com/"/>
+  <updated>2013-04-11T00:27:11+08:00</updated>
+  <id>http://harole.github.com/</id>
+  <author>
+    <name><![CDATA[harole]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)]]></title>
+    <link href="http://harole.github.com/blog/2013/04/10/javascript-event-handle/"/>
+    <updated>2013-04-10T12:49:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/10/javascript-event-handle</id>
+    <content type="html"><![CDATA[<p>一. 常用的事件处理程序</p>
+
+<pre><code>funciton handleClick( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", handleClcik); 
+</code></pre>
+
+<p>上述程序功能：监听 "element" 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
+
+<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
+
+<pre><code>// mousehover
+funciton handleMouseHover( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "mousehover", handleMouseHover);       
+
+// mouseup
+funciton handleMouseUp( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "mousehover", handleMouseUp);      
+
+// 其他事件
+......
+</code></pre>
+
+<p>很明显上面的代码被复制了多，于是我们又有了如下代码：</p>
+
+<pre><code>// eventHandle
+funciton eventHandle( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", eventHandle); 
+addListener(element, "mousehover", eventHandle);        
+addListener(element, "mousehover", eventHandle);    
+
+// 其他监听事件
+......
+</code></pre>
+
+<p>恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
+"click", "mousehover", "mouseup"等的处理程序大部分情况下是不一样的。于是有了如下方案：</p>
+
+<p>二. 隔离应用逻辑</p>
+
+<pre><code>var app =  {
+
+    showPopWindow: function () {
+
+        var popWindow = document.getElementById("popWindow");
+
+        popWindow.style.left = event.clientX + "px";
+        popWindow.style.top = event.clientY + "px";         
+
+    },
+
+    handleClick: function () {
+
+        this.showPopWindow( event );
+
+        // click 的其他代码
+        ......
+    },
+
+    handleMouseHover: function () {
+
+        this.showPopWindow( event );
+
+        // mousehover 的其他代码
+        ......
+
+    }
+
+    // 其他事件处理函数
+    ......      
+};
+
+addListener(element, "click", function (event) {
+    app.handleClick(event);
+});
+
+addListener(element, "mousehover", function (event) {
+    app.handleClick(event);
+});
+
+// 其他事件的监听
+......
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

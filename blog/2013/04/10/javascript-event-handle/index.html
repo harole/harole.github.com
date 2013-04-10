@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Becoming your story - Harole's blog</title>
+  <title>编写可维护的javascript事件处理程序的一般方法(本文未完，待续......) - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to &hellip;">
+  <meta name="description" content="一. 常用的事件处理程序 funciton handleClick( event ) { var popWindow = document.getElementById("popWindow"); popWindow.style.left = event.clientX + "px"; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/08/becoming-your-story">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/04/10/javascript-event-handle">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -106,7 +106,7 @@
   
 
 
-<time datetime="2013-04-08T18:34:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-04-10T12:49:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
           
         </div>
       
@@ -115,64 +115,126 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">Becoming Your Story</h3>
+      <h3 class="entry-title">编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)</h3>
     </div>
-    <div class="entry-content"><p>In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to hide it and drew pictures instead.</p>
+    <div class="entry-content"><p>一. 常用的事件处理程序</p>
 
+<pre><code>funciton handleClick( event ) {
 
-<p></p>
+    var popWindow = document.getElementById("popWindow");
 
-<p>My parents were concerned and had me tested for learning disabilities. They even moved us to a new city. I was so far behind, it took me years to catch up. But, the school was better. In third grade, I started to read.</p>
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
 
+    popWindow.className = "visible";
 
-<p></p>
+}
+addListener(element, "click", handleClcik); 
+</code></pre>
 
-<p>There&#8217;s something that became part of my ethos then. I was at the bottom. I had to do everything to work my way up. I remember constantly telling myself that I just needed to work harder than everyone.  I had to hustle.</p>
+<p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
 
+<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
 
-<p></p>
+<pre><code>// mousehover
+funciton handleMouseHover( event ) {
 
-<p>I became my story. I worked hard and I hustled. </p>
+    var popWindow = document.getElementById("popWindow");
 
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
 
-<!-- more -->
+    popWindow.className = "visible";
 
+}
+addListener(element, "mousehover", handleMouseHover);       
 
-<p>Everyone has a story. You repeat it in your head every day. It&#8217;s a story of how the world reacts to you and how you react to the world. It&#8217;s a story of patterns, where things are experienced over and over again. </p>
+// mouseup
+funciton handleMouseUp( event ) {
 
+    var popWindow = document.getElementById("popWindow");
 
-<p>Just as it can be powerful and energizing, it can also be dangerous. If its a tragic story, you become a tragedy. </p>
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
 
+    popWindow.className = "visible";
 
-<p>I remember reading East of Eden and there was a passage that I&#8217;ll always remember. Cal&#8217;s father, trying a new venture, lost all of his money. Cal was smart; he executed on an idea and made a lot of money. When he tried to give it to his father, his father rejected it. Cal goes to his room and burns the money, one note at a time.</p>
+}
+addListener(element, "mousehover", handleMouseUp);      
 
+// 其他事件
+......
+</code></pre>
 
-<p>His caretaker Lee comes in:  </p>
+<p>很明显上面的代码被复制了多，于是我们又有了如下代码：</p>
 
+<pre><code>// eventHandle
+funciton eventHandle( event ) {
 
-<p>Are you taken pleasure from this whipping you&#8217;re giving yourself? Are you enjoying your despair?”</p>
+    var popWindow = document.getElementById("popWindow");
 
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
 
-<p>“Lee!”</p>
+    popWindow.className = "visible";
 
+}
+addListener(element, "click", eventHandle); 
+addListener(element, "mousehover", eventHandle);        
+addListener(element, "mousehover", eventHandle);    
 
-<p>“You’re pretty full of yourself. You’re marveling at the tragic spectacle of Caleb Trask—Caleb the magnificent, the unique. Caleb whose suffering should have its Homer. </p>
+// 其他监听事件
+......
+</code></pre>
 
+<p>恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
+&#8220;click&#8221;, &#8220;mousehover&#8221;, &#8220;mouseup&#8221;等的处理程序大部分情况下是不一样的。于是有了如下方案：</p>
 
-<p>Maybe it was easier for Cal to become a tragedy. It was easier to think that what he experienced was uniquely painful.  It was hard to think that many others have suffered, often worse than him. Unique pain has more meaning. </p>
+<p>二. 隔离应用逻辑</p>
 
+<pre><code>var app =  {
 
-<p>The danger is that you internalize the pain. You become someone who deserves the misfortune and can&#8217;t get away from it. You expect it and it happens. </p>
+    showPopWindow: function () {
 
+        var popWindow = document.getElementById("popWindow");
 
-<p>If your story is of success, of overcoming adversity, you become that story. As you try it, it validates itself and becomes more true. You expect it and it happens. </p>
+        popWindow.style.left = event.clientX + "px";
+        popWindow.style.top = event.clientY + "px";         
 
+    },
 
-<p>We have words for these people in the startup world: hustlers, cockroaches (which is a compliment for people and companies that refuse to die), lucky. It&#8217;s the person that surprises us. It&#8217;s a person that shouldn&#8217;t succeed, who gets rejected and ignored, but somehow does and does it with energy. </p>
+    handleClick: function () {
 
+        this.showPopWindow( event );
 
-<p>When you tell yourself your story, pause and think it over. Be a force, be a hustler, be creative, be lucky, but don&#8217;t be a tragedy. </p>
+        // click 的其他代码
+        ......
+    },
 
+    handleMouseHover: function () {
+
+        this.showPopWindow( event );
+
+        // mousehover 的其他代码
+        ......
+
+    }
+
+    // 其他事件处理函数
+    ......      
+};
+
+addListener(element, "click", function (event) {
+    app.handleClick(event);
+});
+
+addListener(element, "mousehover", function (event) {
+    app.handleClick(event);
+});
+
+// 其他事件的监听
+......
+</code></pre>
 </div>
   </div>  
   
@@ -198,15 +260,21 @@
   
 
 
-<time datetime="2013-04-08T18:34:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-04-10T12:49:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
           
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>javascript</a>
+  
+</span>
 
 
         </p>
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/08/becoming-your-story/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/08/becoming-your-story/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/10/javascript-event-handle/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/10/javascript-event-handle/" >Tweet</a>
   
   
   
@@ -215,10 +283,10 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/08/thoese-who-we-are/" title="Previous Post: 那些，曾经">&laquo;上一篇: 那些，曾经</a>
+            <a class="basic-alignment left" href="/blog/2013/04/08/becoming-your-story/" title="Previous Post: Becoming your story">&laquo;上一篇: Becoming your story</a>
           
           
-            <a class="basic-alignment right" href="/blog/2013/04/10/javascript-event-handle/" title="Next Post: 编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)">下一篇:编写可维护的javascript事件处理程序的一般方法(本文未完，待续......) &raquo;</a>
+            <a class="basic-alignment right" href="/blog/2013/04/10/inline-block-drop/" title="Next Post: 两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上">下一篇:两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->

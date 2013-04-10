@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-04-10T01:48:41+08:00</updated>
+  <updated>2013-04-11T00:27:11+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,249 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上]]></title>
+    <link href="http://harole.github.com/blog/2013/04/10/inline-block-drop/"/>
+    <updated>2013-04-10T21:58:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/10/inline-block-drop</id>
+    <content type="html"><![CDATA[<p>一. div.left 和 div.right 均有内容。</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;inline-cblock&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    .box {
+        width: 400px;
+        height: 100px;
+        margin: 50px auto;
+        background: black;
+        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
+        letter-spacing: -3px;
+        font-size: 0;       
+        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
+    }
+    .box .left {
+        display: inline-block;
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        background: yellow;
+    }
+    .box .right {
+        display: inline-block;
+        width: 200px;
+        height: 100px;  
+        font-size: 50px;   
+        background: blue;       
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;div class="left"&gt;Left&lt;/div&gt;
+        &lt;div class="right"&gt;Right&lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>预期效果：
+<img src="http://harole.github.com/images/inline-block-01.png" alt="all have content" /></p>
+
+<p>二. 仅把 div.left 中的内容去掉，效果：
+<img src="http://harole.github.com/images/inline-block-02.png" alt="all have content" /></p>
+
+<!-- more -->
+
+
+<p>三. 仅把 div.right 中的内容去掉
+<img src="http://harole.github.com/images/inline-block-03.png" alt="all have content" /></p>
+
+<p>问题“二”和“三”解决办法：</p>
+
+<blockquote><p>方案一：</p>
+
+<pre><code>.box .left {
+    verical-align: top;
+}
+.box .right {
+    verical-align: top;
+} 
+</code></pre>
+
+<p>方案二：</p>
+
+<pre><code>.box .left {
+    verical-align: middle;
+}
+.box .right {
+    verical-align: middle;
+} 
+</code></pre>
+
+<p>方案三:</p>
+
+<pre><code>.box .left {
+    verical-align: top;
+}
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>.box .right {
+    verical-align: top;
+}
+</code></pre></blockquote>
+
+<p>总结（对方案的理解）：</p>
+
+<blockquote><p>对于方案一和方案二的解决，可能会好奇如果都 vertical-align：baseline; 能否解决，答案是否定的。</p>
+
+<p>vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div
+的 baseline 在容器本身的底部，另外一个有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来。</p>
+
+<p>问题一：对于上面的“有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来”会有个疑问，即“为什么是有内容的 div 和没有内容 div 的对齐，而不是没有内容的和有内容的 div 对齐呢？”</p>
+
+<p>其实也可以看做是没有内容的 div 和有内容的 div 对齐，因为浏览器的默认是向下排版的所以向下溢出了，而没有向上溢出。</p>
+
+<p>问题二：对于方案一和方案二都可以理解了，那为什么方案三也可以呢？</p>
+
+<p>当缺少内容的 div 设置了 “verti-align: top;”， 有内容的 div 和它对齐（也可以看做它和有内容的 div 对齐，原因看问题一的解答），就达到期望的显示了。</p>
+
+<p>当有内容的 div 设置了 “verti-align: top;” ，当然就回到 div.box 的顶部了，至于没有内容的 div 为什么没有和有内容的 div 对齐呢？原因和问题一的解答是一样的，没有内容的 div 尝试对齐，但是它不能向上溢出。</p></blockquote>
+
+<p>关于 vertical-align 相关信息可以参考链接：<a href="http://www.jb51.net/css/10337.html">http://www.jb51.net/css/10337.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)]]></title>
+    <link href="http://harole.github.com/blog/2013/04/10/javascript-event-handle/"/>
+    <updated>2013-04-10T12:49:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/10/javascript-event-handle</id>
+    <content type="html"><![CDATA[<p>一. 常用的事件处理程序</p>
+
+<pre><code>funciton handleClick( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", handleClcik); 
+</code></pre>
+
+<p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
+
+<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
+
+<pre><code>// mousehover
+funciton handleMouseHover( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "mousehover", handleMouseHover);       
+
+// mouseup
+funciton handleMouseUp( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "mousehover", handleMouseUp);      
+
+// 其他事件
+......
+</code></pre>
+
+<p>很明显上面的代码被复制了多，于是我们又有了如下代码：</p>
+
+<pre><code>// eventHandle
+funciton eventHandle( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", eventHandle); 
+addListener(element, "mousehover", eventHandle);        
+addListener(element, "mousehover", eventHandle);    
+
+// 其他监听事件
+......
+</code></pre>
+
+<p>恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
+&#8220;click&#8221;, &#8220;mousehover&#8221;, &#8220;mouseup&#8221;等的处理程序大部分情况下是不一样的。于是有了如下方案：</p>
+
+<p>二. 隔离应用逻辑</p>
+
+<pre><code>var app =  {
+
+    showPopWindow: function () {
+
+        var popWindow = document.getElementById("popWindow");
+
+        popWindow.style.left = event.clientX + "px";
+        popWindow.style.top = event.clientY + "px";         
+
+    },
+
+    handleClick: function () {
+
+        this.showPopWindow( event );
+
+        // click 的其他代码
+        ......
+    },
+
+    handleMouseHover: function () {
+
+        this.showPopWindow( event );
+
+        // mousehover 的其他代码
+        ......
+
+    }
+
+    // 其他事件处理函数
+    ......      
+};
+
+addListener(element, "click", function (event) {
+    app.handleClick(event);
+});
+
+addListener(element, "mousehover", function (event) {
+    app.handleClick(event);
+});
+
+// 其他事件的监听
+......
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Becoming your story]]></title>

@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Becoming your story - Harole's blog</title>
+  <title>两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to &hellip;">
+  <meta name="description" content="一. div.left 和 div.right 均有内容。 &lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;inline-cblock&lt;/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/08/becoming-your-story">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/04/10/inline-block-drop">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -106,7 +108,7 @@
   
 
 
-<time datetime="2013-04-08T18:34:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
           
         </div>
       
@@ -115,64 +117,117 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">Becoming Your Story</h3>
+      <h3 class="entry-title">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</h3>
     </div>
-    <div class="entry-content"><p>In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to hide it and drew pictures instead.</p>
+    <div class="entry-content"><p>一. div.left 和 div.right 均有内容。</p>
 
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;inline-cblock&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    .box {
+        width: 400px;
+        height: 100px;
+        margin: 50px auto;
+        background: black;
+        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
+        letter-spacing: -3px;
+        font-size: 0;       
+        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
+    }
+    .box .left {
+        display: inline-block;
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        background: yellow;
+    }
+    .box .right {
+        display: inline-block;
+        width: 200px;
+        height: 100px;  
+        font-size: 50px;   
+        background: blue;       
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;div class="left"&gt;Left&lt;/div&gt;
+        &lt;div class="right"&gt;Right&lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
-<p></p>
+<p>预期效果：
+<img src="/images/inline-block-01.png" alt="all have content" /></p>
 
-<p>My parents were concerned and had me tested for learning disabilities. They even moved us to a new city. I was so far behind, it took me years to catch up. But, the school was better. In third grade, I started to read.</p>
-
-
-<p></p>
-
-<p>There&#8217;s something that became part of my ethos then. I was at the bottom. I had to do everything to work my way up. I remember constantly telling myself that I just needed to work harder than everyone.  I had to hustle.</p>
-
-
-<p></p>
-
-<p>I became my story. I worked hard and I hustled. </p>
-
+<p>二. 仅把 div.left 中的内容去掉，效果：
+<img src="/images/inline-block-02.png" alt="all have content" /></p>
 
 <!-- more -->
 
 
-<p>Everyone has a story. You repeat it in your head every day. It&#8217;s a story of how the world reacts to you and how you react to the world. It&#8217;s a story of patterns, where things are experienced over and over again. </p>
+<p>三. 仅把 div.right 中的内容去掉
+<img src="/images/inline-block-03.png" alt="all have content" /></p>
 
+<p>问题“二”和“三”解决办法：</p>
 
-<p>Just as it can be powerful and energizing, it can also be dangerous. If its a tragic story, you become a tragedy. </p>
+<blockquote><p>方案一：</p>
 
+<pre><code>.box .left {
+    verical-align: top;
+}
+.box .right {
+    verical-align: top;
+} 
+</code></pre>
 
-<p>I remember reading East of Eden and there was a passage that I&#8217;ll always remember. Cal&#8217;s father, trying a new venture, lost all of his money. Cal was smart; he executed on an idea and made a lot of money. When he tried to give it to his father, his father rejected it. Cal goes to his room and burns the money, one note at a time.</p>
+<p>方案二：</p>
 
+<pre><code>.box .left {
+    verical-align: middle;
+}
+.box .right {
+    verical-align: middle;
+} 
+</code></pre>
 
-<p>His caretaker Lee comes in:  </p>
+<p>方案三:</p>
 
+<pre><code>.box .left {
+    verical-align: top;
+}
+</code></pre>
 
-<p>Are you taken pleasure from this whipping you&#8217;re giving yourself? Are you enjoying your despair?”</p>
+<p>或者</p>
 
+<pre><code>.box .right {
+    verical-align: top;
+}
+</code></pre></blockquote>
 
-<p>“Lee!”</p>
+<p>总结（对方案的理解）：</p>
 
+<blockquote><p>对于方案一和方案二的解决，可能会好奇如果都 vertical-align：baseline; 能否解决，答案是否定的。</p>
 
-<p>“You’re pretty full of yourself. You’re marveling at the tragic spectacle of Caleb Trask—Caleb the magnificent, the unique. Caleb whose suffering should have its Homer. </p>
+<p>vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div
+的 baseline 在容器本身的底部，另外一个有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来。</p>
 
+<p>问题一：对于上面的“有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来”会有个疑问，即“为什么是有内容的 div 和没有内容 div 的对齐，而不是没有内容的和有内容的 div 对齐呢？”</p>
 
-<p>Maybe it was easier for Cal to become a tragedy. It was easier to think that what he experienced was uniquely painful.  It was hard to think that many others have suffered, often worse than him. Unique pain has more meaning. </p>
+<p>其实也可以看做是没有内容的 div 和有内容的 div 对齐，因为浏览器的默认是向下排版的所以向下溢出了，而没有向上溢出。</p>
 
+<p>问题二：对于方案一和方案二都可以理解了，那为什么方案三也可以呢？</p>
 
-<p>The danger is that you internalize the pain. You become someone who deserves the misfortune and can&#8217;t get away from it. You expect it and it happens. </p>
+<p>当缺少内容的 div 设置了 “verti-align: top;”， 有内容的 div 和它对齐（也可以看做它和有内容的 div 对齐，原因看问题一的解答），就达到期望的显示了。</p>
 
+<p>当有内容的 div 设置了 “verti-align: top;” ，当然就回到 div.box 的顶部了，至于没有内容的 div 为什么没有和有内容的 div 对齐呢？原因和问题一的解答是一样的，没有内容的 div 尝试对齐，但是它不能向上溢出。</p></blockquote>
 
-<p>If your story is of success, of overcoming adversity, you become that story. As you try it, it validates itself and becomes more true. You expect it and it happens. </p>
-
-
-<p>We have words for these people in the startup world: hustlers, cockroaches (which is a compliment for people and companies that refuse to die), lucky. It&#8217;s the person that surprises us. It&#8217;s a person that shouldn&#8217;t succeed, who gets rejected and ignored, but somehow does and does it with energy. </p>
-
-
-<p>When you tell yourself your story, pause and think it over. Be a force, be a hustler, be creative, be lucky, but don&#8217;t be a tragedy. </p>
-
+<p>关于 vertical-align 相关信息可以参考链接：<a href="http://www.jb51.net/css/10337.html">http://www.jb51.net/css/10337.html</a></p>
 </div>
   </div>  
   
@@ -198,7 +253,7 @@
   
 
 
-<time datetime="2013-04-08T18:34:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
           
 
 
@@ -206,7 +261,7 @@
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/08/becoming-your-story/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/08/becoming-your-story/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/10/inline-block-drop/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/10/inline-block-drop/" >Tweet</a>
   
   
   
@@ -215,10 +270,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/08/thoese-who-we-are/" title="Previous Post: 那些，曾经">&laquo;上一篇: 那些，曾经</a>
+            <a class="basic-alignment left" href="/blog/2013/04/10/javascript-event-handle/" title="Previous Post: 编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)">&laquo;上一篇: 编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/04/10/javascript-event-handle/" title="Next Post: 编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)">下一篇:编写可维护的javascript事件处理程序的一般方法(本文未完，待续......) &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->
