@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-04-13T01:30:28+08:00</updated>
+  <updated>2013-04-13T02:31:29+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)]]></title>
+    <title type="html"><![CDATA[像 html 模块化一样，模块化 javascript 事件处理程序，使之可维护！]]></title>
     <link href="http://harole.github.com/blog/2013/04/10/javascript-event-handle/"/>
     <updated>2013-04-10T12:49:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/04/10/javascript-event-handle</id>
@@ -36,6 +36,9 @@ addListener(element, "click", handleClcik);
 <p>上述程序功能：监听 "element" 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
 
 <p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
+
+<!-- more -->
+
 
 <pre><code>// mousehover
 funciton handleMouseHover( event ) {
@@ -95,7 +98,7 @@ addListener(element, "mousehover", eventHandle);
 
 <pre><code>var app =  {
 
-    showPopWindow: function () {
+    showPopWindow: function (event) {
 
         var popWindow = document.getElementById("popWindow");
 
@@ -104,7 +107,7 @@ addListener(element, "mousehover", eventHandle);
 
     },
 
-    handleClick: function () {
+    handleClick: function (event) {
 
         this.showPopWindow( event );
 
@@ -112,7 +115,7 @@ addListener(element, "mousehover", eventHandle);
         ......
     },
 
-    handleMouseHover: function () {
+    handleMouseHover: function (event) {
 
         this.showPopWindow( event );
 
@@ -130,7 +133,111 @@ addListener(element, "click", function (event) {
 });
 
 addListener(element, "mousehover", function (event) {
+    app.handleMouseHover(event);
+});
+
+// 其他事件的监听
+......
+</code></pre>
+
+<p>隔离应用逻辑后，代码还存在一个问题，即 event 对象被无节制的分发（event 由 addListener 传入了 app.handleClick 或 app.handleMouseHover，再传入app.showPopWindow）。</p>
+
+<p>三. 不要分发事件对象</p>
+
+<p>应用逻辑 showPopWindow 不应该依赖于 event 对象来完成功能。如果想要测试这个方法，必须重新创建一个 event 对象，否则在函数内无法找到 event.clientX 和 event.clientY，就无法测试。所以做了如下改进：</p>
+
+<pre><code>var app =  {
+
+    showPopWindow: function ( x, y ) {
+
+        var popWindow = document.getElementById("popWindow");
+
+        popWindow.style.left = x + "px";
+        popWindow.style.top = y + "px";         
+
+    },
+
+    handleClick: function ( event ) {
+
+        this.showPopWindow( event.clientX, event.clientY );
+
+        // click 的其他代码
+        ......
+    },
+
+    handleMouseHover: function ( event ) {
+
+        this.showPopWindow( event.clientX, event.clientY );
+
+        // mousehover 的其他代码
+        ......
+
+    }
+
+    // 其他事件处理函数
+    ......      
+};
+
+addListener(element, "click", function (event) {
     app.handleClick(event);
+});
+
+addListener(element, "mousehover", function (event) {
+    app.handleMouseHover(event);
+});
+
+// 其他事件的监听
+......
+
+// 当我们想测试的时候，就不在需要重新创建一个event对象了，只需要向下面一样即可
+app.showPopWindow( "20", "20" );
+</code></pre>
+
+<p>当处理事件时，最好让事件处理程序成为唯一一个接触到 event 对象的函数（即 handleClick 和 handleMouseHover 等）。
+事件处理程序应当在进入应用逻辑 showPopWindow 之前对 event 对象执行必要的操作包括阻止默认行为和事件冒泡。最终形成如下代码：</p>
+
+<pre><code>var app =  {
+
+    showPopWindow: function ( x, y ) {
+
+        var popWindow = document.getElementById("popWindow");
+
+        popWindow.style.left = x + "px";
+        popWindow.style.top = y + "px";         
+
+    },
+
+    handleClick: function ( event ) {
+        // 阻止默认行为
+        event.preventDefault();
+
+        // click 的其他代码
+        ...... 
+
+        this.showPopWindow( event.clientX, event.clientY );                     
+    },
+
+    handleMouseHover: function ( event ) {
+        // 阻止默认行为
+        event.preventDefault();
+
+        // mousehover 的其他代码
+        ......
+
+        this.showPopWindow( event.clientX, event.clientY );
+
+    }
+
+    // 其他事件处理函数
+    ......      
+};
+
+addListener(element, "click", function (event) {
+    app.handleClick(event);
+});
+
+addListener(element, "mousehover", function (event) {
+    app.handleMouseHover(event);
 });
 
 // 其他事件的监听

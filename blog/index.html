@@ -222,7 +222,7 @@
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">编写可维护的javascript事件处理程序的一般方法(本文未完，待续&#8230;&#8230;)</h3>
+            <h3 class="entry-title">像 Html 模块化一样，模块化 Javascript 事件处理程序，使之可维护！</h3>
                   
       </div>
   
@@ -245,107 +245,12 @@ addListener(element, "click", handleClcik);
 
 <p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
 
-<pre><code>// mousehover
-funciton handleMouseHover( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "mousehover", handleMouseHover);       
-
-// mouseup
-funciton handleMouseUp( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "mousehover", handleMouseUp);      
-
-// 其他事件
-......
-</code></pre>
-
-<p>很明显上面的代码被复制了多，于是我们又有了如下代码：</p>
-
-<pre><code>// eventHandle
-funciton eventHandle( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "click", eventHandle); 
-addListener(element, "mousehover", eventHandle);        
-addListener(element, "mousehover", eventHandle);    
-
-// 其他监听事件
-......
-</code></pre>
-
-<p>恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
-&#8220;click&#8221;, &#8220;mousehover&#8221;, &#8220;mouseup&#8221;等的处理程序大部分情况下是不一样的。于是有了如下方案：</p>
-
-<p>二. 隔离应用逻辑</p>
-
-<pre><code>var app =  {
-
-    showPopWindow: function () {
-
-        var popWindow = document.getElementById("popWindow");
-
-        popWindow.style.left = event.clientX + "px";
-        popWindow.style.top = event.clientY + "px";         
-
-    },
-
-    handleClick: function () {
-
-        this.showPopWindow( event );
-
-        // click 的其他代码
-        ......
-    },
-
-    handleMouseHover: function () {
-
-        this.showPopWindow( event );
-
-        // mousehover 的其他代码
-        ......
-
-    }
-
-    // 其他事件处理函数
-    ......      
-};
-
-addListener(element, "click", function (event) {
-    app.handleClick(event);
-});
-
-addListener(element, "mousehover", function (event) {
-    app.handleClick(event);
-});
-
-// 其他事件的监听
-......
-</code></pre>
 </div>
       
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/04/10/javascript-event-handle/">Read on &rarr;</a>
+        </footer>
       
     </div>      
   
@@ -628,7 +533,7 @@ addListener(element, "mousehover", function (event) {
       </li>
     
       <li class="post">
-        <a href="/blog/2013/04/10/javascript-event-handle/">编写可维护的javascript事件处理程序的一般方法(本文未完，待续&#8230;&#8230;)</a>
+        <a href="/blog/2013/04/10/javascript-event-handle/">像 html 模块化一样，模块化 javascript 事件处理程序，使之可维护！</a>
       </li>
     
       <li class="post">
