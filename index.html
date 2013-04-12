@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content=" HTML caption. Link to Google. BLOG WITH RIGHT SIDEBAR Lorem ipsum dolor sit amet consecteur. Recent Project test test test Recent Project ">
+  <meta name="description" content="Welcome to Menucool.com. HTML caption. Link to Google. BLOG WITH RIGHT SIDEBAR Lorem ipsum dolor sit amet consecteur. Recent Project test test test &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,22 +85,26 @@
   	</div>
   	<div id="main">  	      
 	    <div id="content">			
-      		<div id="header_section">
-	<div id="sliderFrame">    	
-    <div id="ribbon"></div>
-    <div id="slider">
-        <a href="http://www.menucool.com/jquery-slider" target="_blank">
-            <img src="/images/slider1.jpg" alt="" />
-        </a>
-        <a href="http://harole.com"><img src="/images/slider1.jpg" alt="" /></a>
-        <a href="http://harole.com"><img src="/images/slider2.jpg" alt="" /></a>
-        <a href="http://harole.com"><img src="/images/slider3.jpg" alt="" /></a>
-        <a href="http://harole.com"><img src="/images/slider4.jpg" alt="harole"/></a>
+      		<div id="header_section">	
+	<div id="sliderFrame">
+        <div id="slider">
+            <a href="http://www.menucool.com/javascript-image-slider" target="_blank">
+                <img src="/images/slider1.jpg" alt="#cap1" />
+            </a>
+            <img src="/images/slider1.jpg" alt="Excepteur sint occaecat cupidatat" />
+            <img src="/images/slider2.jpg" alt="Lorem ipsum dolor sit amet" />
+            <img src="/images/slider3.jpg" alt="Pure Javascript. No jQuery. No flash." />
+            <img src="/images/slider4.jpg" alt="#cap2" />            
+        </div>
+        <div style="display: none;">
+            <div id="cap1">
+                Welcome to <a href="http://www.menucool.com/">Menucool.com</a>.
+            </div>
+            <div id="cap2">
+                <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
+            </div>
+        </div>
     </div>
-    <div id="htmlcaption" style="display: none;">
-        <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
-    </div>
-</div>	
 </div>
 <div class="container intro_text intro_blog">
 	<h4>BLOG WITH RIGHT SIDEBAR</h4>
@@ -115,12 +119,103 @@
 	</ul>
 </div>
 <div class="container clearfix home_ft">
-	<div class="activ_project">
-		<h2>Recent Project</h2>
-		
+	<div class="active_project">
+		<h2>Technical Ability</h2>
+		<ul>
+			<li class="myskill html clearfix">
+				<div class="tit">
+					HTML
+				</div>
+				<div class="slider_bar">
+					<div class="slider_bar_html"></div>
+				</div>	
+			</li>
+			<li class="myskill css clearfix">
+				<div class="tit">
+					CSS
+				</div>
+				<div class="slider_bar">
+					<div class="slider_bar_css"></div>
+				</div>
+			</li>
+			<li class="myskill javascript clearfix">
+				<div class="tit">
+					JAVASCRIPT
+				</div>
+				<div class="slider_bar">
+					<div class="slider_bar_javascript"></div>
+				</div>
+			</li>
+		</ul>
 	</div>
 </div>
 
+<script type="text/javascript">	
+	// function sliderBarMove(){
+	// 	var self = $('.slider_bar_move');
+	// 	var delay = 30;
+	// 	var slider_bar_interval;
+
+	// 	function sliderBar(){
+	// 		self.css("right", "-=5")	
+
+	// 		if ( self.css("right") === "0px" ){
+	// 			clearInterval(slider_bar_interval);		
+	// 		}				
+	// 	}
+	// 	slider_bar_interval = setInterval(sliderBar, delay);	
+	// }
+	// sliderBarMove();
+
+	function sliderBar(className, width, overWidth, delay) {
+		var klass = "." + className;		
+
+		this.delay = delay;
+		this.self = $(klass);
+		this.width = width;
+		this.overWidth = overWidth + "px";
+	
+
+	};
+	sliderBar.prototype.moverSliderBar = function () {
+		var slider_bar_interval;
+		var self = this.self;
+		var overWidth =this.overWidth;
+		function changeX() {
+			
+			if ( self.css("right") === overWidth ) {
+				clearInterval(slider_bar_interval);				
+			}
+			else {
+				self.css("right", "-=5");			
+
+			}
+			
+		}
+		slider_bar_interval = setInterval(changeX, this.delay);
+	};
+	var clearHello;
+	function hello() {
+		var active_project = $(".active_project");
+		var scrolltop = $("body").scrollTop();
+		
+		console.log(scrolltop)
+		if ( scrolltop >= 500 ) {
+			var sliderBar01 = new sliderBar("slider_bar_html", 450, 200, 30); 
+			var sliderBar02 = new sliderBar("slider_bar_css", 450, 350, 50); 
+			var sliderBar03 = new sliderBar("slider_bar_javascript", 450, 10, 30); 
+			sliderBar01.moverSliderBar();
+			sliderBar02.moverSliderBar();
+			sliderBar03.moverSliderBar();
+			console.log("hi")
+			clearInterval(clearHello);
+		};
+		// clearHello = setInterval(hello, 300);
+	};
+	clearHello = setInterval(hello, 50);
+	// hello()
+	
+</script>
     	</div>
   	</div>
   	<footer role="contentinfo"><!-- <p>
