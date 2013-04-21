@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-04-14T16:34:51+08:00</updated>
+  <updated>2013-04-21T23:48:37+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ie6 下 png 图片透明，滤镜解决方案]]></title>
+    <link href="http://harole.github.com/blog/2013/04/21/ie6-png/"/>
+    <updated>2013-04-21T23:36:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/21/ie6-png</id>
+    <content type="html"><![CDATA[<p>一. 正常情况下（ie6下回出现半透明）：</p>
+
+<pre><code>/* 注：这里一般使用 png24 */
+background: url("../images/test.png");
+</code></pre>
+
+<p>二. 解决方案：</p>
+
+<pre><code>/* 注：1. 在上述代码下加入下面代码
+ *     2. 图片的路径使用的是相对路径       
+ */
+_background:transparent;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上]]></title>
