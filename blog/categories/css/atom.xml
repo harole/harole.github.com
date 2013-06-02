@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-04-23T23:55:52+08:00</updated>
+  <updated>2013-06-03T00:32:35+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[input ie6,7下双边距问题]]></title>
+    <link href="http://harole.github.com/blog/2013/05/19/input-ie67/"/>
+    <updated>2013-05-19T10:46:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/05/19/input-ie67</id>
+    <content type="html"><![CDATA[<p>一. 先来看 input 产生的几个问题。</p>
+
+<p>情况一：</p>
+
+<hr />
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;test&lt;/title&gt;         
+
+    &lt;style type="text/css"&gt;
+
+    /* 去除默认的 padding 和 margin */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .has-margins {
+        background-color: gray;
+        margin-left: 5em;        
+    }
+    .has-layout {
+        background-color: tan;
+        width: 30em;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action="ignore"&gt;            
+        &lt;div class="has-margins"&gt;
+            &lt;div class="has-layout"&gt;
+                INPUT tag, type=text:&lt;br&gt;
+                &lt;input type="text"&gt;&lt;br&gt;
+                INPUT tag, type=checkbox:&lt;br&gt;
+                &lt;input type="checkbox"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;      
+
+    &lt;!-- 注释2 --&gt;
+    &lt;!-- &lt;form action="ignore"&gt;            
+        &lt;div class="has-margins"&gt;
+            &lt;div class="has-margins"&gt;
+                &lt;div class="has-layout"&gt;
+                    INPUT tag, type=text:&lt;br&gt;
+                    &lt;input type="text"&gt;&lt;br&gt;
+                    INPUT tag, type=checkbox:&lt;br&gt;
+                    &lt;input type="checkbox"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt; --&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>ie6，7 下 input 和 .has-margin 之间多了 80px（即 .box 的 margin-left 的同时也复制给了 input），如下图:</p>
+
+<p><img src="/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
+
+<!-- more -->
+
+
+<p>如果将之前的form注释掉，使用注释二中的代码，会得到下图：</p>
+
+<p><img src="/images/2013-06-02-input-ie67-01.png" alt="all have content" /></p>
+
+<p>出现上述bug的原因是，.has-layout 中的 CSS “width: 30em” 出发了 haslayout 让 input 具有继承所有祖先元素的 margin-left 的总和的特性！所以有了上述情况，同理可以将 “width: 30em” 换成 “zoom: 1;”等触发 haslayout ，可以达到同样的结果！</p>
+
+<p>解决方案：</p>
+
+<ol>
+<li><p>方案一：
+在 input 前加上文本，或是加上 label 元素等行内元素。这也是我们很少发现 bug 的原因，一般而言我们都在 input 的前加上了 label 元素。
+<form action="ignore"></p>
+
+<pre><code>&lt;div class="has-margins"&gt;
+  &lt;div class="has-layout"&gt;
+    INPUT tag, type=text, preceeded by inline text:&lt;br&gt;
+    Text: &lt;input type="text"&gt;&lt;br&gt;
+    &lt;label for=""&gt;Text:&lt;/label&gt; &lt;input type="text"&gt;&lt;br&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p></form></p></li>
+<li><p>方案二：
+给 input 元素包上 span等，只要是没有触发 haslayout 的元素皆可。
+<form action="ignore"></p>
+
+<pre><code>&lt;div class="has-margins"&gt;
+  &lt;div class="has-layout"&gt;
+    INPUT tag, type=text, preceeded by inline text:&lt;br&gt;
+    Text: &lt;input type="text"&gt;&lt;br&gt;
+    &lt;span&gt;&lt;input type="text"&gt;&lt;/span&gt;&lt;br&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p></form></p></li>
+<li><p>注：并不是所有的 input 元素都会产生此 bug，也许你已经发现前面的 checkbox 就没有此 bug，还有radio，image inputs 会打破 haslayout 因此不会产生 bug！</p></li>
+</ol>
+
+
+<p><strong>原文请链接:</strong><a href="http://www.positioniseverything.net/explorer/inherited_margin.html">http://www.positioniseverything.net/explorer/inherited_margin.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AlphamageLoader滤镜解决ie6下png图片透明带来的问题]]></title>

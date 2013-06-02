@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>AlphamageLoader滤镜解决ie6下png图片透明带来的问题 - Harole's blog</title>
+  <title>计算机网络普及知识 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 图片定位 无法使用backgroun-position对图片定位;
-因为“”导致无法使用CSS Sprite，无法减少http请求;
-当前大多数网站使用的图片较多，特别在大型网站，因为 “”
-将会严重影响页面的加载速度。 二. 冻结浏览器 使用滤镜之后，页面不在支持CSS的渐进渲染了; &hellip;">
+  <meta name="description" content=" ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/23/alphamageloader-problem">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/06/02/network">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -97,7 +94,7 @@
   
 
 
-<time datetime="2013-04-23T22:45:00+08:00" pubdate data-updated="true"><span class="tit_date">23rd</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-06-02T19:16:00+08:00" pubdate data-updated="true"><span class="tit_date">2nd</span> <span class="tit_month">Jun</span></time>
           
         </div>
       
@@ -106,29 +103,9 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">AlphamageLoader滤镜解决ie6下png图片透明带来的问题</h3>
+      <h3 class="entry-title">计算机网络普及知识</h3>
     </div>
-    <div class="entry-content"><p>一. 图片定位</p>
-
-<blockquote><ol>
-<li><1>无法使用backgroun-position对图片定位;</li>
-<li><2>因为“<1>”导致无法使用CSS Sprite，无法减少http请求;</li>
-<li><3>当前大多数网站使用的图片较多，特别在大型网站，因为 “<2>”
-将会严重影响页面的加载速度。</li>
-</ol>
-</blockquote>
-
-<p>二. 冻结浏览器</p>
-
-<blockquote><ol>
-<li><1> 使用滤镜之后，页面不在支持CSS的渐进渲染了;</li>
-<li><2> 在所有必须的组件下载完成之前，页面都是一片空白；</li>
-<li><3> ie6会再所以CSS都下载完成后才开始渲染，但是CSS缺依赖于一张经过滤镜处理的图片，所以渲染要等到图片（经过滤镜处理的）加载完成才开始;</li>
-<li><4> 如果一个页面上有10张滤镜处理的图片，每张图片加载需要2秒，那么页面的渲染就需要停滞20秒。</li>
-</ol>
-</blockquote>
-
-<p>总结：在页面中少使用滤镜，否则性能会大大的降低。</p>
+    <div class="entry-content">
 </div>
   </div>  
   
@@ -154,21 +131,15 @@
   
 
 
-<time datetime="2013-04-23T22:45:00+08:00" pubdate data-updated="true"><span class="tit_date">23rd</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-06-02T19:16:00+08:00" pubdate data-updated="true"><span class="tit_date">2nd</span> <span class="tit_month">Jun</span></time>
           
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/ie6/'>IE6</a>
-  
-</span>
 
 
         </p>
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/23/alphamageloader-problem/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/23/alphamageloader-problem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/06/02/network/" data-via="" data-counturl="http://harole.github.com/blog/2013/06/02/network/" >Tweet</a>
   
   
   
@@ -177,10 +148,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/21/ie6-png/" title="Previous Post: ie6 下 png 图片透明，滤镜解决方案">&laquo;上一篇: ie6 下 png 图片透明，滤镜解决方案</a>
+            <a class="basic-alignment left" href="/blog/2013/05/19/input-ie67/" title="Previous Post: input ie6,7下双边距问题">&laquo;上一篇: input ie6,7下双边距问题</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/05/19/input-ie67/" title="Next Post: input ie6,7下双边距问题">下一篇:input ie6,7下双边距问题 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->

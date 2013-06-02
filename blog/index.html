@@ -9,10 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 图片定位 无法使用backgroun-position对图片定位;
-因为“”导致无法使用CSS Sprite，无法减少http请求;
-当前大多数网站使用的图片较多，特别在大型网站，因为 “”
-将会严重影响页面的加载速度。 二. 冻结浏览器 使用滤镜之后，页面不在支持CSS的渐进渲染了; &hellip;">
+  <meta name="description" content=" ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,6 +101,160 @@
   
 
 
+<time datetime="2013-06-02T19:16:00+08:00" pubdate data-updated="true"><span class="tit_date">2nd</span> <span class="tit_month">Jun</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/06/02/network/">计算机网络普及知识</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content">
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T10:46:00+08:00" pubdate data-updated="true"><span class="tit_date">19th</span> <span class="tit_month">May</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/05/19/input-ie67/">Input Ie6,7下双边距问题</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>一. 先来看 input 产生的几个问题。</p>
+
+<p>情况一：</p>
+
+<hr />
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;test&lt;/title&gt;         
+
+    &lt;style type="text/css"&gt;
+
+    /* 去除默认的 padding 和 margin */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .has-margins {
+        background-color: gray;
+        margin-left: 5em;        
+    }
+    .has-layout {
+        background-color: tan;
+        width: 30em;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action="ignore"&gt;            
+        &lt;div class="has-margins"&gt;
+            &lt;div class="has-layout"&gt;
+                INPUT tag, type=text:&lt;br&gt;
+                &lt;input type="text"&gt;&lt;br&gt;
+                INPUT tag, type=checkbox:&lt;br&gt;
+                &lt;input type="checkbox"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;      
+
+    &lt;!-- 注释2 --&gt;
+    &lt;!-- &lt;form action="ignore"&gt;            
+        &lt;div class="has-margins"&gt;
+            &lt;div class="has-margins"&gt;
+                &lt;div class="has-layout"&gt;
+                    INPUT tag, type=text:&lt;br&gt;
+                    &lt;input type="text"&gt;&lt;br&gt;
+                    INPUT tag, type=checkbox:&lt;br&gt;
+                    &lt;input type="checkbox"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt; --&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>ie6，7 下 input 和 .has-margin 之间多了 80px（即 .box 的 margin-left 的同时也复制给了 input），如下图:</p>
+
+<p><img src="/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/05/19/input-ie67/">Read on &rarr;</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2013-04-23T22:45:00+08:00" pubdate data-updated="true"><span class="tit_date">23rd</span> <span class="tit_month">Apr</span></time>
           
         </div>
@@ -114,7 +265,7 @@
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">AlphamageLoader滤镜解决ie6下png图片透明带来的问题</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/23/alphamageloader-problem/">AlphamageLoader滤镜解决ie6下png图片透明带来的问题</a></h3>
                   
       </div>
   
@@ -178,7 +329,7 @@
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">Ie6 下 Png 图片透明，滤镜解决方案</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/21/ie6-png/">Ie6 下 Png 图片透明，滤镜解决方案</a></h3>
                   
       </div>
   
@@ -250,7 +401,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/10/inline-block-drop/">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</a></h3>
                   
       </div>
   
@@ -346,7 +497,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">像 Html 模块化一样，模块化 Javascript 事件处理程序，使之可维护！</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/10/javascript-event-handle/">像 Html 模块化一样，模块化 Javascript 事件处理程序，使之可维护！</a></h3>
                   
       </div>
   
@@ -412,7 +563,7 @@ addListener(element, "click", handleClcik);
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">Becoming Your Story</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/08/becoming-your-story/">Becoming Your Story</a></h3>
                   
       </div>
   
@@ -477,7 +628,7 @@ addListener(element, "click", handleClcik);
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">那些，曾经</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/08/thoese-who-we-are/">那些，曾经</a></h3>
                   
       </div>
   
@@ -545,7 +696,7 @@ addListener(element, "click", handleClcik);
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">爱的一种解释</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/08/love-explanation/">爱的一种解释</a></h3>
                   
       </div>
   
@@ -613,7 +764,7 @@ addListener(element, "click", handleClcik);
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title">青春是场阵痛，熬得过熬不过，都得过。</h3>
+            <h3 class="entry-title"><a href="/blog/2013/04/06/my-first-blog/">青春是场阵痛，熬得过熬不过，都得过。</a></h3>
                   
       </div>
   
@@ -653,15 +804,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/02/network/">计算机网络普及知识</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/19/input-ie67/">input ie6,7下双边距问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/23/alphamageloader-problem/">AlphamageLoader滤镜解决ie6下png图片透明带来的问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/21/ie6-png/">ie6 下 png 图片透明，滤镜解决方案</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/10/inline-block-drop/">两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上</a>
       </li>
     
   </ul>
@@ -673,7 +824,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+    <li class='category'><a href='/blog/categories/css/'>CSS (3)</a></li>
 <li class='category'><a href='/blog/categories/ie6/'>IE6 (2)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
 
