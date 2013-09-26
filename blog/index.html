@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content=" ">
+  <meta name="description" content="很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate 总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,7 +101,7 @@
   
 
 
-<time datetime="2013-06-02T19:16:00+08:00" pubdate data-updated="true"><span class="tit_date">2nd</span> <span class="tit_month">Jun</span></time>
+<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
           
         </div>
       
@@ -111,11 +111,18 @@
     <div class="article_content">
       <div class="article_header">
         
-            <h3 class="entry-title"><a href="/blog/2013/06/02/network/">计算机网络普及知识</a></h3>
+            <h3 class="entry-title"><a href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Liquid Exception: Incompatible Encoding Regexp Match (ASCII-8BIT Regexp With UTF-8 String)</a></h3>
                   
       </div>
   
-      <div class="entry-content">
+      <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
+
+<p>有两种方法：</p>
+
+<blockquote><p><1>直接将<a href="https://github.com/ctdk/octopress-category-list">github上插件中</a>的 category_list.rb 替换 plugins 中的 category_list.rb
+<2>在安装目录下修改 lib/jekyll/converters/markdown.rb，在将最后一个 html 改成 html = html.force_encoding(&#8216;utf-8&#8217;)</p></blockquote>
+
+<p>第一种方法,确实可以成功；第二种，我实践了，但是没有成功，可能是问题有些差异。以上两种方法，分别来自 <a href="http://ayang1588.github.io/blog/2013/04/01/buildblog/">http://ayang1588.github.io/blog/2013/04/01/buildblog/</a> 和 <a href="http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/">http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/</a></p>
 </div>
       
       
@@ -804,7 +811,7 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/06/02/network/">计算机网络普及知识</a>
+        <a href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)</a>
       </li>
     
       <li class="post">
@@ -827,6 +834,7 @@ addListener(element, "click", handleClcik);
     <li class='category'><a href='/blog/categories/css/'>CSS (3)</a></li>
 <li class='category'><a href='/blog/categories/ie6/'>IE6 (2)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
 
   </ul>
 </section>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>那些，曾经 - Harole's blog</title>
+  <title>Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string) - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="叶的离开，是风的追求，还是树的不挽留。 你不是树，怎么知道树没有挽留？ 你不是树，怎么知道风不是叶的最好幸福？ 你不是树，怎么知道既然知道自己不再强大，又何必再用挽留去阻碍叶的幸福的无奈？ 或许，随风飘落，落叶归根便是叶的最好归宿。 无意间，听到广播里诉说着普罗旺斯的薰衣草田， &hellip;">
+  <meta name="description" content="很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate 总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/08/thoese-who-we-are">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -94,7 +94,7 @@
   
 
 
-<time datetime="2013-04-08T16:57:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
           
         </div>
       
@@ -103,49 +103,16 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">那些，曾经</h3>
+      <h3 class="entry-title">Liquid Exception: Incompatible Encoding Regexp Match (ASCII-8BIT Regexp With UTF-8 String)</h3>
     </div>
-    <div class="entry-content"><p>叶的离开，是风的追求，还是树的不挽留。</p>
+    <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
 
+<p>有两种方法：</p>
 
-<p>你不是树，怎么知道树没有挽留？</p>
+<blockquote><p><1>直接将<a href="https://github.com/ctdk/octopress-category-list">github上插件中</a>的 category_list.rb 替换 plugins 中的 category_list.rb
+<2>在安装目录下修改 lib/jekyll/converters/markdown.rb，在将最后一个 html 改成 html = html.force_encoding(&#8216;utf-8&#8217;)</p></blockquote>
 
-
-<p>你不是树，怎么知道风不是叶的最好幸福？</p>
-
-
-<p>你不是树，怎么知道既然知道自己不再强大，又何必再用挽留去阻碍叶的幸福的无奈？</p>
-
-
-<p>或许，随风飘落，落叶归根便是叶的最好归宿。</p>
-
-
-<p>无意间，听到广播里诉说着普罗旺斯的薰衣草田，霎时间泪水从眼睛一滴一滴地滑落，落到脸上，落到心里，勾起了许久许久不曾触碰的那些，曾经。</p>
-
-
-<p>曾经那条走过无数次的小路，那张再心里无数遍复习过的笑脸，那抹无数次魂牵梦萦的身影，此刻都那么真实的想起，那安静而又冷冽的男孩，那快乐而又唯美的曾经。</p>
-
-
-<!-- more -->
-
-
-<p>我们总是“无意”地相逢，总是一前一后地走在上学的路上，总是在茫茫人海中寻找着彼此的身影，我们就这样默默地注视着对方的背影，默默地宣泄着自己的感情，可是我们却从未说过一句话，一切尽在不言中，我们有着心照不宣的默契。想着想着眼中就充满了甜蜜，从眼里，到心里。</p>
-
-
-<p>还记得第一次见面的那一天，学校集体大扫除，打扫完后几个同学就一起拿着把扫帚回家了，走在一条长长地街道上，同学正在互相说笑着，不经意间回过头看到了一个孤单安静的身影，他抬头，如海洋般深邃的眼睛看着我，我们四目相对，霎那间觉得空气仿佛静止，脑海中想起的薰衣草里主题曲“记忆是阵阵花香….”我顿时明白了小鹿乱撞的心情，我回过头，朝自己笑笑，在心里祈祷有一天能和他一起去看普罗旺斯的薰衣草，因为，那时候我就知道到，薰衣草的花语是，等待爱情。</p>
-
-
-<p>可是，世事变迁，雕栏玉砌应犹在，只是朱颜改。我毕竟没有等到爱情之花绽放的那一天。如今，那个安静清冷的男孩却不在了，那个期望一起去看薰衣草的梦想也埋藏到了心里，我无法去挽留他，因为我知道我不够强大，不够优秀，既然无法给人幸福，就不要以爱他的方式去阻碍他的幸福。</p>
-
-
-<p>所以，我放手了。可是我却从未后悔，依旧在祝福着他永远幸福。</p>
-
-
-<p>那些微笑，那抹背影，那些画面，却被我永久珍藏在心里，一辈子，不忘记。</p>
-
-
-<p>“那些，曾经，刻骨铭心！”</p>
-
+<p>第一种方法,确实可以成功；第二种，我实践了，但是没有成功，可能是问题有些差异。以上两种方法，分别来自 <a href="http://ayang1588.github.io/blog/2013/04/01/buildblog/">http://ayang1588.github.io/blog/2013/04/01/buildblog/</a> 和 <a href="http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/">http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/</a></p>
 </div>
   </div>  
   
@@ -171,15 +138,21 @@
   
 
 
-<time datetime="2013-04-08T16:57:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
           
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
 
 
         </p>
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/08/thoese-who-we-are/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/08/thoese-who-we-are/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" data-via="" data-counturl="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" >Tweet</a>
   
   
   
@@ -188,10 +161,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/08/love-explanation/" title="Previous Post: 爱的一种解释">&laquo;上一篇: 爱的一种解释</a>
+            <a class="basic-alignment left" href="/blog/2013/05/19/input-ie67/" title="Previous Post: input ie6,7下双边距问题">&laquo;上一篇: input ie6,7下双边距问题</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/04/08/becoming-your-story/" title="Next Post: Becoming your story">下一篇:Becoming your story &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->
