@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-09-29T23:10:36+08:00</updated>
+  <updated>2013-09-29T23:13:47+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -20,23 +20,23 @@
     <id>http://harole.github.com/blog/2013/09/29/func-method-call-and-apply</id>
     <content type="html"><![CDATA[<p><strong>call()</strong> 方法和 <strong>apply()</strong> 方法的第一个参数都是要调用的函数对象，在函数体内这一参数是关键字 <strong>this</strong> 的值。call()剩余的参数是传递给要调用的函数的值。</p>
 
-<pre><code>var o = {};
+<pre><code>var O = {};
 
 function f( a, b ) {
     console.log(a);
     console.log(b);
 }   
 
-// call()方法的使用
-f.call( o, 1, 2 );
+// call()方法的使用，当前 **this** 指向的是对象O
+f.call( O, 1, 2 );
 
 // call()方法的实现与下面代码实现相似，可以通过下面的代码来理解call()的使用。    
-o.m = f;
-o.m();
-delete o.m;
+O.m = f;
+O.m();
+delete O.m;
 
 // apply()方法和call()方法相似，区别在于apply传递给函数的参数是由数组指定的：
-f.apply( o, [1,2] );
+f.apply( O, [1,2] );
 </code></pre>
 ]]></content>
   </entry>
