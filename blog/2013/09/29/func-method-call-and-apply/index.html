@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ie6 下 png 图片透明，滤镜解决方案 - Harole's blog</title>
+  <title>函数方法call()和apply()的使用和区别 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 正常情况下（ie6下回出现半透明）： /* 注：这里一般使用 png24 */
-background: url("../images/test.png"); 二. 解决方案： /* 注： 图片的路径使用的是相对路径 */
-background: url("../images/test.png &hellip;">
+  <meta name="description" content="call() 方法和 apply() 方法的第一个参数都是要调用的函数对象，在函数体内这一参数是关键字 this 的值。call()剩余的参数是传递给要调用的函数的值。 var o = {}; function f( a, b ) { console.log(a); console.log(b &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ background: url("../images/test.png &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/21/ie6-png">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/09/29/func-method-call-and-apply">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -96,7 +94,7 @@ background: url("../images/test.png &hellip;">
   
 
 
-<time datetime="2013-04-21T23:36:00+08:00" pubdate data-updated="true"><span class="tit_date">21st</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-09-29T22:40:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Sep</span></time>
           
         </div>
       
@@ -105,37 +103,28 @@ background: url("../images/test.png &hellip;">
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">Ie6 下 Png 图片透明，滤镜解决方案</h3>
+      <h3 class="entry-title">函数方法call()和apply()的使用和区别</h3>
     </div>
-    <div class="entry-content"><p>一. 正常情况下（ie6下回出现半透明）：</p>
+    <div class="entry-content"><p><strong>call()</strong> 方法和 <strong>apply()</strong> 方法的第一个参数都是要调用的函数对象，在函数体内这一参数是关键字 <strong>this</strong> 的值。call()剩余的参数是传递给要调用的函数的值。</p>
 
-<pre><code>/* 注：这里一般使用 png24 */
-background: url("../images/test.png");
+<pre><code>var o = {};
+
+function f( a, b ) {
+    console.log(a);
+    console.log(b);
+}   
+
+// call()方法的使用
+f.call( o, 1, 2 );
+
+// call()方法的实现与下面代码实现相似，可以通过下面的代码来理解call()的使用。    
+o.m = f;
+o.m();
+delete o.m;
+
+// apply()方法和call()方法相似，区别在于apply传递给函数的参数是由数组指定的：
+f.apply( o, [1,2] );
 </code></pre>
-
-<p>二. 解决方案：</p>
-
-<pre><code>/* 注： 图片的路径使用的是相对路径 */
-background: url("../images/test.png");
-
-/* ie6 下将背景移除 */
-_background:none;   
-
-/* 使用AlphaImageLoader滤镜重新加载图片 */
-_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
-</code></pre>
-
-<p>三. 注：上述解决方案在ie6下，有时图片会覆盖文本导致文本消失。</p>
-
-<pre><code>/* 我们需要给滤镜加上一行设置, 即sizingMethod="crop"
- * 使得剪切图片以适应对象的尺寸边界。  
- */
-_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png", sizingMethod="crop");    
-</code></pre>
-
-<p><strong>
-<a href="http://hi.baidu.com/zygalcn/item/6f9946b8900c33d385dd79e6">更多关于ALphaImageLoader滤镜的属性</a>
-</strong></p>
 </div>
   </div>  
   
@@ -161,12 +150,12 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
   
 
 
-<time datetime="2013-04-21T23:36:00+08:00" pubdate data-updated="true"><span class="tit_date">21st</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-09-29T22:40:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Sep</span></time>
           
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/ie6/'>IE6</a>
+    <a class='category' href='/blog/categories/javascript/'>javascript</a>
   
 </span>
 
@@ -175,7 +164,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/21/ie6-png/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/21/ie6-png/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/09/29/func-method-call-and-apply/" data-via="" data-counturl="http://harole.github.com/blog/2013/09/29/func-method-call-and-apply/" >Tweet</a>
   
   
   
@@ -184,10 +173,8 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/10/inline-block-drop/" title="Previous Post: 两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上">&laquo;上一篇: 两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上</a>
+            <a class="basic-alignment left" href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" title="Previous Post: Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)">&laquo;上一篇: Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/04/23/alphamageloader-problem/" title="Next Post: AlphamageLoader滤镜解决ie6下png图片透明带来的问题">下一篇:AlphamageLoader滤镜解决ie6下png图片透明带来的问题 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->
