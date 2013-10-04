@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-01T15:43:04+08:00</updated>
+  <updated>2013-10-05T03:07:57+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -144,6 +144,9 @@
 </ol>
 </blockquote>
 
+<!-- more -->
+
+
 <p>二. 冻结浏览器</p>
 
 <blockquote><ol>
@@ -180,6 +183,9 @@ _background:none;
 /* 使用AlphaImageLoader滤镜重新加载图片 */
 _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
 </code></pre>
+
+<!-- more -->
+
 
 <p>三. 注：上述解决方案在ie6下，有时图片会覆盖文本导致文本消失。</p>
 

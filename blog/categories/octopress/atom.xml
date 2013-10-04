@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-01T15:43:04+08:00</updated>
+  <updated>2013-10-05T03:07:57+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-09-26T15:05:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string</id>
     <content type="html"><![CDATA[<p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错"Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)"，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
+
+<!-- more -->
+
 
 <p>有两种方法：</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-01T15:43:04+08:00</updated>
+  <updated>2013-10-05T03:07:57+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascript 循环（for，while）那些事儿！]]></title>
+    <link href="http://harole.github.com/blog/2013/10/05/looping-techniques-javascript/"/>
+    <updated>2013-10-05T00:16:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/05/looping-techniques-javascript</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>for 类循环</p>
+
+<ol>
+<li><p>for-in 循环的一般形式</p>
+
+<pre><code> // i 可以是数组的下标，也可以是对象的属性
+ // arr 可以是数组，也可以是对象
+ for ( i in arr ) {
+
+     // 如需匹配特定的值
+     // 可以使用一个判断语句
+     // definited 为匹配值的变量
+     if ( arr[i] === definited ) {
+
+     }
+ }
+</code></pre>
+
+<p>总结：for-in 语句不仅可以对数组循环遍历，还可以对对象的属性循环遍历
+<!-- more --></p></li>
+<li><p>for 循环一般形式</p>
+
+<pre><code> for ( var i = 0; i &lt; arr.length; i++ ) {
+
+ }
+</code></pre>
+
+<p>总结：每次都需要去查找数组的 length 属性，可以通过缓存 length 来稍微提升遍历的速度</p></li>
+<li><p>for 缓存数组的 length 属性</p>
+
+<pre><code> for ( var i = 0, l = arr.length; i &lt; l; i++ ) {
+
+ }
+</code></pre>
+
+<p>总结：如果遍历的是HTMLCollection，性能提升比较明显。因为每次访问HTMLCollection的属性，HTMLCollection都会内部匹配一次所有的节点。</p></li>
+<li><p>遍历数组操作中，不判断下标，直接判断数组元素是否存在，再对元素进行操作。</p>
+
+<pre><code> var currentItem;
+ for ( var i = 0; items[i]; i++ ) {
+     currentItem = items[i];
+ }
+
+ // 例如：遍历 DOM 子元素
+ for ( node = parent.firstChild; node; node = node.nextSibling ) {  
+     if ( node.nodeType === 1 ) {  
+         node.nodeIndex = ++count;  
+     }  
+ }
+</code></pre></li>
+<li><p>在迭代中，要尽可能少遍历，如果知道从 position 开始。</p>
+
+<pre><code> var currentItem;
+ for ( var i = position || 0, l = items.length; i &lt; l; i++ ) {
+     currentItem = items[i];
+ }
+</code></pre></li>
+<li><p>倒序遍历可以减少几个字符。</p>
+
+<pre><code> for ( var i = items.length, currentItem; i; ) {
+     currentItem = items[--i];  // 合并了 i 自减和 i 取值的操作
+ }    
+</code></pre></li>
+</ol>
+</li>
+<li><p>while 循环</p>
+
+<ol>
+<li><p>通过 while 检测下标遍历。</p>
+
+<pre><code> var l = arr.length, currentItem;
+ while ( --l ) {
+     currentItem = arr[l];
+ }
+</code></pre></li>
+<li><p>while 检测元素</p>
+
+<pre><code> var findType, i = 0;
+ while ( findType == arr[i++] ) {
+     // 一些操作 
+ }
+</code></pre></li>
+</ol>
+</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Function()构造函数，即用 new Function() 方式构造函数]]></title>
@@ -32,6 +127,9 @@
 
 <p>Function构造函数期待任意数目的 <strong>字符串</strong> 参数，其中最后一个参数（它可以包含任意多条 javascript 语句）是函数的函数体，其他均是函数的参数。如果需要定义一个没有参数的函数体，只需向构造函数传入一个字符串参数，也就是函数体。</p>
 
+<!-- more -->
+
+
 <p>二. 关于Function()构造函数需要理解以下几点：</p>
 
 <pre><code>* Function()构造函数润允许javascript代码被动态地创建而且在运行时编译。
@@ -47,8 +145,9 @@
 
 * Function()构造函数，他所创建的函数并不适用词法作用域，而是当作顶层的函数一样编译。
   如下面代码所示:
+  var y = "global";
 function a(){
-    var y = "global";
+
     var y = "local1";
     function constructFunction() {
         var y = "local";

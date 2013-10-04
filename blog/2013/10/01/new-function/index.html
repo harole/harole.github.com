@@ -120,6 +120,9 @@
 
 <p>Function构造函数期待任意数目的 <strong>字符串</strong> 参数，其中最后一个参数（它可以包含任意多条 javascript 语句）是函数的函数体，其他均是函数的参数。如果需要定义一个没有参数的函数体，只需向构造函数传入一个字符串参数，也就是函数体。</p>
 
+<!-- more -->
+
+
 <p>二. 关于Function()构造函数需要理解以下几点：</p>
 
 <pre><code>* Function()构造函数润允许javascript代码被动态地创建而且在运行时编译。
@@ -135,8 +138,9 @@
 
 * Function()构造函数，他所创建的函数并不适用词法作用域，而是当作顶层的函数一样编译。
   如下面代码所示:
+  var y = "global";
 function a(){
-    var y = "global";
+
     var y = "local1";
     function constructFunction() {
         var y = "local";
@@ -200,6 +204,8 @@ function a(){
             <a class="basic-alignment left" href="/blog/2013/09/29/func-method-call-and-apply/" title="Previous Post: 函数方法call()和apply()的使用和区别">&laquo;上一篇: 函数方法call()和apply()的使用和区别</a>
           
           
+            <a class="basic-alignment right" href="/blog/2013/10/05/looping-techniques-javascript/" title="Next Post: javascript 循环（for，while）那些事儿！">下一篇:javascript 循环（for，while）那些事儿！ &raquo;</a>
+          
         </p>
         <!-- Duoshuo Comment BEGIN -->
   <div class="ds-thread"></div>
@@ -227,15 +233,15 @@ var duoshuoQuery = {short_name:"harole"};
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/05/looping-techniques-javascript/">javascript 循环（for，while）那些事儿！</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/01/new-function/">Function()构造函数，即用 new Function() 方式构造函数</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/09/29/func-method-call-and-apply/">函数方法call()和apply()的使用和区别</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)</a>
       </li>
     
   </ul>

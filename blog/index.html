@@ -9,8 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 下面是使用Functin()构造函数来创建一个函数的例子： var f = new Function( "x", "y", "return x + y;" ); 这行代码创建了一个新函数，这个函数和下面的定义基本相等 function f( x, y ){ return x + y;
-} &hellip;">
+  <meta name="description" content="for 类循环 for-in 循环的一般形式 // i 可以是数组的下标，也可以是对象的属性 // arr 可以是数组，也可以是对象 for ( i in arr ) { // 如需匹配特定的值 // 可以使用一个判断语句 // definited 为匹配值的变量 if ( arr[i &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +101,73 @@
   
 
 
+<time datetime="2013-10-05T00:16:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/05/looping-techniques-javascript/">Javascript 循环（for，while）那些事儿！</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><ol>
+<li><p>for 类循环</p>
+
+<ol>
+<li><p>for-in 循环的一般形式</p>
+
+<pre><code> // i 可以是数组的下标，也可以是对象的属性
+ // arr 可以是数组，也可以是对象
+ for ( i in arr ) {
+
+     // 如需匹配特定的值
+     // 可以使用一个判断语句
+     // definited 为匹配值的变量
+     if ( arr[i] === definited ) {
+
+     }
+ }
+</code></pre>
+
+<p>总结：for-in 语句不仅可以对数组循环遍历，还可以对对象的属性循环遍历
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/05/looping-techniques-javascript/">Read on &rarr;</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2013-10-01T14:38:00+08:00" pubdate data-updated="true"><span class="tit_date">1st</span> <span class="tit_month">Oct</span></time>
           
         </div>
@@ -130,37 +196,12 @@
 
 <p>Function构造函数期待任意数目的 <strong>字符串</strong> 参数，其中最后一个参数（它可以包含任意多条 javascript 语句）是函数的函数体，其他均是函数的参数。如果需要定义一个没有参数的函数体，只需向构造函数传入一个字符串参数，也就是函数体。</p>
 
-<p>二. 关于Function()构造函数需要理解以下几点：</p>
-
-<pre><code>* Function()构造函数润允许javascript代码被动态地创建而且在运行时编译。
-  全局的eval()函数也是这种方式。
-
-* Function()构造函数解析函数体，并且每次被调用时都创建一个新的函数对象。
-
-    缺点：如果构造函数的调用出现在一个循环中，或者出现在一个经常被调用的函数中，
-          那么过程的效率将会很低。
-
-    优点：如果构造函数的调用出现在一个循环或是函数中的直接量中的函数直接量或者
-          嵌套的函数，并不会每次遇到的时候都编译。
-
-* Function()构造函数，他所创建的函数并不适用词法作用域，而是当作顶层的函数一样编译。
-  如下面代码所示:
-function a(){
-    var y = "global";
-    var y = "local1";
-    function constructFunction() {
-        var y = "local";
-        return new Function("return y;");
-    }
-
-    // 这里 constructFunction()()
-    // 第一个 '()' 是执行 constructFunction 函数
-    // 第二个 '()' 是执行constructFunction 函数返回的 'new Function()' 函数。
-    alert(constructFunction()()); // 显示global
-}
-</code></pre>
 </div>
       
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/01/new-function/">Read on &rarr;</a>
+        </footer>
       
     </div>      
   
@@ -267,14 +308,12 @@ f.apply( O, [1,2] );
   
       <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
 
-<p>有两种方法：</p>
-
-<blockquote><p><1>直接将<a href="https://github.com/ctdk/octopress-category-list">github上插件中</a>的 category_list.rb 替换 plugins 中的 category_list.rb
-<2>在安装目录下修改 lib/jekyll/converters/markdown.rb，在将最后一个 html 改成 html = html.force_encoding(&#8216;utf-8&#8217;)</p></blockquote>
-
-<p>第一种方法,确实可以成功；第二种，我实践了，但是没有成功，可能是问题有些差异。以上两种方法，分别来自 <a href="http://ayang1588.github.io/blog/2013/04/01/buildblog/">http://ayang1588.github.io/blog/2013/04/01/buildblog/</a> 和 <a href="http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/">http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/</a></p>
 </div>
       
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Read on &rarr;</a>
+        </footer>
       
     </div>      
   
@@ -436,19 +475,12 @@ f.apply( O, [1,2] );
 </ol>
 </blockquote>
 
-<p>二. 冻结浏览器</p>
-
-<blockquote><ol>
-<li><1> 使用滤镜之后，页面不在支持CSS的渐进渲染了;</li>
-<li><2> 在所有必须的组件下载完成之前，页面都是一片空白；</li>
-<li><3> ie6会再所以CSS都下载完成后才开始渲染，但是CSS缺依赖于一张经过滤镜处理的图片，所以渲染要等到图片（经过滤镜处理的）加载完成才开始;</li>
-<li><4> 如果一个页面上有10张滤镜处理的图片，每张图片加载需要2秒，那么页面的渲染就需要停滞20秒。</li>
-</ol>
-</blockquote>
-
-<p>总结：在页面中少使用滤镜，否则性能会大大的降低。</p>
 </div>
       
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/04/23/alphamageloader-problem/">Read on &rarr;</a>
+        </footer>
       
     </div>      
   
@@ -508,19 +540,12 @@ _background:none;
 _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
 </code></pre>
 
-<p>三. 注：上述解决方案在ie6下，有时图片会覆盖文本导致文本消失。</p>
-
-<pre><code>/* 我们需要给滤镜加上一行设置, 即sizingMethod="crop"
- * 使得剪切图片以适应对象的尺寸边界。  
- */
-_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png", sizingMethod="crop");    
-</code></pre>
-
-<p><strong>
-<a href="http://hi.baidu.com/zygalcn/item/6f9946b8900c33d385dd79e6">更多关于ALphaImageLoader滤镜的属性</a>
-</strong></p>
 </div>
       
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/04/21/ie6-png/">Read on &rarr;</a>
+        </footer>
       
     </div>      
   
@@ -756,74 +781,6 @@ addListener(element, "click", handleClcik);
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T16:57:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/08/thoese-who-we-are/">那些，曾经</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>叶的离开，是风的追求，还是树的不挽留。</p>
-
-
-<p>你不是树，怎么知道树没有挽留？</p>
-
-
-<p>你不是树，怎么知道风不是叶的最好幸福？</p>
-
-
-<p>你不是树，怎么知道既然知道自己不再强大，又何必再用挽留去阻碍叶的幸福的无奈？</p>
-
-
-<p>或许，随风飘落，落叶归根便是叶的最好归宿。</p>
-
-
-<p>无意间，听到广播里诉说着普罗旺斯的薰衣草田，霎时间泪水从眼睛一滴一滴地滑落，落到脸上，落到心里，勾起了许久许久不曾触碰的那些，曾经。</p>
-
-
-<p>曾经那条走过无数次的小路，那张再心里无数遍复习过的笑脸，那抹无数次魂牵梦萦的身影，此刻都那么真实的想起，那安静而又冷冽的男孩，那快乐而又唯美的曾经。</p>
-
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/08/thoese-who-we-are/">Read on &rarr;</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -839,15 +796,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/05/looping-techniques-javascript/">javascript 循环（for，while）那些事儿！</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/01/new-function/">Function()构造函数，即用 new Function() 方式构造函数</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/09/29/func-method-call-and-apply/">函数方法call()和apply()的使用和区别</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)</a>
       </li>
     
   </ul>
@@ -861,7 +818,7 @@ addListener(element, "click", handleClcik);
   <ul id="categories">
     <li class='category'><a href='/blog/categories/css/'>CSS (3)</a></li>
 <li class='category'><a href='/blog/categories/ie6/'>IE6 (2)</a></li>
-<li class='category'><a href='/blog/categories/javascript/'>javascript (3)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (4)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
 
   </ul>
