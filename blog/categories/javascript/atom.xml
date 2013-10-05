@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-05T20:47:34+08:00</updated>
+  <updated>2013-10-06T01:21:04+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -18,16 +18,24 @@
     <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
     <updated>2013-10-05T17:26:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
-    <content type="html"><![CDATA[<pre><code>    var THRESHOLD = 150, DELAY = 15;
+    <content type="html"><![CDATA[<pre><code>    // THRESHOLD 用于防止浏览器超时，DELAY 用来设置函数调用等待时间
+    var THRESHOLD = 150, DELAY = 15;
 
     function initBigArrayAsync(max, cb) {
         var r = [], i = 0;
 
         function init(startTime) {
             while (i &lt; max) {
+
+                // 判断语句，函数执行的当前时间和开始执行时间差
+                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
+                // 当小于 THRESHOLD，可进行正常赋值
                 if (new Date - startTime &lt; THRESHOLD) {
                     r[i++] = i;
                 } else {
+
+                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
+                    // 所以用一个很小的等待时间 DELAY，来从新调用 init() 进行赋值
                     setTimeout(function() {
                         init(new Date);
                     }, DELAY);
@@ -41,6 +49,7 @@
         init(new Date);
     }
 
+    // 该函数用于检测，是否成功给大数组赋值
     initBigArrayAsync(1000000, function(arr) {
         console.log(arr.length);
         console.log(arr[1000000 - 1]);
