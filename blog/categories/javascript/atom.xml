@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-05T03:07:57+08:00</updated>
+  <updated>2013-10-05T20:47:34+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascript 异步初始化大数组]]></title>
+    <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
+    <updated>2013-10-05T17:26:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
+    <content type="html"><![CDATA[<pre><code>    var THRESHOLD = 150, DELAY = 15;
+
+    function initBigArrayAsync(max, cb) {
+        var r = [], i = 0;
+
+        function init(startTime) {
+            while (i &lt; max) {
+                if (new Date - startTime &lt; THRESHOLD) {
+                    r[i++] = i;
+                } else {
+                    setTimeout(function() {
+                        init(new Date);
+                    }, DELAY);
+                    return;
+                }
+            }
+
+            cb(r);
+        }
+
+        init(new Date);
+    }
+
+    initBigArrayAsync(1000000, function(arr) {
+        console.log(arr.length);
+        console.log(arr[1000000 - 1]);
+    });
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[javascript 循环（for，while）那些事儿！]]></title>

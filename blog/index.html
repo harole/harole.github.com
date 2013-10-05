@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="for 类循环 for-in 循环的一般形式 // i 可以是数组的下标，也可以是对象的属性 // arr 可以是数组，也可以是对象 for ( i in arr ) { // 如需匹配特定的值 // 可以使用一个判断语句 // definited 为匹配值的变量 if ( arr[i &hellip;">
+  <meta name="description" content="var THRESHOLD = 150, DELAY = 15; function initBigArrayAsync(max, cb) { var r = [], i = 0; function init(startTime) { while (i &lt; max) { if (new &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +101,77 @@
   
 
 
+<time datetime="2013-10-05T17:26:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/05/initbigarrayasync/">Javascript 异步初始化大数组</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><pre><code>    var THRESHOLD = 150, DELAY = 15;
+
+    function initBigArrayAsync(max, cb) {
+        var r = [], i = 0;
+
+        function init(startTime) {
+            while (i &lt; max) {
+                if (new Date - startTime &lt; THRESHOLD) {
+                    r[i++] = i;
+                } else {
+                    setTimeout(function() {
+                        init(new Date);
+                    }, DELAY);
+                    return;
+                }
+            }
+
+            cb(r);
+        }
+
+        init(new Date);
+    }
+
+    initBigArrayAsync(1000000, function(arr) {
+        console.log(arr.length);
+        console.log(arr[1000000 - 1]);
+    });
+</code></pre>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2013-10-05T00:16:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
           
         </div>
@@ -139,7 +210,7 @@
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/10/05/looping-techniques-javascript/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/10/05/looping-techniques-javascript/">阅读更多</a>
         </footer>
       
     </div>      
@@ -200,7 +271,7 @@
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/10/01/new-function/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/10/01/new-function/">阅读更多</a>
         </footer>
       
     </div>      
@@ -312,7 +383,7 @@ f.apply( O, [1,2] );
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">阅读更多</a>
         </footer>
       
     </div>      
@@ -422,7 +493,7 @@ f.apply( O, [1,2] );
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/05/19/input-ie67/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/05/19/input-ie67/">阅读更多</a>
         </footer>
       
     </div>      
@@ -479,7 +550,7 @@ f.apply( O, [1,2] );
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/04/23/alphamageloader-problem/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/04/23/alphamageloader-problem/">阅读更多</a>
         </footer>
       
     </div>      
@@ -544,7 +615,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/04/21/ie6-png/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/04/21/ie6-png/">阅读更多</a>
         </footer>
       
     </div>      
@@ -640,7 +711,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/04/10/inline-block-drop/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/04/10/inline-block-drop/">阅读更多</a>
         </footer>
       
     </div>      
@@ -706,72 +777,7 @@ addListener(element, "click", handleClcik);
       
       
         <footer>
-          <a rel="full-article" href="/blog/2013/04/10/javascript-event-handle/">Read on &rarr;</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T18:34:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/08/becoming-your-story/">Becoming Your Story</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to hide it and drew pictures instead.</p>
-
-
-<p></p>
-
-<p>My parents were concerned and had me tested for learning disabilities. They even moved us to a new city. I was so far behind, it took me years to catch up. But, the school was better. In third grade, I started to read.</p>
-
-
-<p></p>
-
-<p>There&#8217;s something that became part of my ethos then. I was at the bottom. I had to do everything to work my way up. I remember constantly telling myself that I just needed to work harder than everyone.  I had to hustle.</p>
-
-
-<p></p>
-
-<p>I became my story. I worked hard and I hustled. </p>
-
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/08/becoming-your-story/">Read on &rarr;</a>
+          <a rel="full-article" href="/blog/2013/04/10/javascript-event-handle/">阅读更多</a>
         </footer>
       
     </div>      
@@ -796,15 +802,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/05/initbigarrayasync/">javascript 异步初始化大数组</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/05/looping-techniques-javascript/">javascript 循环（for，while）那些事儿！</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/01/new-function/">Function()构造函数，即用 new Function() 方式构造函数</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/29/func-method-call-and-apply/">函数方法call()和apply()的使用和区别</a>
       </li>
     
   </ul>
@@ -818,7 +824,7 @@ addListener(element, "click", handleClcik);
   <ul id="categories">
     <li class='category'><a href='/blog/categories/css/'>CSS (3)</a></li>
 <li class='category'><a href='/blog/categories/ie6/'>IE6 (2)</a></li>
-<li class='category'><a href='/blog/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (5)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
 
   </ul>
