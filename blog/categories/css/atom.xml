@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-06T01:21:04+08:00</updated>
+  <updated>2013-10-11T03:11:55+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -79,14 +79,14 @@
 
 <p>ie6，7 下 input 和 .has-margin 之间多了 80px（即 .box 的 margin-left 的同时也复制给了 input），如下图:</p>
 
-<p><img src="/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
+<p><img src="{{%20root_url%20}}/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
 
 <!-- more -->
 
 
 <p>如果将之前的form注释掉，使用注释二中的代码，会得到下图：</p>
 
-<p><img src="/images/2013-06-02-input-ie67-01.png" alt="all have content" /></p>
+<p><img src="{{%20root_url%20}}/images/2013-06-02-input-ie67-01.png" alt="all have content" /></p>
 
 <p>出现上述bug的原因是，.has-layout 中的 CSS “width: 30em” 出发了 haslayout 让 input 具有继承所有祖先元素的 margin-left 的总和的特性！所以有了上述情况，同理可以将 “width: 30em” 换成 “zoom: 1;”等触发 haslayout ，可以达到同样的结果！</p>
 

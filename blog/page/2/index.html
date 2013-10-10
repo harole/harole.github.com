@@ -9,7 +9,9 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to &hellip;">
+  <meta name="description" content="一. div.left 和 div.right 均有内容。 &lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;inline-cblock&lt;/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +83,168 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/04/10/inline-block-drop/">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>一. div.left 和 div.right 均有内容。</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;inline-cblock&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    .box {
+        width: 400px;
+        height: 100px;
+        margin: 50px auto;
+        background: black;
+        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
+        letter-spacing: -3px;
+        font-size: 0;       
+        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
+    }
+    .box .left {
+        display: inline-block;
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        background: yellow;
+    }
+    .box .right {
+        display: inline-block;
+        width: 200px;
+        height: 100px;  
+        font-size: 50px;   
+        background: blue;       
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;div class="left"&gt;Left&lt;/div&gt;
+        &lt;div class="right"&gt;Right&lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>预期效果：
+<img src="/images/inline-block-01.png" alt="all have content" /></p>
+
+<p>二. 仅把 div.left 中的内容去掉，效果：
+<img src="/images/inline-block-02.png" alt="all have content" /></p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/04/10/inline-block-drop/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-10T12:49:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/04/10/javascript-event-handle/">像 Html 模块化一样，模块化 Javascript 事件处理程序，使之可维护！</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>一. 常用的事件处理程序</p>
+
+<pre><code>funciton handleClick( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", handleClcik); 
+</code></pre>
+
+<p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
+
+<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/04/10/javascript-event-handle/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -354,15 +518,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery解决名字隔阂$冲突方法&#8212;noConflict()解析</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/regexp-test-exec-difference/">正则表达式（RegExp）方法，test() 和 exec() 区别。</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/05/initbigarrayasync/">javascript 异步初始化大数组</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/05/looping-techniques-javascript/">javascript 循环（for，while）那些事儿！</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/01/new-function/">Function()构造函数，即用 new Function() 方式构造函数</a>
       </li>
     
   </ul>
@@ -376,7 +540,9 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/css/'>CSS (3)</a></li>
 <li class='category'><a href='/blog/categories/ie6/'>IE6 (2)</a></li>
-<li class='category'><a href='/blog/categories/javascript/'>javascript (5)</a></li>
+<li class='category'><a href='/blog/categories/regexp/'>RegExp (1)</a></li>
+<li class='category'><a href='/blog/categories/jquery/'>jQuery (1)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (6)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
 
   </ul>

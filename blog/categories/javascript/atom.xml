@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-06T01:21:04+08:00</updated>
+  <updated>2013-10-11T03:11:55+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery解决名字隔阂$冲突方法---noConflict()解析]]></title>
+    <link href="http://harole.github.com/blog/2013/10/11/jquery-noconflict-method/"/>
+    <updated>2013-10-11T02:42:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/11/jquery-noconflict-method</id>
+    <content type="html"><![CDATA[<h3>jQuery 中 noConflict() 方法如下：</h3>
+
+<pre><code>// jQuery 开头定义变量部分：
+var ....,
+
+    _$ = window.$,
+
+    _jQuery = window.jQuer,
+
+    ....;
+
+noConflict: function( deep ) {
+    if ( window.$ === jQuery ) {
+        window.$ = _$;
+    }
+
+    if ( deep &amp;&amp; window.jQuery === jQuery ) {
+        window.jQuery = _jQuery;
+    }
+
+    return jQuery;
+}
+...
+
+// jQuery 函数底部
+if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.exports === "object" ) {
+    // 在执行节点的加载器中，公开 jQuery 作为 module.exports,
+    // 因为 module 模式：不能创建全局变量，用户将会储存它作为局部变量
+    // 全局变量不能被 Node module 解析。
+    // 所以将 jQuery 赋给 module.exports
+    module.exports = jQuery;
+} else {
+    // 不是 module 模式，就把 jQuery 赋给全局
+    window.jQuery = window.$ = jQuery;
+
+    // Register as a named AMD module, since jQuery can be concatenated with other
+    // files that may use define, but not via a proper concatenation script that
+    // understands anonymous AMD modules. A named AMD is safest and most robust
+    // way to register. Lowercase jquery is used because AMD module names are
+    // derived from file names, and jQuery is normally delivered in a lowercase
+    // file name. Do this after creating the global so that if an AMD module wants
+    // to call noConflict to hide this version of jQuery, it will work.
+    if ( typeof define === "function" &amp;&amp; define.amd ) {
+        define( "jquery", [], function () { return jQuery; } );
+    }
+}
+</code></pre>
+
+<p>在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[javascript 异步初始化大数组]]></title>
@@ -232,239 +289,6 @@ delete O.m;
 
 // apply()方法和call()方法相似，区别在于apply传递给函数的参数是由数组指定的：
 f.apply( O, [1,2] );
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[像 html 模块化一样，模块化 javascript 事件处理程序，使之可维护！]]></title>
-    <link href="http://harole.github.com/blog/2013/04/10/javascript-event-handle/"/>
-    <updated>2013-04-10T12:49:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/04/10/javascript-event-handle</id>
-    <content type="html"><![CDATA[<p>一. 常用的事件处理程序</p>
-
-<pre><code>funciton handleClick( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "click", handleClcik); 
-</code></pre>
-
-<p>上述程序功能：监听 "element" 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
-
-<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
-
-<!-- more -->
-
-
-<pre><code>// mousehover
-funciton handleMouseHover( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "mousehover", handleMouseHover);       
-
-// mouseup
-funciton handleMouseUp( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "mousehover", handleMouseUp);      
-
-// 其他事件
-......
-</code></pre>
-
-<p>很明显上面的代码被复制了多，于是我们又有了如下代码：</p>
-
-<pre><code>// eventHandle
-funciton eventHandle( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "click", eventHandle); 
-addListener(element, "mousehover", eventHandle);        
-addListener(element, "mousehover", eventHandle);    
-
-// 其他监听事件
-......
-</code></pre>
-
-<p>恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
-"click", "mousehover", "mouseup"等的处理程序大部分情况下是不一样的。于是有了如下方案：</p>
-
-<p>二. 隔离应用逻辑</p>
-
-<pre><code>var app =  {
-
-    showPopWindow: function (event) {
-
-        var popWindow = document.getElementById("popWindow");
-
-        popWindow.style.left = event.clientX + "px";
-        popWindow.style.top = event.clientY + "px";         
-
-    },
-
-    handleClick: function (event) {
-
-        this.showPopWindow( event );
-
-        // click 的其他代码
-        ......
-    },
-
-    handleMouseHover: function (event) {
-
-        this.showPopWindow( event );
-
-        // mousehover 的其他代码
-        ......
-
-    }
-
-    // 其他事件处理函数
-    ......      
-};
-
-addListener(element, "click", function (event) {
-    app.handleClick(event);
-});
-
-addListener(element, "mousehover", function (event) {
-    app.handleMouseHover(event);
-});
-
-// 其他事件的监听
-......
-</code></pre>
-
-<p>隔离应用逻辑后，代码还存在一个问题，即 event 对象被无节制的分发（event 由 addListener 传入了 app.handleClick 或 app.handleMouseHover，再传入app.showPopWindow）。</p>
-
-<p>三. 不要分发事件对象</p>
-
-<p>应用逻辑 showPopWindow 不应该依赖于 event 对象来完成功能。如果想要测试这个方法，必须重新创建一个 event 对象，否则在函数内无法找到 event.clientX 和 event.clientY，就无法测试。所以做了如下改进：</p>
-
-<pre><code>var app =  {
-
-    showPopWindow: function ( x, y ) {
-
-        var popWindow = document.getElementById("popWindow");
-
-        popWindow.style.left = x + "px";
-        popWindow.style.top = y + "px";         
-
-    },
-
-    handleClick: function ( event ) {
-
-        this.showPopWindow( event.clientX, event.clientY );
-
-        // click 的其他代码
-        ......
-    },
-
-    handleMouseHover: function ( event ) {
-
-        this.showPopWindow( event.clientX, event.clientY );
-
-        // mousehover 的其他代码
-        ......
-
-    }
-
-    // 其他事件处理函数
-    ......      
-};
-
-addListener(element, "click", function (event) {
-    app.handleClick(event);
-});
-
-addListener(element, "mousehover", function (event) {
-    app.handleMouseHover(event);
-});
-
-// 其他事件的监听
-......
-
-// 当我们想测试的时候，就不在需要重新创建一个event对象了，只需要向下面一样即可
-app.showPopWindow( "20", "20" );
-</code></pre>
-
-<p>当处理事件时，最好让事件处理程序成为唯一一个接触到 event 对象的函数（即 handleClick 和 handleMouseHover 等）。
-事件处理程序应当在进入应用逻辑 showPopWindow 之前对 event 对象执行必要的操作包括阻止默认行为和事件冒泡。最终形成如下代码：</p>
-
-<pre><code>var app =  {
-
-    showPopWindow: function ( x, y ) {
-
-        var popWindow = document.getElementById("popWindow");
-
-        popWindow.style.left = x + "px";
-        popWindow.style.top = y + "px";         
-
-    },
-
-    handleClick: function ( event ) {
-        // 阻止默认行为
-        event.preventDefault();
-
-        // click 的其他代码
-        ...... 
-
-        this.showPopWindow( event.clientX, event.clientY );                     
-    },
-
-    handleMouseHover: function ( event ) {
-        // 阻止默认行为
-        event.preventDefault();
-
-        // mousehover 的其他代码
-        ......
-
-        this.showPopWindow( event.clientX, event.clientY );
-
-    }
-
-    // 其他事件处理函数
-    ......      
-};
-
-addListener(element, "click", function (event) {
-    app.handleClick(event);
-});
-
-addListener(element, "mousehover", function (event) {
-    app.handleMouseHover(event);
-});
-
-// 其他事件的监听
-......
 </code></pre>
 ]]></content>
   </entry>

@@ -9,7 +9,8 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="// THRESHOLD 用于防止浏览器超时，DELAY 用来设置函数调用等待时间 var THRESHOLD = 150, DELAY = 15; function initBigArrayAsync(max, cb) { var r = [], i = 0; function init( &hellip;">
+  <meta name="description" content="jQuery 中 noConflict() 方法如下： // jQuery 开头定义变量部分：
+var ...., _$ = window.$, _jQuery = window.jQuer, ....; noConflict: function( deep ) { if ( window &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,173 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T02:42:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery解决名字隔阂$冲突方法&#8212;noConflict()解析</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><h3>jQuery 中 noConflict() 方法如下：</h3>
+
+<pre><code>// jQuery 开头定义变量部分：
+var ....,
+
+    _$ = window.$,
+
+    _jQuery = window.jQuer,
+
+    ....;
+
+noConflict: function( deep ) {
+    if ( window.$ === jQuery ) {
+        window.$ = _$;
+    }
+
+    if ( deep &amp;&amp; window.jQuery === jQuery ) {
+        window.jQuery = _jQuery;
+    }
+
+    return jQuery;
+}
+...
+
+// jQuery 函数底部
+if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.exports === "object" ) {
+    // 在执行节点的加载器中，公开 jQuery 作为 module.exports,
+    // 因为 module 模式：不能创建全局变量，用户将会储存它作为局部变量
+    // 全局变量不能被 Node module 解析。
+    // 所以将 jQuery 赋给 module.exports
+    module.exports = jQuery;
+} else {
+    // 不是 module 模式，就把 jQuery 赋给全局
+    window.jQuery = window.$ = jQuery;
+
+    // Register as a named AMD module, since jQuery can be concatenated with other
+    // files that may use define, but not via a proper concatenation script that
+    // understands anonymous AMD modules. A named AMD is safest and most robust
+    // way to register. Lowercase jquery is used because AMD module names are
+    // derived from file names, and jQuery is normally delivered in a lowercase
+    // file name. Do this after creating the global so that if an AMD module wants
+    // to call noConflict to hide this version of jQuery, it will work.
+    if ( typeof define === "function" &amp;&amp; define.amd ) {
+        define( "jquery", [], function () { return jQuery; } );
+    }
+}
+</code></pre>
+
+<p>在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T19:10:00+08:00" pubdate data-updated="true"><span class="tit_date">7th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/07/regexp-test-exec-difference/">正则表达式（RegExp）方法，test() 和 Exec() 区别。</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><h4>test() 方法。</h4>
+
+<blockquote><ol>
+<li>语法：RegExpObject.test(string)；</li>
+<li>作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；</li>
+<li>返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。</li>
+</ol>
+</blockquote>
+
+<p>实例：</p>
+
+<pre><code>var str = "this is harole's blog.";
+var pattern = new RegExp( "harole" );
+var result = pattern.test( "sam harole freestyle" );
+alert( "this is harole's blog : " + result );
+</code></pre>
+
+<h4>exec() 方法。</h4>
+
+<pre><code>1. 语法：RegExpObject.test(string)；
+2. 作用：用来获取字符串匹配某个模式（该模式由 RegExpObject 设置）的内容；
+3. 返回值：如果存在满足 RegExpObject，则把匹配到的结果依次存入一个数组中，并返回数组；如果没有找到匹配的字符串，则返回 null。
+</code></pre>
+
+<h4>match() 方法。</h4>
+
+<pre><code>1. 语法：RegExpObject.test(string)；
+2. 作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；
+3. 返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。
+</code></pre>
+
+<p>总结：1. test() 和 exec() 比较：</p>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -634,168 +802,6 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/10/inline-block-drop/">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. div.left 和 div.right 均有内容。</p>
-
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;inline-cblock&lt;/title&gt;
-    &lt;style type="text/css"&gt;
-    .box {
-        width: 400px;
-        height: 100px;
-        margin: 50px auto;
-        background: black;
-        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
-        letter-spacing: -3px;
-        font-size: 0;       
-        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
-    }
-    .box .left {
-        display: inline-block;
-        width: 200px;
-        height: 100px;
-        font-size: 50px;
-        background: yellow;
-    }
-    .box .right {
-        display: inline-block;
-        width: 200px;
-        height: 100px;  
-        font-size: 50px;   
-        background: blue;       
-    }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="box"&gt;
-        &lt;div class="left"&gt;Left&lt;/div&gt;
-        &lt;div class="right"&gt;Right&lt;/div&gt;
-    &lt;/div&gt;  
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>预期效果：
-<img src="/images/inline-block-01.png" alt="all have content" /></p>
-
-<p>二. 仅把 div.left 中的内容去掉，效果：
-<img src="/images/inline-block-02.png" alt="all have content" /></p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/10/inline-block-drop/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-10T12:49:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/10/javascript-event-handle/">像 Html 模块化一样，模块化 Javascript 事件处理程序，使之可维护！</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. 常用的事件处理程序</p>
-
-<pre><code>funciton handleClick( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "click", handleClcik); 
-</code></pre>
-
-<p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
-
-<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/10/javascript-event-handle/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -811,15 +817,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery解决名字隔阂$冲突方法&#8212;noConflict()解析</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/regexp-test-exec-difference/">正则表达式（RegExp）方法，test() 和 exec() 区别。</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/05/initbigarrayasync/">javascript 异步初始化大数组</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/05/looping-techniques-javascript/">javascript 循环（for，while）那些事儿！</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/01/new-function/">Function()构造函数，即用 new Function() 方式构造函数</a>
       </li>
     
   </ul>
@@ -833,7 +839,9 @@ addListener(element, "click", handleClcik);
   <ul id="categories">
     <li class='category'><a href='/blog/categories/css/'>CSS (3)</a></li>
 <li class='category'><a href='/blog/categories/ie6/'>IE6 (2)</a></li>
-<li class='category'><a href='/blog/categories/javascript/'>javascript (5)</a></li>
+<li class='category'><a href='/blog/categories/regexp/'>RegExp (1)</a></li>
+<li class='category'><a href='/blog/categories/jquery/'>jQuery (1)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (6)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
 
   </ul>

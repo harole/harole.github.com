@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上 - Harole's blog</title>
+  <title>jQuery解决名字隔阂$冲突方法---noConflict()解析 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. div.left 和 div.right 均有内容。 &lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;inline-cblock&lt;/ &hellip;">
+  <meta name="description" content="jQuery 中 noConflict() 方法如下： // jQuery 开头定义变量部分：
+var ...., _$ = window.$, _jQuery = window.jQuer, ....; noConflict: function( deep ) { if ( window &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/10/inline-block-drop">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/10/11/jquery-noconflict-method">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -96,7 +95,7 @@
   
 
 
-<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-10-11T02:42:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
           
         </div>
       
@@ -105,117 +104,57 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</h3>
+      <h3 class="entry-title">jQuery解决名字隔阂$冲突方法---noConflict()解析</h3>
     </div>
-    <div class="entry-content"><p>一. div.left 和 div.right 均有内容。</p>
+    <div class="entry-content"><h3>jQuery 中 noConflict() 方法如下：</h3>
 
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;inline-cblock&lt;/title&gt;
-    &lt;style type="text/css"&gt;
-    .box {
-        width: 400px;
-        height: 100px;
-        margin: 50px auto;
-        background: black;
-        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
-        letter-spacing: -3px;
-        font-size: 0;       
-        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
+<pre><code>// jQuery 开头定义变量部分：
+var ....,
+
+    _$ = window.$,
+
+    _jQuery = window.jQuer,
+
+    ....;
+
+noConflict: function( deep ) {
+    if ( window.$ === jQuery ) {
+        window.$ = _$;
     }
-    .box .left {
-        display: inline-block;
-        width: 200px;
-        height: 100px;
-        font-size: 50px;
-        background: yellow;
+
+    if ( deep &amp;&amp; window.jQuery === jQuery ) {
+        window.jQuery = _jQuery;
     }
-    .box .right {
-        display: inline-block;
-        width: 200px;
-        height: 100px;  
-        font-size: 50px;   
-        background: blue;       
+
+    return jQuery;
+}
+...
+
+// jQuery 函数底部
+if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.exports === "object" ) {
+    // 在执行节点的加载器中，公开 jQuery 作为 module.exports,
+    // 因为 module 模式：不能创建全局变量，用户将会储存它作为局部变量
+    // 全局变量不能被 Node module 解析。
+    // 所以将 jQuery 赋给 module.exports
+    module.exports = jQuery;
+} else {
+    // 不是 module 模式，就把 jQuery 赋给全局
+    window.jQuery = window.$ = jQuery;
+
+    // Register as a named AMD module, since jQuery can be concatenated with other
+    // files that may use define, but not via a proper concatenation script that
+    // understands anonymous AMD modules. A named AMD is safest and most robust
+    // way to register. Lowercase jquery is used because AMD module names are
+    // derived from file names, and jQuery is normally delivered in a lowercase
+    // file name. Do this after creating the global so that if an AMD module wants
+    // to call noConflict to hide this version of jQuery, it will work.
+    if ( typeof define === "function" &amp;&amp; define.amd ) {
+        define( "jquery", [], function () { return jQuery; } );
     }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="box"&gt;
-        &lt;div class="left"&gt;Left&lt;/div&gt;
-        &lt;div class="right"&gt;Right&lt;/div&gt;
-    &lt;/div&gt;  
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>预期效果：
-<img src="/images/inline-block-01.png" alt="all have content" /></p>
-
-<p>二. 仅把 div.left 中的内容去掉，效果：
-<img src="/images/inline-block-02.png" alt="all have content" /></p>
-
-<!-- more -->
-
-
-<p>三. 仅把 div.right 中的内容去掉
-<img src="/images/inline-block-03.png" alt="all have content" /></p>
-
-<p>问题“二”和“三”解决办法：</p>
-
-<blockquote><p>方案一：</p>
-
-<pre><code>.box .left {
-    verical-align: top;
-}
-.box .right {
-    verical-align: top;
-} 
-</code></pre>
-
-<p>方案二：</p>
-
-<pre><code>.box .left {
-    verical-align: middle;
-}
-.box .right {
-    verical-align: middle;
-} 
-</code></pre>
-
-<p>方案三:</p>
-
-<pre><code>.box .left {
-    verical-align: top;
 }
 </code></pre>
 
-<p>或者</p>
-
-<pre><code>.box .right {
-    verical-align: top;
-}
-</code></pre></blockquote>
-
-<p>总结（对方案的理解）：</p>
-
-<blockquote><p>对于方案一和方案二的解决，可能会好奇如果都 vertical-align：baseline; 能否解决，答案是否定的。</p>
-
-<p>vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div
-的 baseline 在容器本身的底部，另外一个有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来。</p>
-
-<p>问题一：对于上面的“有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来”会有个疑问，即“为什么是有内容的 div 和没有内容 div 的对齐，而不是没有内容的和有内容的 div 对齐呢？”</p>
-
-<p>其实也可以看做是没有内容的 div 和有内容的 div 对齐，因为浏览器的默认是向下排版的所以向下溢出了，而没有向上溢出。</p>
-
-<p>问题二：对于方案一和方案二都可以理解了，那为什么方案三也可以呢？</p>
-
-<p>当缺少内容的 div 设置了 “verti-align: top;”， 有内容的 div 和它对齐（也可以看做它和有内容的 div 对齐，原因看问题一的解答），就达到期望的显示了。</p>
-
-<p>当有内容的 div 设置了 “verti-align: top;” ，当然就回到 div.box 的顶部了，至于没有内容的 div 为什么没有和有内容的 div 对齐呢？原因和问题一的解答是一样的，没有内容的 div 尝试对齐，但是它不能向上溢出。</p></blockquote>
-
-<p>关于 vertical-align 相关信息可以参考链接：<a href="http://www.jb51.net/css/10337.html">http://www.jb51.net/css/10337.html</a></p>
+<p>在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
 </div>
   </div>  
   
@@ -241,15 +180,21 @@
   
 
 
-<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-10-11T02:42:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
           
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
+  
+</span>
 
 
         </p>
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/10/inline-block-drop/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/10/inline-block-drop/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/10/11/jquery-noconflict-method/" data-via="" data-counturl="http://harole.github.com/blog/2013/10/11/jquery-noconflict-method/" >Tweet</a>
   
   
   
@@ -258,10 +203,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/10/javascript-event-handle/" title="Previous Post: 像 html 模块化一样，模块化 javascript 事件处理程序，使之可维护！">&laquo;上一篇: 像 html 模块化一样，模块化 javascript 事件处理程序，使之可维护！</a>
+            <a class="basic-alignment left" href="/blog/2013/10/07/regexp-test-exec-difference/" title="Previous Post: 正则表达式（RegExp）方法，test() 和 exec() 区别。">&laquo;上一篇: 正则表达式（RegExp）方法，test() 和 exec() 区别。</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/04/21/ie6-png/" title="Next Post: ie6 下 png 图片透明，滤镜解决方案">下一篇:ie6 下 png 图片透明，滤镜解决方案 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->
