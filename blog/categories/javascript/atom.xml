@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-11T03:11:55+08:00</updated>
+  <updated>2013-10-11T03:17:39+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[jQuery解决名字隔阂$冲突方法---noConflict()解析]]></title>
+    <title type="html"><![CDATA[jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析]]></title>
     <link href="http://harole.github.com/blog/2013/10/11/jquery-noconflict-method/"/>
     <updated>2013-10-11T02:42:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/11/jquery-noconflict-method</id>
@@ -37,8 +37,12 @@ noConflict: function( deep ) {
     if ( deep &amp;&amp; window.jQuery === jQuery ) {
         window.jQuery = _jQuery;
     }
+</code></pre>
 
-    return jQuery;
+<!-- more -->
+
+
+<pre><code>    return jQuery;
 }
 ...
 
@@ -66,7 +70,7 @@ if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.expor
 }
 </code></pre>
 
-<p>在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
+<p>总结：在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
 ]]></content>
   </entry>
   
@@ -90,8 +94,12 @@ if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.expor
                 if (new Date - startTime &lt; THRESHOLD) {
                     r[i++] = i;
                 } else {
+</code></pre>
 
-                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
+<!-- more -->
+
+
+<pre><code>                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
                     // 所以用一个很小的等待时间 DELAY，来从新调用 init() 进行赋值
                     setTimeout(function() {
                         init(new Date);
