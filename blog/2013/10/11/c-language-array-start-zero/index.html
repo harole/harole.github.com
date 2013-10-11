@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>AlphamageLoader滤镜解决ie6下png图片透明带来的问题 - Harole's blog</title>
+  <title>为什么C语言中数组下标从0开始？ - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 图片定位 无法使用backgroun-position对图片定位;
-因为“”导致无法使用CSS Sprite，无法减少http请求;
-当前大多数网站使用的图片较多，特别在大型网站，因为 “”
-将会严重影响页面的加载速度。 二. 冻结浏览器 使用滤镜之后，页面不在支持CSS的渐进渲染了; &hellip;">
+  <meta name="description" content="最近学习了汇编语言，和一些反汇编调试程序的方法，对语言的实现有了更深的认识。也明白了C语言的数组下标为什么从零开始。有两种理解方式，一般理解和从反汇编代码的角度理解。 首先要理解什么是物理地址： CPU 被划分为不同的段，物理地址由 CS 和 IP 构成，对内存地址进行控制。CS 是基地址（段基址 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/23/alphamageloader-problem">
+  <link rel="canonical" href="http://harole.github.com/blog/2013/10/11/c-language-array-start-zero">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -97,7 +94,7 @@
   
 
 
-<time datetime="2013-04-23T22:45:00+08:00" pubdate data-updated="true"><span class="tit_date">23rd</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-10-11T20:49:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
           
         </div>
       
@@ -106,32 +103,42 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">AlphamageLoader滤镜解决ie6下png图片透明带来的问题</h3>
+      <h3 class="entry-title">为什么C语言中数组下标从0开始？</h3>
     </div>
-    <div class="entry-content"><p>一. 图片定位</p>
+    <div class="entry-content"><p>最近学习了汇编语言，和一些反汇编调试程序的方法，对语言的实现有了更深的认识。也明白了C语言的数组下标为什么从零开始。有两种理解方式，一般理解和从反汇编代码的角度理解。</p>
 
-<blockquote><ol>
-<li><1>无法使用backgroun-position对图片定位;</li>
-<li><2>因为“<1>”导致无法使用CSS Sprite，无法减少http请求;</li>
-<li><3>当前大多数网站使用的图片较多，特别在大型网站，因为 “<2>”
-将会严重影响页面的加载速度。</li>
-</ol>
-</blockquote>
+<p>首先要理解什么是物理地址：</p>
+
+<blockquote><p>CPU 被划分为不同的段，物理地址由 CS 和 IP 构成，对内存地址进行控制。CS 是基地址（段基址），IP 是偏移地址。CPU 以8086为例：假设 CS 为 2000（16进制），IP 为 0001（16进制），那么物理地址为 CS<em>16 + IP, CS</em>16 即 2000 左移一位 20000， 故物理地址 = 20000 + 0001 = 20001（构成20位的物理地址）。</p></blockquote>
 
 <!-- more -->
 
 
-<p>二. 冻结浏览器</p>
+<ol>
+<li><p>一般理解（粗略理解），可认为是以下方式</p>
 
-<blockquote><ol>
-<li><1> 使用滤镜之后，页面不在支持CSS的渐进渲染了;</li>
-<li><2> 在所有必须的组件下载完成之前，页面都是一片空白；</li>
-<li><3> ie6会再所以CSS都下载完成后才开始渲染，但是CSS缺依赖于一张经过滤镜处理的图片，所以渲染要等到图片（经过滤镜处理的）加载完成才开始;</li>
-<li><4> 如果一个页面上有10张滤镜处理的图片，每张图片加载需要2秒，那么页面的渲染就需要停滞20秒。</li>
+<p> 如果下标 i（用下标表示偏移地址）是从 1 开始的，则赋值时我们需要，获得的物理地址 = CS * 16 + (i - 1)，即每次赋值都需要多执行一次减法；</p>
+
+<p> <img src="/images/2013-10-11-22-39-57.png" alt="all have content" /></p>
+
+<p> 如果下标 i（用下标表示偏移地址）是从 0 开始的，则赋值时，获取的物理地址 = CS * 16 + i;</p>
+
+<p> <img src="/images/2013-10-11-cpu.png" alt="all have content" /></p>
+
+<p> 总结：如果数组比较大，则两种方式在时间复杂度上，数组下标从零开始更优！故数组从 0 开始。</p></li>
+<li><p>从反汇编的角度来理解（细节理解）</p>
+
+<p> <img src="/images/2013-10-11-22-46-40.png" alt="all have content" /></p>
+
+<p> 001813F6 8B 45 DC             mov         eax,dword ptr [ebp-24h] ，这语句将 [ebp-24h] （即 i 的值）赋给 eax 寄存器；</p>
+
+<p> 001813FC 89 4C 85 E8          mov         dword ptr [ebp+eax<em>4-18h],ecx ，这句将寄存器 ecx 中的值赋给 [ebp+eax</em>4-18h] （即 a[i]），其中 ebp-18h 可以看做 CS，eax*4 为 IP；这里的 4 是4字节（int 类型的长度），这个长度随数组类型的变化而变化。</p>
+
+<p> <img src="/images/2013-10-11-23-14-57.png" alt="all have content" /></p>
+
+<p> 同一般理解中的解释一样，如果数组是从 1 开始，即这里的寄存器每次都要做一次减法，同样带来时间复杂度的增加。</p></li>
 </ol>
-</blockquote>
 
-<p>总结：在页面中少使用滤镜，否则性能会大大的降低。</p>
 </div>
   </div>  
   
@@ -157,12 +164,12 @@
   
 
 
-<time datetime="2013-04-23T22:45:00+08:00" pubdate data-updated="true"><span class="tit_date">23rd</span> <span class="tit_month">Apr</span></time>
+<time datetime="2013-10-11T20:49:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
           
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/ie6/'>IE6</a>
+    <a class='category' href='/blog/categories/cyan-yu/'>C言语</a>
   
 </span>
 
@@ -171,7 +178,7 @@
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/23/alphamageloader-problem/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/23/alphamageloader-problem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/10/11/c-language-array-start-zero/" data-via="" data-counturl="http://harole.github.com/blog/2013/10/11/c-language-array-start-zero/" >Tweet</a>
   
   
   
@@ -180,10 +187,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/04/21/ie6-png/" title="Previous Post: ie6 下 png 图片透明，滤镜解决方案">&laquo;上一篇: ie6 下 png 图片透明，滤镜解决方案</a>
+            <a class="basic-alignment left" href="/blog/2013/10/11/jquery-noconflict-method/" title="Previous Post: jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析">&laquo;上一篇: jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/05/19/input-ie67/" title="Next Post: input ie6,7下双边距问题">下一篇:input ie6,7下双边距问题 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->
