@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-11T23:24:40+08:00</updated>
+  <updated>2013-10-16T00:01:15+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascript 数组引用和对象引用]]></title>
+    <link href="http://harole.github.com/blog/2013/10/12/javascript-array-quote/"/>
+    <updated>2013-10-12T23:22:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/12/javascript-array-quote</id>
+    <content type="html"><![CDATA[<pre><code>var a = b = [1,2,3];
+a = [];// a 为空数组，b 仍是 [1,2,3]
+
+var a = b = [1,2,3];
+a.length = 0;// a，b 为空数组
+
+var a = b = [1,2,3];
+a.length = 2;// a，b 为 [1,2]
+</code></pre>
+
+<p>总结：换个角度来理解上面那个问题，a, b 都是数组对象 [1,2,3] 的引用，当a = [] 或是 b = [] 改变的只是变量 a，b 的引用对象而已。而是用 a.length = 0 或是 b.length = 0，改变的是数组对象 [1,2,3] 的长度，故有上述实例的结果。</p>
+
+<p>思考：上述数组 a 和 b 保存的都只是数组 [1,2,3] 的引用，那么对与 Object 是否也是引用呢？猜想，引用规则对 Object 同样适用。</p>
+
+<!-- more -->
+
+
+<p>验证猜想：</p>
+
+<pre><code>// a 为null，b 仍是 { one: 1, two: 2, three: 3 }
+var a = b = { one: 1, two: 2, three: 3 };
+a = null;
+
+// a，b 为{ one: 1, two: 2 }
+var a = b = { one: 1, two: 2, three: 3 };
+delete a.three;
+
+// a，b 为 {}
+var a = b = { one: 1, two: 2, three: 3 };
+for ( number in a ) {
+    // 为什么这里使用 [] 的方式调用对象的属性？
+    // 因为这里使用 a.number 的方式无法取得属性值（至少在chrome中是这样的）
+    delete a[number];
+}
+</code></pre>
+
+<p>先来看看这里引用的一段 1.10.2 版本的 jQuery 的 globalEval 函数源码：</p>
+
+<pre><code>// Evaluates a script in a global context
+// Workarounds based on findings by Jim Driscoll
+// http://weblogs.java.net/blog/driscoll/archive/2009/09/08/eval-
+// javascript-global-context
+globalEval: function( data ) {
+    if ( data &amp;&amp; jQuery.trim( data ) ) {
+        // We use execScript on Internet Explorer
+        // We use an anonymous function so that context is window
+        // rather than jQuery in Firefox
+        ( window.execScript || function( data ) {
+            window[ "eval" ].call( window, data );
+        } )( data );
+    }
+}
+</code></pre>
+
+<p>我们会发现在源码中有这么一行 <strong>window[ &#8220;eval&#8221; ].call( window, data );</strong> 为什么这里也使用 [] 的方式调用对象的属性？曾经我找到一篇文章（一时也找不到了）提到 window.eval 在某些浏览器无法正常获取属性值，包括 chrome 都无法正常获取属性。可是 window.eval 在 chrome 的控制台是可以正常获取的，那么究竟什么情况下可以用 &#8220;.&#8221; 获取属性或是方法，什么情况下不行呢？现在可以肯定的 Object 在 for 语句中不能使用 &#8220;.&#8221; 获取属性或方法，如果读者有相关结论，欢迎联系我。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为什么C语言中数组下标从0开始？]]></title>

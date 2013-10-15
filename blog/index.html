@@ -9,7 +9,10 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="最近学习了汇编语言，和一些反汇编调试程序的方法，对语言的实现有了更深的认识。也明白了C语言的数组下标为什么从零开始。有两种理解方式，一般理解和从反汇编代码的角度理解。 首先要理解什么是物理地址： CPU 被划分为不同的段，物理地址由 CS 和 IP 构成，对内存地址进行控制。CS 是基地址（段基址 &hellip;">
+  <meta name="description" content="var a = b = [1,2,3];
+a = [];// a 为空数组，b 仍是 [1,2,3] var a = b = [1,2,3];
+a.length = 0;// a，b 为空数组 var a = b = [1,2,3];
+a.length = 2;// a，b 为 [1,2] 总结： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +84,67 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T23:22:00+08:00" pubdate data-updated="true"><span class="tit_date">12th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/12/javascript-array-quote/">Javascript 数组引用和对象引用</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><pre><code>var a = b = [1,2,3];
+a = [];// a 为空数组，b 仍是 [1,2,3]
+
+var a = b = [1,2,3];
+a.length = 0;// a，b 为空数组
+
+var a = b = [1,2,3];
+a.length = 2;// a，b 为 [1,2]
+</code></pre>
+
+<p>总结：换个角度来理解上面那个问题，a, b 都是数组对象 [1,2,3] 的引用，当a = [] 或是 b = [] 改变的只是变量 a，b 的引用对象而已。而是用 a.length = 0 或是 b.length = 0，改变的是数组对象 [1,2,3] 的长度，故有上述实例的结果。</p>
+
+<p>思考：上述数组 a 和 b 保存的都只是数组 [1,2,3] 的引用，那么对与 Object 是否也是引用呢？猜想，引用规则对 Object 同样适用。</p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/12/javascript-array-quote/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -681,63 +745,6 @@ f.apply( O, [1,2] );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-23T22:45:00+08:00" pubdate data-updated="true"><span class="tit_date">23rd</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/23/alphamageloader-problem/">AlphamageLoader滤镜解决ie6下png图片透明带来的问题</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. 图片定位</p>
-
-<blockquote><ol>
-<li><1>无法使用backgroun-position对图片定位;</li>
-<li><2>因为“<1>”导致无法使用CSS Sprite，无法减少http请求;</li>
-<li><3>当前大多数网站使用的图片较多，特别在大型网站，因为 “<2>”
-将会严重影响页面的加载速度。</li>
-</ol>
-</blockquote>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/23/alphamageloader-problem/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -753,15 +760,15 @@ f.apply( O, [1,2] );
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/12/javascript-array-quote/">javascript 数组引用和对象引用</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/11/c-language-array-start-zero/">为什么C语言中数组下标从0开始？</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法&#8212;noConflict()解析</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/07/regexp-test-exec-difference/">正则表达式（RegExp）方法，test() 和 exec() 区别。</a>
       </li>
     
   </ul>
@@ -773,7 +780,7 @@ f.apply( O, [1,2] );
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(6)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(7)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     
