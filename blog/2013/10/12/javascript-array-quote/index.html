@@ -138,31 +138,14 @@ delete a.three;
 // a，b 为 {}
 var a = b = { one: 1, two: 2, three: 3 };
 for ( number in a ) {
+
     // 为什么这里使用 [] 的方式调用对象的属性？
-    // 因为这里使用 a.number 的方式无法取得属性值（至少在chrome中是这样的）
+    // 因为 for/in 语句，将字面量 one 等转换成字符串 "one" 等
+    // 所以 a.number 会变成 a."one"等, 故无法访问
+    // 而 a[number] 为 a["one"]，可以正常访问
     delete a[number];
 }
 </code></pre>
-
-<p>先来看看这里引用的一段 1.10.2 版本的 jQuery 的 globalEval 函数源码：</p>
-
-<pre><code>// Evaluates a script in a global context
-// Workarounds based on findings by Jim Driscoll
-// http://weblogs.java.net/blog/driscoll/archive/2009/09/08/eval-
-// javascript-global-context
-globalEval: function( data ) {
-    if ( data &amp;&amp; jQuery.trim( data ) ) {
-        // We use execScript on Internet Explorer
-        // We use an anonymous function so that context is window
-        // rather than jQuery in Firefox
-        ( window.execScript || function( data ) {
-            window[ "eval" ].call( window, data );
-        } )( data );
-    }
-}
-</code></pre>
-
-<p>我们会发现在源码中有这么一行 <strong>window[ &#8220;eval&#8221; ].call( window, data );</strong> 为什么这里也使用 [] 的方式调用对象的属性？曾经我找到一篇文章（一时也找不到了）提到 window.eval 在某些浏览器无法正常获取属性值，包括 chrome 都无法正常获取属性。可是 window.eval 在 chrome 的控制台是可以正常获取的，那么究竟什么情况下可以用 &#8220;.&#8221; 获取属性或是方法，什么情况下不行呢？现在可以肯定的 Object 在 for 语句中不能使用 &#8220;.&#8221; 获取属性或方法，如果读者有相关结论，欢迎联系我。</p>
 </div>
   </div>  
   
