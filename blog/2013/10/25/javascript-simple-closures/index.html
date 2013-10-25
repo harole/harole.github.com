@@ -128,7 +128,7 @@ console.log(returnFunVar());    // 输出 3
 
 <p>按照通用命令式思维的理解，funVar 是 fun 函数内部的变量，它的生命周期就是 fun 函数的执行周期。当 fun 函数从调用栈中返回时，funVar 变量申请的空间也就释放了。问题是，在 fun 执行结束后，inFun 却引用了”已经释放了“的 funVar ，而且没有报错，每次调用还修改了 funVar。这是为什么呢？</p>
 
-<p>这正是所谓闭包的特性，当一个函数返回它内部定义的一个函数时，就产生了闭包。<strong>闭包不仅只是被返回的函数，还包括函数的定义环境。</strong>大家可能对这里的“定义环境”感到疑惑，可以点击这《<a href="http://harole.com/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>》。 fun 可以产生多个闭包，闭包和闭包之间互不影响，可以认为是工厂里的生产同种部件的不同车间。例如：</p>
+<p>这正是所谓闭包的特性，当一个函数返回它内部定义的一个函数时，就产生了闭包。<strong>闭包不仅只是被返回的函数，还包括函数的定义环境。</strong>大家可能对这里的“定义环境”感到疑惑，可以点击这《<a href="http://www.harole.com/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>》。 fun 可以产生多个闭包，闭包和闭包之间互不影响，可以认为是工厂里的生产同种部件的不同车间。例如：</p>
 
 <pre><code>var fun = function () {
     var funVar = 0;
