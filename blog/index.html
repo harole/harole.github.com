@@ -9,10 +9,8 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="var a = b = [1,2,3];
-a = [];// a 为空数组，b 仍是 [1,2,3] var a = b = [1,2,3];
-a.length = 0;// a，b 为空数组 var a = b = [1,2,3];
-a.length = 2;// a，b 为 [1,2] 总结： &hellip;">
+  <meta name="description" content="在 《javascript 简单闭包》 一文中提到，闭包包含返回的函数和该函数的定义环境，本文将从函数定义环境和函数执行周期的角度来理解闭包，如有不恰之处，欢迎提出，讨论！先来看一个示例及其结果： //示例一：
+var fun = function () { var funVar = 0; var &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +82,138 @@ a.length = 2;// a，b 为 [1,2] 总结： &hellip;">
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-25T15:36:00+08:00" pubdate data-updated="true"><span class="tit_date">25th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/25/javascript-understand-closures-deeply/">Javascript 闭包原理的深入理解</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>在 《<a href="http://harole.com/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>》 一文中提到，闭包包含返回的函数和该函数的定义环境，本文将从函数定义环境和函数执行周期的角度来理解闭包，如有不恰之处，欢迎提出，讨论！先来看一个示例及其结果：</p>
+
+<pre><code>//示例一：
+var fun = function () {
+    var funVar = 0;
+    var inFun = function () {
+         funVar++;
+         return funVar;
+    }
+    return inFun;
+}
+var returnFunVar1 = fun();
+var returnFunVar2 = fun();
+console.log(returnFunVar1());    // 输出 1
+console.log(returnFunVar2());    // 输出 1
+console.log(returnFunVar1());    // 输出 2
+console.log(returnFunVar1());    // 输出 3
+console.log(returnFunVar2());    // 输出 2
+</code></pre>
+
+<p>总结：我们可以发现，示例一中，returnFunVar1 和 returnFunVar2 操作的 funVar 不是同一个变量，var returnFunVar1 = fun();  事实上 fun() 的局部变量随着 fun 执行的结束，即 funVar 也释放了。</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/25/javascript-understand-closures-deeply/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-25T15:26:00+08:00" pubdate data-updated="true"><span class="tit_date">25th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/25/javascript-simple-closures/">Javascript 简单闭包</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>通俗的讲，javascript 中每个函数都是一个闭包，但通常意义上是嵌套的函数能够体现出闭包的特性。例如：</p>
+
+<pre><code>var fun = function () {
+    var funVar = 0;
+    var inFun = function () {
+         funVar++;
+         return funVar;
+    }
+    return inFun;
+}
+var returnFunVar = fun();
+console.log(returnFunVar());    // 输出 1
+console.log(returnFunVar());    // 输出 2
+console.log(returnFunVar());    // 输出 3
+</code></pre>
+
+<p>上面一段代码中，fun() 函数中有一个局部变量 funVar，初值为 0,，还有一个 inFun 函数。inFun 函数将其父作用域，即 fun 函数中的 funVar 变量加 1，并返回 funVar。fun 返回的是 inFun 函数，在外部通过变量 returnFunVar 调用获取 fun 的返回值（即 inFun 函数）。</p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/25/javascript-simple-closures/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -364,7 +494,10 @@ alert( "this is harole's blog : " + result );
                   
       </div>
   
-      <div class="entry-content"><pre><code>    // THRESHOLD 用于防止浏览器超时，DELAY 用来设置函数调用等待时间
+      <div class="entry-content"><pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
+    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
+    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
+
     var THRESHOLD = 150, DELAY = 15;
 
     function initBigArrayAsync(max, cb) {
@@ -586,165 +719,6 @@ f.apply( O, [1,2] );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Liquid Exception: Incompatible Encoding Regexp Match (ASCII-8BIT Regexp With UTF-8 String)</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-19T10:46:00+08:00" pubdate data-updated="true"><span class="tit_date">19th</span> <span class="tit_month">May</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/05/19/input-ie67/">Input Ie6,7下双边距问题</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. 先来看 input 产生的几个问题。</p>
-
-<p>情况一：</p>
-
-<hr />
-
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;test&lt;/title&gt;         
-
-    &lt;style type="text/css"&gt;
-
-    /* 去除默认的 padding 和 margin */
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    .has-margins {
-        background-color: gray;
-        margin-left: 5em;        
-    }
-    .has-layout {
-        background-color: tan;
-        width: 30em;
-    }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;form action="ignore"&gt;            
-        &lt;div class="has-margins"&gt;
-            &lt;div class="has-layout"&gt;
-                INPUT tag, type=text:&lt;br&gt;
-                &lt;input type="text"&gt;&lt;br&gt;
-                INPUT tag, type=checkbox:&lt;br&gt;
-                &lt;input type="checkbox"&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/form&gt;      
-
-    &lt;!-- 注释2 --&gt;
-    &lt;!-- &lt;form action="ignore"&gt;            
-        &lt;div class="has-margins"&gt;
-            &lt;div class="has-margins"&gt;
-                &lt;div class="has-layout"&gt;
-                    INPUT tag, type=text:&lt;br&gt;
-                    &lt;input type="text"&gt;&lt;br&gt;
-                    INPUT tag, type=checkbox:&lt;br&gt;
-                    &lt;input type="checkbox"&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/form&gt; --&gt; 
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>ie6，7 下 input 和 .has-margin 之间多了 80px（即 .box 的 margin-left 的同时也复制给了 input），如下图:</p>
-
-<p><img src="/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/05/19/input-ie67/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -760,15 +734,15 @@ f.apply( O, [1,2] );
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/12/javascript-array-quote/">javascript 数组引用和对象引用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/c-language-array-start-zero/">为什么C语言中数组下标从0开始？</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法&#8212;noConflict()解析</a>
       </li>
     
   </ul>
@@ -780,7 +754,7 @@ f.apply( O, [1,2] );
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(7)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     

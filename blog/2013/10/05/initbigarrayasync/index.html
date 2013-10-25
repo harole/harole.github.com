@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="// THRESHOLD 用于防止浏览器超时，DELAY 用来设置函数调用等待时间 var THRESHOLD = 150, DELAY = 15; function initBigArrayAsync(max, cb) { var r = [], i = 0; function init( &hellip;">
+  <meta name="description" content="// 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务 // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间 // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒 var &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,7 +105,10 @@
     <div class="article_header">
       <h3 class="entry-title">Javascript 异步初始化大数组</h3>
     </div>
-    <div class="entry-content"><pre><code>    // THRESHOLD 用于防止浏览器超时，DELAY 用来设置函数调用等待时间
+    <div class="entry-content"><pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
+    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
+    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
+
     var THRESHOLD = 150, DELAY = 15;
 
     function initBigArrayAsync(max, cb) {
@@ -226,15 +229,15 @@ var duoshuoQuery = {short_name:"harole"};
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/12/javascript-array-quote/">javascript 数组引用和对象引用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/c-language-array-start-zero/">为什么C语言中数组下标从0开始？</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析</a>
       </li>
     
   </ul>

@@ -9,10 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 图片定位 无法使用backgroun-position对图片定位;
-因为“”导致无法使用CSS Sprite，无法减少http请求;
-当前大多数网站使用的图片较多，特别在大型网站，因为 “”
-将会严重影响页面的加载速度。 ">
+  <meta name="description" content="很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate 总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +81,165 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">Liquid Exception: Incompatible Encoding Regexp Match (ASCII-8BIT Regexp With UTF-8 String)</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T10:46:00+08:00" pubdate data-updated="true"><span class="tit_date">19th</span> <span class="tit_month">May</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/05/19/input-ie67/">Input Ie6,7下双边距问题</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>一. 先来看 input 产生的几个问题。</p>
+
+<p>情况一：</p>
+
+<hr />
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;test&lt;/title&gt;         
+
+    &lt;style type="text/css"&gt;
+
+    /* 去除默认的 padding 和 margin */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .has-margins {
+        background-color: gray;
+        margin-left: 5em;        
+    }
+    .has-layout {
+        background-color: tan;
+        width: 30em;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action="ignore"&gt;            
+        &lt;div class="has-margins"&gt;
+            &lt;div class="has-layout"&gt;
+                INPUT tag, type=text:&lt;br&gt;
+                &lt;input type="text"&gt;&lt;br&gt;
+                INPUT tag, type=checkbox:&lt;br&gt;
+                &lt;input type="checkbox"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;      
+
+    &lt;!-- 注释2 --&gt;
+    &lt;!-- &lt;form action="ignore"&gt;            
+        &lt;div class="has-margins"&gt;
+            &lt;div class="has-margins"&gt;
+                &lt;div class="has-layout"&gt;
+                    INPUT tag, type=text:&lt;br&gt;
+                    &lt;input type="text"&gt;&lt;br&gt;
+                    INPUT tag, type=checkbox:&lt;br&gt;
+                    &lt;input type="checkbox"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt; --&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>ie6，7 下 input 和 .has-margin 之间多了 80px（即 .box 的 margin-left 的同时也复制给了 input），如下图:</p>
+
+<p><img src="/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/05/19/input-ie67/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -641,15 +797,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/12/javascript-array-quote/">javascript 数组引用和对象引用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/c-language-array-start-zero/">为什么C语言中数组下标从0开始？</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法&#8212;noConflict()解析</a>
       </li>
     
   </ul>
@@ -661,7 +817,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(7)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     

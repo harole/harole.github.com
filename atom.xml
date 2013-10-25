@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-19T15:50:52+08:00</updated>
+  <updated>2013-10-25T15:47:36+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascript 闭包原理的深入理解]]></title>
+    <link href="http://harole.github.com/blog/2013/10/25/javascript-understand-closures-deeply/"/>
+    <updated>2013-10-25T15:36:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/25/javascript-understand-closures-deeply</id>
+    <content type="html"><![CDATA[<p>在 《<a href="http://harole.com/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>》 一文中提到，闭包包含返回的函数和该函数的定义环境，本文将从函数定义环境和函数执行周期的角度来理解闭包，如有不恰之处，欢迎提出，讨论！先来看一个示例及其结果：</p>
+
+<pre><code>//示例一：
+var fun = function () {
+    var funVar = 0;
+    var inFun = function () {
+         funVar++;
+         return funVar;
+    }
+    return inFun;
+}
+var returnFunVar1 = fun();
+var returnFunVar2 = fun();
+console.log(returnFunVar1());    // 输出 1
+console.log(returnFunVar2());    // 输出 1
+console.log(returnFunVar1());    // 输出 2
+console.log(returnFunVar1());    // 输出 3
+console.log(returnFunVar2());    // 输出 2
+</code></pre>
+
+<p>总结：我们可以发现，示例一中，returnFunVar1 和 returnFunVar2 操作的 funVar 不是同一个变量，var returnFunVar1 = fun();  事实上 fun() 的局部变量随着 fun 执行的结束，即 funVar 也释放了。<!-- more -->而在javascript 简单闭包中，我们知道函数的执行它定义的位置有关，而与执行环境无关。所以，当执行 returnFunvar() 时，就是执行 fun 函数中 inFun 指向的那个匿名函数，而不是 inFun 函数。因为 fun 函数已经执行结束，inFun 已经被释放。当那个匿名函数执行时，发现自己需要 funVar 这个变量。于是为 funVar 在内存上添加一快空间，此时的 funVar 不在是 fun 中的那个 funVar 了（因为已经释放了），我们给它命名为 funVar1。当该匿名函数执行结束后，同样释放局部变量，但是 funVar1 不属于它的局部变量，所以没有释放（可能带来内存泄露）。同理，var returnFunVar2 = fun(); 中的 funVar 为 funVar2，故有示例一展示的结果。</p>
+
+<pre><code>//示例二：
+var fun = function () {
+    funVar = 0;
+    var inFun = function () {
+         funVar++;
+         return funVar;
+    }
+    return inFun;
+}
+var returnFunVar1 = fun();
+var returnFunVar2 = fun();
+console.log(returnFunVar1());    // 输出 1
+console.log(returnFunVar2());    // 输出 2
+console.log(returnFunVar1());    // 输出 3
+console.log(returnFunVar1());    // 输出 4
+console.log(returnFunVar2());    // 输出 5
+
+// 示例三
+var global = 0;
+var fun = function () {
+    var inFun = function () {
+         global++;
+         return global;
+    }
+    return inFun;
+}
+var returnFunVar1 = fun();
+var returnFunVar2 = fun();
+console.log(returnFunVar1());    // 输出 1
+console.log(returnFunVar2());    // 输出 2
+console.log(returnFunVar1());    // 输出 3
+console.log(returnFunVar1());    // 输出 4
+console.log(returnFunVar2());    // 输出 5
+</code></pre>
+
+<p>示例二和示例三，不管是隐式还是显式声明的全局变量，因为不会释放变量，所以在闭包中都是指向内存的同一个区域（即指向同一个变量）。故有示例二和示例三的输出结果。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[javascript 简单闭包]]></title>
+    <link href="http://harole.github.com/blog/2013/10/25/javascript-simple-closures/"/>
+    <updated>2013-10-25T15:26:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/25/javascript-simple-closures</id>
+    <content type="html"><![CDATA[<p>通俗的讲，javascript 中每个函数都是一个闭包，但通常意义上是嵌套的函数能够体现出闭包的特性。例如：</p>
+
+<pre><code>var fun = function () {
+    var funVar = 0;
+    var inFun = function () {
+         funVar++;
+         return funVar;
+    }
+    return inFun;
+}
+var returnFunVar = fun();
+console.log(returnFunVar());    // 输出 1
+console.log(returnFunVar());    // 输出 2
+console.log(returnFunVar());    // 输出 3
+</code></pre>
+
+<p>上面一段代码中，fun() 函数中有一个局部变量 funVar，初值为 0,，还有一个 inFun 函数。inFun 函数将其父作用域，即 fun 函数中的 funVar 变量加 1，并返回 funVar。fun 返回的是 inFun 函数，在外部通过变量 returnFunVar 调用获取 fun 的返回值（即 inFun 函数）。</p>
+
+<!-- more -->
+
+
+<p>按照通用命令式思维的理解，funVar 是 fun 函数内部的变量，它的生命周期就是 fun 函数的执行周期。当 fun 函数从调用栈中返回时，funVar 变量申请的空间也就释放了。问题是，在 fun 执行结束后，inFun 却引用了”已经释放了“的 funVar ，而且没有报错，每次调用还修改了 funVar。这是为什么呢？</p>
+
+<p>这正是所谓闭包的特性，当一个函数返回它内部定义的一个函数时，就产生了闭包。<strong>闭包不仅只是被返回的函数，还包括函数的定义环境。</strong>大家可能对这里的“定义环境”感到疑惑，可以点击这《<a href="http://harole.com/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>》。 fun 可以产生多个闭包，闭包和闭包之间互不影响，可以认为是工厂里的生产同种部件的不同车间。例如：</p>
+
+<pre><code>var fun = function () {
+    var funVar = 0;
+    var inFun = function () {
+         funVar++;
+         return funVar;
+    }
+    return inFun;
+}
+var returnFunVar1 = fun();
+var returnFunVar2 = fun();
+console.log(returnFunVar1());    // 输出 1
+console.log(returnFunVar2());    // 输出 1
+console.log(returnFunVar1());    // 输出 2
+console.log(returnFunVar1());    // 输出 3
+console.log(returnFunVar2());    // 输出 2
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[javascript 数组引用和对象引用]]></title>
@@ -212,7 +327,10 @@ alert( "this is harole's blog : " + result );
     <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
     <updated>2013-10-05T17:26:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
-    <content type="html"><![CDATA[<pre><code>    // THRESHOLD 用于防止浏览器超时，DELAY 用来设置函数调用等待时间
+    <content type="html"><![CDATA[<pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
+    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
+    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
+
     var THRESHOLD = 150, DELAY = 15;
 
     function initBigArrayAsync(max, cb) {
