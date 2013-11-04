@@ -9,8 +9,8 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="在 《javascript 简单闭包》 一文中提到，闭包包含返回的函数和该函数的定义环境，本文将从函数定义环境和函数执行周期的角度来理解闭包，如有不恰之处，欢迎提出，讨论！先来看一个示例及其结果： //示例一：
-var fun = function () { var funVar = 0; var &hellip;">
+  <meta name="description" content="一. 浅拷贝 对象浅拷贝的一般实现： // 赋值对象方法
+Object.prototype.clone = function () { var newObj = {}; for (var i in this) { newObj[i] = this[i]; } return newObj &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,80 @@ var fun = function () { var funVar = 0; var &hellip;">
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-26T17:15:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>一. 浅拷贝</p>
+
+<p>对象浅拷贝的一般实现：</p>
+
+<pre><code>// 赋值对象方法
+Object.prototype.clone = function () {
+    var newObj = {};
+    for (var i in this) {
+        newObj[i] = this[i];
+    }
+    return newObj;
+}
+
+// 待赋值的对象
+var oldObj = {
+    name : "harole",
+    age  : "21"
+}
+
+// 复制对象
+var newObj = oldObj.clone();
+
+delete newObj.name;
+console.log(newObj.name);   // 输出 undefined
+console.log(oldObj.name);   // 输出 harole
+</code></pre>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/26/javascript-shallow-deep-cope/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -656,69 +730,6 @@ alert( "this is harole's blog : " + result );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-29T22:40:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Sep</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/09/29/func-method-call-and-apply/">函数方法call()和apply()的使用和区别</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p><strong>call()</strong> 方法和 <strong>apply()</strong> 方法的第一个参数都是要调用的函数对象，在函数体内这一参数是关键字 <strong>this</strong> 的值。call()剩余的参数是传递给要调用的函数的值。</p>
-
-<pre><code>var O = {};
-
-function f( a, b ) {
-    console.log(a);
-    console.log(b);
-}   
-
-// call()方法的使用，当前 **this** 指向的是对象O
-f.call( O, 1, 2 );
-
-// call()方法的实现与下面代码实现相似，可以通过下面的代码来理解call()的使用。    
-O.m = f;
-O.m();
-delete O.m;
-
-// apply()方法和call()方法相似，区别在于apply传递给函数的参数是由数组指定的：
-f.apply( O, [1,2] );
-</code></pre>
-</div>
-      
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -734,15 +745,15 @@ f.apply( O, [1,2] );
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">javascript 对象与数组的浅拷贝和深拷贝</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/12/javascript-array-quote/">javascript 数组引用和对象引用</a>
       </li>
     
   </ul>
@@ -754,7 +765,7 @@ f.apply( O, [1,2] );
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     

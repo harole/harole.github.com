@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-10-25T15:51:09+08:00</updated>
+  <updated>2013-11-04T23:09:52+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascript 对象与数组的浅拷贝和深拷贝]]></title>
+    <link href="http://harole.github.com/blog/2013/10/26/javascript-shallow-deep-cope/"/>
+    <updated>2013-10-26T17:15:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/26/javascript-shallow-deep-cope</id>
+    <content type="html"><![CDATA[<p>一. 浅拷贝</p>
+
+<p>对象浅拷贝的一般实现：</p>
+
+<pre><code>// 赋值对象方法
+Object.prototype.clone = function () {
+    var newObj = {};
+    for (var i in this) {
+        newObj[i] = this[i];
+    }
+    return newObj;
+}
+
+// 待赋值的对象
+var oldObj = {
+    name : "harole",
+    age  : "21"
+}
+
+// 复制对象
+var newObj = oldObj.clone();
+
+delete newObj.name;
+console.log(newObj.name);   // 输出 undefined
+console.log(oldObj.name);   // 输出 harole
+</code></pre>
+
+<!-- more -->
+
+
+<p>类似对象浅拷贝，数组浅拷贝的一般实现：</p>
+
+<pre><code>// 赋值对象方法
+Array.prototype.clone = function () {
+    var newArray = [];
+    for ( ; this[i]; ) {
+        newArray[i] = this[i++];
+    }
+    return newArray;
+}
+
+// 待赋值的对象
+var oldArray = ['harole', '21'];
+
+// 复制对象
+var newArray = oldArray.clone();
+
+delete newArray[0];
+console.log(newArray[0]);   // 输出 undefined
+console.log(oldArray[0]);   // 输出 harole
+</code></pre>
+
+<p>很快你会发现，上面的代码只能复制基本类型的属性。对数组、对象和函数无法进行复制。例如：</p>
+
+<pre><code>oldObj = {
+    name: "harole",
+    info: {
+        age: 21,
+        sex: 'man'
+    }
+}
+</code></pre>
+
+<p>上面的浅拷贝无法实现复制，数组同理，也无法实现复制。于是产生的深拷贝！</p>
+
+<p>二. 深拷贝</p>
+
+<p>深拷贝只能对基本类型的属性复制，所以只需在 clone 函数中，进行拷贝之前加一条判断语句。如果是拷贝的是数组、对象，就跳到 clone 函数执行拷贝。</p>
+
+<p>对象深拷贝：</p>
+
+<pre><code>// 赋值对象方法
+Object.prototype.clone = function () {
+    var newObj = {};
+    for (var i in this) {
+        // 在这加判断拷贝的数据类型
+        if (typeof (this[i]) == 'object' ) {
+            newObj[i] = this[i].clone();
+        } else {
+            newObj[i] = this[i];
+        }
+
+    }
+    return newObj;
+}
+
+// 待赋值的对象
+var oldObj = {
+    name: "harole",
+    info: {
+        age: 21,
+        sex: 'man'
+    }
+}
+
+// 复制对象
+var newObj = oldObj.clone();
+
+console.log(newObj.info.age);   // 输出 21
+</code></pre>
+
+<p>数组深拷贝：</p>
+
+<pre><code>// 赋值对象方法
+Array.prototype.clone = function () {
+    var newArray = [];
+
+    for ( var i = 0, l = this.length; i &lt; l; i++ ) {
+        if (typeof (this[i]) == 'object' || typeof (this[i]) == 'array') {
+            // 注意：若数组中有对象，则要依赖Object.prototype.clone
+            newArray[i] = this[i].clone();
+        } else {
+            newArray[i] = this[i];
+        }
+
+    }
+    return newArray;
+}
+
+// 待赋值的对象
+var oldArray = ['harole', { age: 21, sex: 'man' }];
+
+// 复制对象
+var newArray = oldArray.clone();
+
+console.log(newArray[1].age);   // 输出 undefined
+</code></pre>
+
+<p>三. 数组的一个方法：concat</p>
+
+<p>concat 方法在 w3school 上定义：用于连接两个或多个数组（简单的数组拼接），接收参数为一个或多个数组，返回合并后的数组。
+但是在这里，我们可以通过 concat 方法来实现数组的深拷贝。如下：</p>
+
+<pre><code>var arr = [1, 2, [2, 3], 4];
+
+var arr1 = arr.concat();
+
+console.log(arr1); // 输出 [1, 2, [2, 3], 4]
+
+arr1.length = 0;
+
+console.log(arr1);
+
+console.log(arr1); // 输出 []
+
+console.log(arr);   // 输出 [1, 2, [2, 3], 4]
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[javascript 闭包原理的深入理解]]></title>
@@ -171,6 +326,8 @@ for ( number in a ) {
     delete a[number];
 }
 </code></pre>
+
+<p>总结：javascript 中两个变量之间赋值传递一个对象或数组，传递的是这个对象或数组的引用。但是在实际中我们希望的是进行拷贝。那么如何实现对象或数组间的拷贝呢？请看《<a href="http://www.harole.com/blog/2013/10/26/javascript-shallow-deep-cope/">javascript 对象与数组的浅拷贝和深拷贝</a>》</p>
 ]]></content>
   </entry>
   
@@ -232,58 +389,6 @@ if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.expor
 </code></pre>
 
 <p>总结：在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[javascript 异步初始化大数组]]></title>
-    <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
-    <updated>2013-10-05T17:26:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
-    <content type="html"><![CDATA[<pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
-    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
-    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
-
-    var THRESHOLD = 150, DELAY = 15;
-
-    function initBigArrayAsync(max, cb) {
-        var r = [], i = 0;
-
-        function init(startTime) {
-            while (i &lt; max) {
-
-                // 判断语句，函数执行的当前时间和开始执行时间差
-                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
-                // 当小于 THRESHOLD，可进行正常赋值
-                if (new Date - startTime &lt; THRESHOLD) {
-                    r[i++] = i;
-                } else {
-</code></pre>
-
-<!-- more -->
-
-
-<pre><code>                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
-                    // 所以用一个很小的等待时间 DELAY，来从新调用 init() 进行赋值
-                    setTimeout(function() {
-                        init(new Date);
-                    }, DELAY);
-                    return;
-                }
-            }
-
-            cb(r);
-        }
-
-        init(new Date);
-    }
-
-    // 该函数用于检测，是否成功给大数组赋值
-    initBigArrayAsync(1000000, function(arr) {
-        console.log(arr.length);
-        console.log(arr[1000000 - 1]);
-    });
-</code></pre>
 ]]></content>
   </entry>
   

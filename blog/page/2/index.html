@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate 总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp &hellip;">
+  <meta name="description" content="call() 方法和 apply() 方法的第一个参数都是要调用的函数对象，在函数体内这一参数是关键字 this 的值。call()剩余的参数是传递给要调用的函数的值。 var O = {}; function f( a, b ) { console.log(a); console.log(b &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,69 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-29T22:40:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Sep</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/09/29/func-method-call-and-apply/">函数方法call()和apply()的使用和区别</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p><strong>call()</strong> 方法和 <strong>apply()</strong> 方法的第一个参数都是要调用的函数对象，在函数体内这一参数是关键字 <strong>this</strong> 的值。call()剩余的参数是传递给要调用的函数的值。</p>
+
+<pre><code>var O = {};
+
+function f( a, b ) {
+    console.log(a);
+    console.log(b);
+}   
+
+// call()方法的使用，当前 **this** 指向的是对象O
+f.call( O, 1, 2 );
+
+// call()方法的实现与下面代码实现相似，可以通过下面的代码来理解call()的使用。    
+O.m = f;
+O.m();
+delete O.m;
+
+// apply()方法和call()方法相似，区别在于apply传递给函数的参数是由数组指定的：
+f.apply( O, [1,2] );
+</code></pre>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -726,63 +789,9 @@ addListener(element, "click", handleClcik);
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-06T14:00:00+08:00" pubdate data-updated="true"><span class="tit_date">6th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/06/my-first-blog/">青春是场阵痛，熬得过熬不过，都得过。</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>总是想不明白，青春是因为无处安放才让人无从懂得，还是因为没人懂，所以才没有归处，以致无处安放呢？91年出生的我说自己是90后，应该是名符其实的吧，还没出校门的我一直以为自己还处在那个容易惊慌的年纪，可当我面对我的两个98年的小朋友时，才发现，我的那场阵痛已经过去了。</p>
-
-
-<p>大概是在六七年前看了《我们无处安放的青春》的电视剧，当时并不知道它的原型是一本小说，也没想到会多年后的今天我会看到这本书，更没想到，当时自己幻想的长大的样子，现在照照镜子就能看见了。</p>
-
-
-<p>当时是不喜欢那部电视的，因为在那个刚刚好的年纪里，总是喜欢特定的故事情节和结局的，比如说王子和灰姑娘最后幸福快乐地生活在了一起。这个故事里没有王子，没有忠贞不渝，有的是那时的我并不能宽容的背叛，和我不能理解的怯懦与逃避。故事里每个人都不幸福，这让我很伤心，因为总觉得，至少主角得是幸福的啊。</p>
-
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/06/my-first-blog/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
+      
+        <a class="prev" href="/blog/page/3/">&larr; Older</a>
       
       <a href="/blog/archives">Blog Archives</a>
       
@@ -797,15 +806,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">javascript 对象与数组的浅拷贝和深拷贝</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/12/javascript-array-quote/">javascript 数组引用和对象引用</a>
       </li>
     
   </ul>
@@ -817,7 +826,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     
