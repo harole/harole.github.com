@@ -1,0 +1,18 @@
+.blog_archives {
+	padding: 30px 0;
+	.blog_list_box {
+		width: 680px;
+		float: left;
+		h1 {
+			font-size: 24px;
+			margin: 30px 0;
+		}
+		h2 {
+			font-size: 18px;
+		}
+	}
+	aside.sidebar {
+		width: 250px;
+		float: right;
+	}
+}

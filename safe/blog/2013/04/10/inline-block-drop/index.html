@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上 - Harole's blog</title>
+  <meta name="author" content="harole">
+
+  
+  <meta name="description" content="一. div.left 和 div.right 均有内容。 &lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;inline-cblock&lt;/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://harole.github.com/blog/2013/04/10/inline-block-drop">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
+  <!-- <script src="/javascripts/modernizr-2.0.js"></script> -->
+  <script src="/javascripts/libs/jquery.min.js"></script>
+  <script src="/javascripts/js-image-slider.js"></script>
+  <!--<script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>-->
+  <!-- <script src="/javascripts/octopress.js" type="text/javascript"></script> -->
+  <!-- <script src="/javascripts/harole.js" type="text/javascript"></script> -->
+  <!--[if IE]>
+  <script>
+  (function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})()
+  </script>
+  <![endif]-->
+  <!-- S 监听博客访问量 google analytice -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-39991774-1', 'harole.com');
+  ga('send', 'pageview');
+
+  </script>
+  <!-- E 监听博客访问量 google analytice -->
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39991774-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  	<div id="header">
+  		<div class="container clearfix">
+	<div class="logo">
+	<h1><a href="/">Harole's blog</a></h1>
+</div>
+
+	<div class="nav_top">
+	<ul class="clearfix">
+	  <li><a href="/">首&nbsp;&nbsp;页</a></li>
+	  <li><a href="/blog">博&nbsp;&nbsp;客</a></li>
+	  <li><a href="/blog/archives">博文列表</a></li>
+	</ul>
+</div>
+
+</div>
+
+  	</div>
+  	<div id="main">  	      
+	    <div id="content">			
+      		<div id="header_section">
+</div>
+<div class="container_one clearfix blog_box">
+  <div class="blog-index">
+    <article class="hentry" role="article">
+      <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+  <div class="article_content">
+    <div class="article_header">
+      <h3 class="entry-title">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</h3>
+    </div>
+    <div class="entry-content"><p>一. div.left 和 div.right 均有内容。</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;inline-cblock&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    .box {
+        width: 400px;
+        height: 100px;
+        margin: 50px auto;
+        background: black;
+        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
+        letter-spacing: -3px;
+        font-size: 0;       
+        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
+    }
+    .box .left {
+        display: inline-block;
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        background: yellow;
+    }
+    .box .right {
+        display: inline-block;
+        width: 200px;
+        height: 100px;  
+        font-size: 50px;   
+        background: blue;       
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;div class="left"&gt;Left&lt;/div&gt;
+        &lt;div class="right"&gt;Right&lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>预期效果：
+<img src="/images/inline-block-01.png" alt="all have content" /></p>
+
+<p>二. 仅把 div.left 中的内容去掉，效果：
+<img src="/images/inline-block-02.png" alt="all have content" /></p>
+
+<!-- more -->
+
+
+<p>三. 仅把 div.right 中的内容去掉
+<img src="/images/inline-block-03.png" alt="all have content" /></p>
+
+<p>问题“二”和“三”解决办法：</p>
+
+<blockquote><p>方案一：</p>
+
+<pre><code>.box .left {
+    verical-align: top;
+}
+.box .right {
+    verical-align: top;
+} 
+</code></pre>
+
+<p>方案二：</p>
+
+<pre><code>.box .left {
+    verical-align: middle;
+}
+.box .right {
+    verical-align: middle;
+} 
+</code></pre>
+
+<p>方案三:</p>
+
+<pre><code>.box .left {
+    verical-align: top;
+}
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>.box .right {
+    verical-align: top;
+}
+</code></pre></blockquote>
+
+<p>总结（对方案的理解）：</p>
+
+<blockquote><p>对于方案一和方案二的解决，可能会好奇如果都 vertical-align：baseline; 能否解决，答案是否定的。</p>
+
+<p>vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div
+的 baseline 在容器本身的底部，另外一个有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来。</p>
+
+<p>问题一：对于上面的“有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来”会有个疑问，即“为什么是有内容的 div 和没有内容 div 的对齐，而不是没有内容的和有内容的 div 对齐呢？”</p>
+
+<p>其实也可以看做是没有内容的 div 和有内容的 div 对齐，因为浏览器的默认是向下排版的所以向下溢出了，而没有向上溢出。</p>
+
+<p>问题二：对于方案一和方案二都可以理解了，那为什么方案三也可以呢？</p>
+
+<p>当缺少内容的 div 设置了 “verti-align: top;”， 有内容的 div 和它对齐（也可以看做它和有内容的 div 对齐，原因看问题一的解答），就达到期望的显示了。</p>
+
+<p>当有内容的 div 设置了 “verti-align: top;” ，当然就回到 div.box 的顶部了，至于没有内容的 div 为什么没有和有内容的 div 对齐呢？原因和问题一的解答是一样的，没有内容的 div 尝试对齐，但是它不能向上溢出。</p></blockquote>
+
+<p>关于 vertical-align 相关信息可以参考链接：<a href="http://www.jb51.net/css/10337.html">http://www.jb51.net/css/10337.html</a></p>
+</div>
+  </div>  
+  
+</div>
+
+
+      <footer>
+        <p class="meta">
+          
+  
+
+<span class="byline author vcard">Posted by <span class="fn">harole</span></span>
+
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
+          
+
+
+        </p>
+        <!-- 
+          <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/10/inline-block-drop/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/10/inline-block-drop/" >Tweet</a>
+  
+  
+  
+</div>
+
+         -->
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2013/04/10/javascript-event-handle/" title="Previous Post: 编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)">&laquo;上一篇: 编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)</a>
+          
+          
+        </p>
+        <!-- Duoshuo Comment BEGIN -->
+  <div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"harole"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->
+      </footer>
+    </article>
+    
+  </div>
+  
+  <aside class="sidebar">
+    
+      <section>
+  <h3>Recent Posts</h3>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/10/inline-block-drop/">两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/10/javascript-event-handle/">编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/08/becoming-your-story/">Becoming your story</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/08/thoese-who-we-are/">那些，曾经</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/08/love-explanation/">爱的一种解释</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h3>Categories</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+
+  </ul>
+</section>
+    
+  </aside>
+  
+</div>
+
+    	</div>
+  	</div>
+  	<footer role="contentinfo"><!-- <p>
+  Copyright &copy; 2013 - harole -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+<div class="footer_box">
+	<div class="container clearfix">
+		<ul>
+			<li><a href="/">首&nbsp;&nbsp;页</a></li>
+		  	<li><a href="/blog">博&nbsp;&nbsp;客</a></li>
+		  	<li><a href="/blog/archives">博文列表</a></li>
+		  	<li><a href="/blog/archives">博文列表</a></li>
+		</ul>
+		<div class="copy_right">
+			COPYRIGHT &copy; Harole's blog 2013
+		</div>
+	</div>
+</div>
+</footer>
+  	
+
+
+
+
+
+
+<!-- 
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+ -->
+
+
+
+  
+</body>
+</html>

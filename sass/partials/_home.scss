@@ -1,0 +1,69 @@
+.recent_project {
+	width: 940px;
+	margin: 0 auto; 
+	h2 	{
+		font-size: 20px;
+		border-bottom: 1px solid #dedede;
+	} 
+	ul {
+		text-align: center;
+		li {
+			display: inline-block;
+			*display: inline;
+			*zoom: 1;
+			width: 234px;
+			margin: 20px 10px 0;
+			// background: image-url("../images/test.jpg") no-repeat 50% 50%;
+			img {
+				width: 232px;
+				height: 133px;
+			}
+			a {
+				text-align: center;				
+			}
+		}
+	}
+}
+.home_ft {
+	margin-bottom: 20px;
+	.active_project {
+		width: 580px;
+		float: left;
+		h3 {
+			margin-top: 1.5em;
+			font-size: 18px;
+			border-bottom: 1px solid #dedede;	
+		}
+		.myskill {
+			margin: 20px 10px;
+			.tit {
+				float: left;
+			}
+			/* S-- slidebar_border */
+			.slider_bar {
+				width: 450px;
+				height: 8px;
+				margin: 6px 0;
+				float: right;   			
+				background-color: rgb(182, 182, 182);
+				position: relative;
+				overflow: hidden;   
+				
+				.slider_bar_html, .slider_bar_css, .slider_bar_javascript {
+				  width: 100%;
+				  height: 7px;
+				  background-color: rgb(29, 29, 29);      
+				  position: absolute;
+				  right: 450px;
+				}
+				/* E-- slidebar_border */
+			}
+
+		}
+		
+	}
+	aside.sidebar {
+		width: 300px;
+		float: right;
+	}
+}

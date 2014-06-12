@@ -1,0 +1,122 @@
+---
+layout: default
+---
+<div id="header_section">	
+	{% include custom/slider.html %}
+</div>
+{% include custom/persent_blog.html %}
+<div class="recent_project">
+	<h2>Recent Project</h2>
+	<ul class="clearfix">
+		<li>
+			<img src="{{ root-url }}/images/yfmy.png" alt="">
+			<a href="http://yifanmuye.com/">一帆牧业</a>
+		</li>
+		<li>
+			<img src="{{ root-url }}/images/ydfdc.png" alt="">
+			<a href="http://psydfdc.com/index.php/home">永达发地产</a>
+		</li>
+		<li>
+			<img src="{{ root-url }}/images/test.jpg" alt="">
+			<a href="http://github.com/harole/harole.github.com.git">test</a>
+		</li>
+	</ul>
+</div>
+<div class="container_one clearfix home_ft">
+	<div class="active_project">
+		<h3>Technical Ability</h3>
+		<ul>
+			<li class="myskill html clearfix">
+				<div class="tit">
+					HTML
+				</div>
+				<div class="slider_bar">
+					<div class="slider_bar_html"></div>
+				</div>	
+			</li>
+			<li class="myskill css clearfix">
+				<div class="tit">
+					CSS
+				</div>
+				<div class="slider_bar">
+					<div class="slider_bar_css"></div>
+				</div>
+			</li>
+			<li class="myskill javascript clearfix">
+				<div class="tit">
+					JAVASCRIPT
+				</div>
+				<div class="slider_bar">
+					<div class="slider_bar_javascript"></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<aside class="sidebar">	    
+	    {% include_array default_asides %}
+	</aside>
+</div>
+
+<script type="text/javascript">	
+	// function sliderBarMove(){
+	// 	var self = $('.slider_bar_move');
+	// 	var delay = 30;
+	// 	var sliderBarInterval;
+
+	// 	function sliderBar(){
+	// 		self.css("right", "-=5")	
+
+	// 		if ( self.css("right") === "0px" ){
+	// 			clearInterval(sliderBarInterval);		
+	// 		}				
+	// 	}
+	// 	sliderBarInterval = setInterval(sliderBar, delay);	
+	// }
+	// sliderBarMove();
+
+	function setSliderBar(className, width, overWidth, delay) {
+		var klass = "." + className;		
+
+		this.delay = delay;
+		this.self = $(klass);
+		this.width = width;
+		this.overWidth = width-overWidth + "px";	
+
+	}
+	setSliderBar.prototype.moverSliderBar = function () {
+		var sliderBarInterval;
+		var self = this.self;
+		var overWidth =this.overWidth;
+		function changeX() {
+			
+			if ( self.css("right") === overWidth ) {
+				clearInterval(sliderBarInterval);				
+			}
+			else {
+				self.css("right", "-=5");			
+
+			}
+			
+		}
+		sliderBarInterval = setInterval(changeX, this.delay);
+	};
+	var clearHello;
+	function hello() {
+		var active_project = $(".active_project");
+		var scrolltop = $("body").scrollTop();
+		
+		console.log(scrolltop)
+		if ( scrolltop >= 500 ) {
+			var sliderBar01 = new setSliderBar("slider_bar_html", 450, 200, 30); 
+			var sliderBar02 = new setSliderBar("slider_bar_css", 450, 150, 50); 
+			var sliderBar03 = new setSliderBar("slider_bar_javascript", 450, 300, 30); 
+			sliderBar01.moverSliderBar();
+			sliderBar02.moverSliderBar();
+			sliderBar03.moverSliderBar();
+			console.log("hi");
+			clearInterval(clearHello);
+		}
+	}
+	clearHello = setInterval(hello, 50);
+	
+</script>

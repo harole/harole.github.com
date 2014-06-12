@@ -1,0 +1,31 @@
+---
+layout: post
+title: "ie6 下 png 图片透明，滤镜解决方案"
+date: 2013-04-21 23:36
+comments: true
+categories: CSS IE6
+---
+一. 正常情况下（ie6下回出现半透明）：
+
+    /* 注：这里一般使用 png24 */
+    background: url("../images/test.png");
+
+二. 解决方案：
+
+    /* 注： 图片的路径使用的是相对路径 */
+    background: url("../images/test.png");
+
+    /* ie6 下将背景移除 */
+    _background:none;   
+
+    /* 使用AlphaImageLoader滤镜重新加载图片 */
+    _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
+<!-- more -->
+三. 注：上述解决方案在ie6下，有时图片会覆盖文本导致文本消失。
+    /* 我们需要给滤镜加上一行设置, 即sizingMethod="crop"
+     * 使得剪切图片以适应对象的尺寸边界。  
+     */
+    _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png", sizingMethod="crop");    
+**
+[更多关于ALphaImageLoader滤镜的属性](http://hi.baidu.com/zygalcn/item/6f9946b8900c33d385dd79e6)
+**

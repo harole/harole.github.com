@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Harole's blog]]></title>
+  <link href="http://harole.github.com/atom.xml" rel="self"/>
+  <link href="http://harole.github.com/"/>
+  <updated>2013-04-11T13:02:40+08:00</updated>
+  <id>http://harole.github.com/</id>
+  <author>
+    <name><![CDATA[harole]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上]]></title>
+    <link href="http://harole.github.com/blog/2013/04/10/inline-block-drop/"/>
+    <updated>2013-04-10T21:58:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/10/inline-block-drop</id>
+    <content type="html"><![CDATA[<p>一. div.left 和 div.right 均有内容。</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;inline-cblock&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    .box {
+        width: 400px;
+        height: 100px;
+        margin: 50px auto;
+        background: black;
+        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
+        letter-spacing: -3px;
+        font-size: 0;       
+        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
+    }
+    .box .left {
+        display: inline-block;
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        background: yellow;
+    }
+    .box .right {
+        display: inline-block;
+        width: 200px;
+        height: 100px;  
+        font-size: 50px;   
+        background: blue;       
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;div class="left"&gt;Left&lt;/div&gt;
+        &lt;div class="right"&gt;Right&lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>预期效果：
+<img src="http://harole.github.com/images/inline-block-01.png" alt="all have content" /></p>
+
+<p>二. 仅把 div.left 中的内容去掉，效果：
+<img src="http://harole.github.com/images/inline-block-02.png" alt="all have content" /></p>
+
+<!-- more -->
+
+
+<p>三. 仅把 div.right 中的内容去掉
+<img src="http://harole.github.com/images/inline-block-03.png" alt="all have content" /></p>
+
+<p>问题“二”和“三”解决办法：</p>
+
+<blockquote><p>方案一：</p>
+
+<pre><code>.box .left {
+    verical-align: top;
+}
+.box .right {
+    verical-align: top;
+} 
+</code></pre>
+
+<p>方案二：</p>
+
+<pre><code>.box .left {
+    verical-align: middle;
+}
+.box .right {
+    verical-align: middle;
+} 
+</code></pre>
+
+<p>方案三:</p>
+
+<pre><code>.box .left {
+    verical-align: top;
+}
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>.box .right {
+    verical-align: top;
+}
+</code></pre></blockquote>
+
+<p>总结（对方案的理解）：</p>
+
+<blockquote><p>对于方案一和方案二的解决，可能会好奇如果都 vertical-align：baseline; 能否解决，答案是否定的。</p>
+
+<p>vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div
+的 baseline 在容器本身的底部，另外一个有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来。</p>
+
+<p>问题一：对于上面的“有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来”会有个疑问，即“为什么是有内容的 div 和没有内容 div 的对齐，而不是没有内容的和有内容的 div 对齐呢？”</p>
+
+<p>其实也可以看做是没有内容的 div 和有内容的 div 对齐，因为浏览器的默认是向下排版的所以向下溢出了，而没有向上溢出。</p>
+
+<p>问题二：对于方案一和方案二都可以理解了，那为什么方案三也可以呢？</p>
+
+<p>当缺少内容的 div 设置了 “verti-align: top;”， 有内容的 div 和它对齐（也可以看做它和有内容的 div 对齐，原因看问题一的解答），就达到期望的显示了。</p>
+
+<p>当有内容的 div 设置了 “verti-align: top;” ，当然就回到 div.box 的顶部了，至于没有内容的 div 为什么没有和有内容的 div 对齐呢？原因和问题一的解答是一样的，没有内容的 div 尝试对齐，但是它不能向上溢出。</p></blockquote>
+
+<p>关于 vertical-align 相关信息可以参考链接：<a href="http://www.jb51.net/css/10337.html">http://www.jb51.net/css/10337.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[编写可维护的javascript事件处理程序的一般方法(本文未完，待续......)]]></title>
+    <link href="http://harole.github.com/blog/2013/04/10/javascript-event-handle/"/>
+    <updated>2013-04-10T12:49:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/10/javascript-event-handle</id>
+    <content type="html"><![CDATA[<p>一. 常用的事件处理程序</p>
+
+<pre><code>funciton handleClick( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", handleClcik); 
+</code></pre>
+
+<p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
+
+<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
+
+<pre><code>// mousehover
+funciton handleMouseHover( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "mousehover", handleMouseHover);       
+
+// mouseup
+funciton handleMouseUp( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "mousehover", handleMouseUp);      
+
+// 其他事件
+......
+</code></pre>
+
+<p>很明显上面的代码被复制了多，于是我们又有了如下代码：</p>
+
+<pre><code>// eventHandle
+funciton eventHandle( event ) {
+
+    var popWindow = document.getElementById("popWindow");
+
+    popWindow.style.left = event.clientX + "px";
+    popWindow.style.top = event.clientY + "px"; 
+
+    popWindow.className = "visible";
+
+}
+addListener(element, "click", eventHandle); 
+addListener(element, "mousehover", eventHandle);        
+addListener(element, "mousehover", eventHandle);    
+
+// 其他监听事件
+......
+</code></pre>
+
+<p>恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
+&#8220;click&#8221;, &#8220;mousehover&#8221;, &#8220;mouseup&#8221;等的处理程序大部分情况下是不一样的。于是有了如下方案：</p>
+
+<p>二. 隔离应用逻辑</p>
+
+<pre><code>var app =  {
+
+    showPopWindow: function () {
+
+        var popWindow = document.getElementById("popWindow");
+
+        popWindow.style.left = event.clientX + "px";
+        popWindow.style.top = event.clientY + "px";         
+
+    },
+
+    handleClick: function () {
+
+        this.showPopWindow( event );
+
+        // click 的其他代码
+        ......
+    },
+
+    handleMouseHover: function () {
+
+        this.showPopWindow( event );
+
+        // mousehover 的其他代码
+        ......
+
+    }
+
+    // 其他事件处理函数
+    ......      
+};
+
+addListener(element, "click", function (event) {
+    app.handleClick(event);
+});
+
+addListener(element, "mousehover", function (event) {
+    app.handleClick(event);
+});
+
+// 其他事件的监听
+......
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Becoming your story]]></title>
+    <link href="http://harole.github.com/blog/2013/04/08/becoming-your-story/"/>
+    <updated>2013-04-08T18:34:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/08/becoming-your-story</id>
+    <content type="html"><![CDATA[<p>In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to hide it and drew pictures instead.</p>
+
+
+<p></p>
+
+<p>My parents were concerned and had me tested for learning disabilities. They even moved us to a new city. I was so far behind, it took me years to catch up. But, the school was better. In third grade, I started to read.</p>
+
+
+<p></p>
+
+<p>There&#8217;s something that became part of my ethos then. I was at the bottom. I had to do everything to work my way up. I remember constantly telling myself that I just needed to work harder than everyone.  I had to hustle.</p>
+
+
+<p></p>
+
+<p>I became my story. I worked hard and I hustled. </p>
+
+
+<!-- more -->
+
+
+<p>Everyone has a story. You repeat it in your head every day. It&#8217;s a story of how the world reacts to you and how you react to the world. It&#8217;s a story of patterns, where things are experienced over and over again. </p>
+
+
+<p>Just as it can be powerful and energizing, it can also be dangerous. If its a tragic story, you become a tragedy. </p>
+
+
+<p>I remember reading East of Eden and there was a passage that I&#8217;ll always remember. Cal&#8217;s father, trying a new venture, lost all of his money. Cal was smart; he executed on an idea and made a lot of money. When he tried to give it to his father, his father rejected it. Cal goes to his room and burns the money, one note at a time.</p>
+
+
+<p>His caretaker Lee comes in:  </p>
+
+
+<p>Are you taken pleasure from this whipping you&#8217;re giving yourself? Are you enjoying your despair?”</p>
+
+
+<p>“Lee!”</p>
+
+
+<p>“You’re pretty full of yourself. You’re marveling at the tragic spectacle of Caleb Trask—Caleb the magnificent, the unique. Caleb whose suffering should have its Homer. </p>
+
+
+<p>Maybe it was easier for Cal to become a tragedy. It was easier to think that what he experienced was uniquely painful.  It was hard to think that many others have suffered, often worse than him. Unique pain has more meaning. </p>
+
+
+<p>The danger is that you internalize the pain. You become someone who deserves the misfortune and can&#8217;t get away from it. You expect it and it happens. </p>
+
+
+<p>If your story is of success, of overcoming adversity, you become that story. As you try it, it validates itself and becomes more true. You expect it and it happens. </p>
+
+
+<p>We have words for these people in the startup world: hustlers, cockroaches (which is a compliment for people and companies that refuse to die), lucky. It&#8217;s the person that surprises us. It&#8217;s a person that shouldn&#8217;t succeed, who gets rejected and ignored, but somehow does and does it with energy. </p>
+
+
+<p>When you tell yourself your story, pause and think it over. Be a force, be a hustler, be creative, be lucky, but don&#8217;t be a tragedy. </p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[那些，曾经]]></title>
+    <link href="http://harole.github.com/blog/2013/04/08/thoese-who-we-are/"/>
+    <updated>2013-04-08T16:57:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/08/thoese-who-we-are</id>
+    <content type="html"><![CDATA[<p>叶的离开，是风的追求，还是树的不挽留。</p>
+
+
+<p>你不是树，怎么知道树没有挽留？</p>
+
+
+<p>你不是树，怎么知道风不是叶的最好幸福？</p>
+
+
+<p>你不是树，怎么知道既然知道自己不再强大，又何必再用挽留去阻碍叶的幸福的无奈？</p>
+
+
+<p>或许，随风飘落，落叶归根便是叶的最好归宿。</p>
+
+
+<p>无意间，听到广播里诉说着普罗旺斯的薰衣草田，霎时间泪水从眼睛一滴一滴地滑落，落到脸上，落到心里，勾起了许久许久不曾触碰的那些，曾经。</p>
+
+
+<p>曾经那条走过无数次的小路，那张再心里无数遍复习过的笑脸，那抹无数次魂牵梦萦的身影，此刻都那么真实的想起，那安静而又冷冽的男孩，那快乐而又唯美的曾经。</p>
+
+
+<!-- more -->
+
+
+<p>我们总是“无意”地相逢，总是一前一后地走在上学的路上，总是在茫茫人海中寻找着彼此的身影，我们就这样默默地注视着对方的背影，默默地宣泄着自己的感情，可是我们却从未说过一句话，一切尽在不言中，我们有着心照不宣的默契。想着想着眼中就充满了甜蜜，从眼里，到心里。</p>
+
+
+<p>还记得第一次见面的那一天，学校集体大扫除，打扫完后几个同学就一起拿着把扫帚回家了，走在一条长长地街道上，同学正在互相说笑着，不经意间回过头看到了一个孤单安静的身影，他抬头，如海洋般深邃的眼睛看着我，我们四目相对，霎那间觉得空气仿佛静止，脑海中想起的薰衣草里主题曲“记忆是阵阵花香….”我顿时明白了小鹿乱撞的心情，我回过头，朝自己笑笑，在心里祈祷有一天能和他一起去看普罗旺斯的薰衣草，因为，那时候我就知道到，薰衣草的花语是，等待爱情。</p>
+
+
+<p>可是，世事变迁，雕栏玉砌应犹在，只是朱颜改。我毕竟没有等到爱情之花绽放的那一天。如今，那个安静清冷的男孩却不在了，那个期望一起去看薰衣草的梦想也埋藏到了心里，我无法去挽留他，因为我知道我不够强大，不够优秀，既然无法给人幸福，就不要以爱他的方式去阻碍他的幸福。</p>
+
+
+<p>所以，我放手了。可是我却从未后悔，依旧在祝福着他永远幸福。</p>
+
+
+<p>那些微笑，那抹背影，那些画面，却被我永久珍藏在心里，一辈子，不忘记。</p>
+
+
+<p>“那些，曾经，刻骨铭心！”</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[爱的一种解释]]></title>
+    <link href="http://harole.github.com/blog/2013/04/08/love-explanation/"/>
+    <updated>2013-04-08T14:31:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/08/love-explanation</id>
+    <content type="html"><![CDATA[<p>爱是什么？</p>
+
+
+<p>一个精灵坐在碧绿的枝叶间沉思。</p>
+
+
+<p>风而若有若无。</p>
+
+
+<p>一只鸟儿飞过来，停在枝上，望着远处将要成熟的稻田。</p>
+
+
+<p>精灵取出一束黄澄澄的稻谷问道：“你爱这稻谷吗？”</p>
+
+
+<p>“爱。”</p>
+
+
+<p>“为什么？”</p>
+
+
+<!-- more -->
+
+
+<p>“它驱赶我的饥饿。”</p>
+
+
+<p>鸟儿啄完稻谷，轻轻梳理着光润的羽毛。</p>
+
+
+<p>“现在你爱这稻谷吗？”精灵又取出一束黄澄澄的稻谷。</p>
+
+
+<p>鸟儿抬头望着远处的一湾泉水回答：“现在我爱那一湾泉水，我有点渴了。”</p>
+
+
+<p>精灵摘下一片树叶，里面盛了一汪泉水。</p>
+
+
+<p>鸟儿喝完泉水，准备振翅飞去。</p>
+
+
+<p>“请再回答我一个问题，”精灵伸出指尖，鸟儿停在上面。</p>
+
+
+<p>“你要去做什么更重要的事吗？我这里又稻谷也有泉水。”</p>
+
+
+<p>“我要去那片开着风信子的山谷，去看那朵风信子。”</p>
+
+
+<p>“为什么？它能驱赶你的饥饿？”</p>
+
+
+<p>“不能。”</p>
+
+
+<p>“它能滋润你的干渴？”</p>
+
+
+<p>“不能。”</p>
+
+
+<p>“那你为什么要去看它呢？”</p>
+
+
+<p>“我需要它啊。”</p>
+
+
+<p>“为什么需要？”</p>
+
+
+<p>“我爱它啊。”</p>
+
+
+<p>“为什么爱它？”</p>
+
+
+<p>“我日日夜夜都在思念它。”</p>
+
+
+<p>“为什么思念它？”</p>
+
+
+<p>“我爱它。”</p>
+
+
+<p>精灵沉默了片刻，又提出一个问题：</p>
+
+
+<p>“你为什么只爱那一朵风信子呢？山谷里有无数朵风信子。”</p>
+
+
+<p>“因为它是唯一的一朵啊。”</p>
+
+
+<p>“为什么？它和其他所有的风信子有什么不同的地方吗？”</p>
+
+
+<p>“有的。”</p>
+
+
+<p>“哪里不同呢？”</p>
+
+
+<p>“只有它才是我爱的那一朵啊。”</p>
+
+
+<p>精灵忽然轻轻笑了起来，鸟儿振翅而去。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[青春是场阵痛，熬得过熬不过，都得过。]]></title>
+    <link href="http://harole.github.com/blog/2013/04/06/my-first-blog/"/>
+    <updated>2013-04-06T14:00:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/04/06/my-first-blog</id>
+    <content type="html"><![CDATA[<p>总是想不明白，青春是因为无处安放才让人无从懂得，还是因为没人懂，所以才没有归处，以致无处安放呢？91年出生的我说自己是90后，应该是名符其实的吧，还没出校门的我一直以为自己还处在那个容易惊慌的年纪，可当我面对我的两个98年的小朋友时，才发现，我的那场阵痛已经过去了。</p>
+
+
+<p>大概是在六七年前看了《我们无处安放的青春》的电视剧，当时并不知道它的原型是一本小说，也没想到会多年后的今天我会看到这本书，更没想到，当时自己幻想的长大的样子，现在照照镜子就能看见了。</p>
+
+
+<p>当时是不喜欢那部电视的，因为在那个刚刚好的年纪里，总是喜欢特定的故事情节和结局的，比如说王子和灰姑娘最后幸福快乐地生活在了一起。这个故事里没有王子，没有忠贞不渝，有的是那时的我并不能宽容的背叛，和我不能理解的怯懦与逃避。故事里每个人都不幸福，这让我很伤心，因为总觉得，至少主角得是幸福的啊。</p>
+
+
+<!-- more -->
+
+
+<p>慢慢地，开始明白主角的意思。在每个人的生活里，主角都是自己，我们都会有自己的男一号或女一号，发生一段或平平淡淡或轰轰烈烈的故事。当然，在别人的生活里，我们就是那个可轻可重的配角，或者是某个只有一两个镜头的路人甲，是个小小的反派也是有可能的。然后，学相对论那一章时，我理解的特别快。所以，就明白了，自己的故事静静地演才好，因为在观众的眼中，配角的故事永远不会成为焦点，过度的喧哗只会被当做一场闹剧，招来反感。</p>
+
+
+<p>时间可能真的是太久了，久到一日日微小的变化累积累积，再看时会惊异居然改变了那么多。再看《我们无处安放的青春》这个故事，居然能看懂了，而且里面的每个人，都能懂。明白了李然为什么放弃周蒙，明白了周蒙为什么放弃苦守的诺言，明白了杜晓彬为什么不择手段的得到李然，也明白了小宗、刘漪、李越、潘多，这所有走在成长路上，由男孩儿女孩儿成长为男人女人的年轻人，他们在成长的路上放弃了什么，得到了什么。因为他们也明白了，所以在自己以后的婚姻生活里，即使陪在自己身边的不是当初想的那个人，也过得坦坦然然，不受过往的牵绊，再回忆起曾经的故事时，能报以释然的微微一笑。</p>
+
+]]></content>
+  </entry>
+  
+</feed>

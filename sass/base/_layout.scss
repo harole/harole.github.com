@@ -1,0 +1,153 @@
+@charset "utf-8";
+/** 清除内外边距 **/
+body, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6 { margin: 15px 0;}
+/** 设置默认字体 **/
+body,
+button, input, select, textarea /* for ie */ {
+    font: 14px/1.5 "Microsoft yahei", tahoma, arial, \5b8b\4f53, sans-serif;
+}
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul { list-style: none; }
+li { margin-left: 15px;}
+/** 重置文本格式元素 **/
+a { text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    color: #848484;  }
+a:hover { text-decoration: none; color: rgb(245,143,23);}
+
+sup { vertical-align: text-top; } /* 重置，减少对行高的影响 */
+sub { vertical-align: text-bottom; }
+
+/** 重置表单元素 **/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: 0 none; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+input {
+  outline: 0 none; }    /* 统一 input 边框 */
+/* 注： 使得元素统一对齐基线*/
+input, select {
+  vertical-align: baseline;
+  outline:none; }
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; }
+/*S base style*/
+
+html {
+  
+  background: none;}
+  
+  html body {
+    color: #848484;
+    font-family: 14px/2 Arial, "MS Trebuchet", sans-serif;
+    word-wrap: break-word; 
+    -webkit-text-size-adjust:none; /* make chrome support font-size smaller than 12px */
+  }
+
+  textarea{
+    resize:none;
+  }
+/*---  重定义 h1 字体
+-------------------------------------------------------------------*/
+// h1 {  
+//   margin: 50px;
+//   color:rgb(76,76,76);
+//   font-family: "Centaur", "Times New Roman",Georgia,Serif,sans-serif;
+//   a {
+//     font-size: 50px;  
+//   }
+// }
+// p {
+//   line-height: 2;
+//   margin: 2em 0;
+//   font-size: 14px;
+//   // text-indent: 2em;
+// }
+
+/* `Clear Floated Elements
+---------------------------------------------------------------------------*/
+/* http://sonspring.com/journal/clearing-floats */
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  line-height: 0;
+}
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+.clearfix:before,
+.clearfix:after {
+  content: '.';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+/*
+  The following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+.clearfix {
+  zoom: 1;
+}
+/*E - reset and base style*/
+
+
+#header_section {
+  min-height: 10px;
+  border-bottom: 1px solid #d8d8d8;
+  background: image-url("bg_header.jpg") no-repeat 50% 0;
+}
+/* S-- intro_text */
+.intro_text {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(190,190,190);
+  text-align: center;
+  border-bottom: 1px solid #b6b6b6;
+  h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+ }
+/* E-- intro_text */
+
+/* S-- container */
+.container {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container_one {
+  width: 940px;
+  margin: 0 auto;
+}
+/* S-- container */
+
