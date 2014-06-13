@@ -33,8 +33,7 @@
   </script>
   <![endif]-->  
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> -->
 
   
   <script type="text/javascript">
@@ -72,7 +71,7 @@
   	</div>
   	<div id="main">  	      
 	    <div id="content">			
-      		<div id="header_section">	
+      		<div id="header_section">
 	    <div id="sliderFrame">
         <div id="slider">
             <a href="http://www.menucool.com/javascript-image-slider" target="_blank">
@@ -127,7 +126,7 @@
 				</div>
 				<div class="slider_bar">
 					<div class="slider_bar_html"></div>
-				</div>	
+				</div>
 			</li>
 			<li class="myskill css clearfix">
 				<div class="tit">
@@ -147,7 +146,7 @@
 			</li>
 		</ul>
 	</div>
-	<aside class="sidebar">	    
+	<aside class="sidebar">
 	    <section>
   <h3>Recent Posts</h3>
   <ul id="recent_posts">
@@ -170,30 +169,14 @@
 	</aside>
 </div>
 
-<script type="text/javascript">	
-	// function sliderBarMove(){
-	// 	var self = $('.slider_bar_move');
-	// 	var delay = 30;
-	// 	var sliderBarInterval;
-
-	// 	function sliderBar(){
-	// 		self.css("right", "-=5")	
-
-	// 		if ( self.css("right") === "0px" ){
-	// 			clearInterval(sliderBarInterval);		
-	// 		}				
-	// 	}
-	// 	sliderBarInterval = setInterval(sliderBar, delay);	
-	// }
-	// sliderBarMove();
-
+<script type="text/javascript">
 	function setSliderBar(className, width, overWidth, delay) {
-		var klass = "." + className;		
+		var klass = "." + className;
 
 		this.delay = delay;
 		this.self = $(klass);
 		this.width = width;
-		this.overWidth = width-overWidth + "px";	
+		this.overWidth = width-overWidth + "px";
 
 	}
 	setSliderBar.prototype.moverSliderBar = function () {
@@ -201,15 +184,15 @@
 		var self = this.self;
 		var overWidth =this.overWidth;
 		function changeX() {
-			
+
 			if ( self.css("right") === overWidth ) {
-				clearInterval(sliderBarInterval);				
+				clearInterval(sliderBarInterval);
 			}
 			else {
-				self.css("right", "-=5");			
+				self.css("right", "-=5");
 
 			}
-			
+
 		}
 		sliderBarInterval = setInterval(changeX, this.delay);
 	};
@@ -217,12 +200,12 @@
 	function hello() {
 		var active_project = $(".active_project");
 		var scrolltop = $("body").scrollTop();
-		
+
 		console.log(scrolltop)
 		if ( scrolltop >= 500 ) {
-			var sliderBar01 = new setSliderBar("slider_bar_html", 450, 200, 30); 
-			var sliderBar02 = new setSliderBar("slider_bar_css", 450, 150, 50); 
-			var sliderBar03 = new setSliderBar("slider_bar_javascript", 450, 300, 30); 
+			var sliderBar01 = new setSliderBar("slider_bar_html", 450, 200, 30);
+			var sliderBar02 = new setSliderBar("slider_bar_css", 450, 150, 50);
+			var sliderBar03 = new setSliderBar("slider_bar_javascript", 450, 300, 30);
 			sliderBar01.moverSliderBar();
 			sliderBar02.moverSliderBar();
 			sliderBar03.moverSliderBar();
@@ -231,7 +214,7 @@
 		}
 	}
 	clearHello = setInterval(hello, 50);
-	
+
 </script>
     	</div>
   	</div>
@@ -246,10 +229,9 @@
 			<li><a href="/">首&nbsp;&nbsp;页</a></li>
 		  	<li><a href="/blog">博&nbsp;&nbsp;客</a></li>
 		  	<li><a href="/blog/archives">博文列表</a></li>
-		  	<li><a href="/blog/archives">博文列表</a></li>
 		</ul>
 		<div class="copy_right">
-			COPYRIGHT &copy; Harole's blog 2013
+			COPYRIGHT &copy; Harole's blog 2014
 		</div>
 	</div>
 </div>
