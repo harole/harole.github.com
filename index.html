@@ -90,11 +90,11 @@
 	<ul class="clearfix">
 		<li>
 			<img src="/images/yfmy.png" alt="">
-			<a href="http://yifanmuye.com/">一帆牧业</a>
+			<a href="http://yifanmuye.com/" target="_blank">一帆牧业</a>
 		</li>
 		<li>
 			<img src="/images/ydfdc.png" alt="">
-			<a href="http://psydfdc.com/index.php/home">永达发地产</a>
+			<a href="http://psydfdc.com/index.php/home" target="_blank">永达发地产</a>
 		</li>
 		<li>
 			<img src="/images/test.jpg" alt="">
@@ -187,7 +187,6 @@
 		var active_project = $(".active_project");
 		var scrolltop = $("body").scrollTop();
 
-		console.log(scrolltop)
 		if ( scrolltop >= 500 ) {
 			var sliderBar01 = new setSliderBar("slider_bar_html", 450, 200, 30);
 			var sliderBar02 = new setSliderBar("slider_bar_css", 450, 150, 50);
@@ -195,7 +194,6 @@
 			sliderBar01.moverSliderBar();
 			sliderBar02.moverSliderBar();
 			sliderBar03.moverSliderBar();
-			console.log("hi");
 			clearInterval(clearHello);
 		}
 	}
@@ -256,18 +254,6 @@
 
 
 
-
-<!-- 
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
- -->
 
 
 
