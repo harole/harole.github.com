@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "javascript 闭包原理的深入理解"
+title: "Javascript 闭包原理的深入理解"
 date: 2013-10-25 15:36
 comments: true
-categories: javascript
+categories: Javascript
 ---
 在 《[javascript 简单闭包](http://www.harole.com/blog/2013/10/25/javascript-simple-closures/)》 一文中提到，闭包包含返回的函数和该函数的定义环境，本文将从函数定义环境和函数执行周期的角度来理解闭包，如有不恰之处，欢迎提出，讨论！先来看一个示例及其结果：
     //示例一：

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "javascript 异步初始化大数组"
+title: "Javascript 异步初始化大数组"
 date: 2013-10-05 17:26
 comments: true
-categories: javascript
+categories: Javascript
 ---
 		// 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
 		// THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间

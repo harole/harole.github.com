@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "javascript 简单闭包"
+title: "Javascript 简单闭包"
 date: 2013-10-25 15:26
 comments: true
-categories: javascript
+categories: Javascript
 ---
 通俗的讲，javascript 中每个函数都是一个闭包，但通常意义上是嵌套的函数能够体现出闭包的特性。例如：
     var fun = function () {

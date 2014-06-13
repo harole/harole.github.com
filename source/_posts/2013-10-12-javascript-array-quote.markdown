@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "javascript 数组引用和对象引用"
+title: "Javascript 数组引用和对象引用"
 date: 2013-10-12 23:22
 comments: true
-categories: javascript
+categories: Javascript
 ---
 
     var a = b = [1,2,3];

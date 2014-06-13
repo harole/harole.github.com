@@ -3,7 +3,7 @@ layout: post
 title: "Function()构造函数，即用 new Function() 方式构造函数"
 date: 2013-10-01 14:38
 comments: true
-categories: javascript
+categories: Javascript
 ---
 一. 下面是使用Functin()构造函数来创建一个函数的例子：
 	var f = new Function( "x", "y", "return x + y;" );
@@ -30,13 +30,13 @@ Function构造函数期待任意数目的 **字符串** 参数，其中最后一
       如下面代码所示:
       var y = "global";
 	function a(){
-    	
+
 		var y = "local1";
     	function constructFunction() {
     		var y = "local";
     		return new Function("return y;");
     	}
-		
+
 		// 这里 constructFunction()()
 		// 第一个 '()' 是执行 constructFunction 函数
 		// 第二个 '()' 是执行constructFunction 函数返回的 'new Function()' 函数。

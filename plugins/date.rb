@@ -12,17 +12,12 @@ module Octopress
     # Returns an ordidinal date eg July 22 2007 -> July 22nd 2007
     def ordinalize(date)
       date = datetime(date)
-<<<<<<< HEAD
       "<span class=\"tit_date\">#{ordinal(date.strftime('%e').to_i)}</span> <span class=\"tit_month\">#{date.strftime('%b')}</span>"
-=======
-      "#{date.strftime('%b')} #{ordinal(date.strftime('%e').to_i)}, #{date.strftime('%Y')}"
->>>>>>> 7dfba9a26e21b970f74aa663a86d407ae8fd5958
     end
 
     # Returns an ordinal number. 13 -> 13th, 21 -> 21st etc.
     def ordinal(number)
       if (11..13).include?(number.to_i % 100)
-<<<<<<< HEAD
         "#{number}th"
       else
         case number.to_i % 10
@@ -30,15 +25,6 @@ module Octopress
         when 2; "#{number}nd"
         when 3; "#{number}rd"
         else    "#{number}th"
-=======
-        "#{number}<span>th</span>"
-      else
-        case number.to_i % 10
-        when 1; "#{number}<span>st</span>"
-        when 2; "#{number}<span>nd</span>"
-        when 3; "#{number}<span>rd</span>"
-        else    "#{number}<span>th</span>"
->>>>>>> 7dfba9a26e21b970f74aa663a86d407ae8fd5958
         end
       end
     end

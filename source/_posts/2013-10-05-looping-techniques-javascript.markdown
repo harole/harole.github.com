@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "javascript 循环（for，while）那些事儿！"
+title: "Javascript 循环（for，while）那些事儿！"
 date: 2013-10-05 00:16
 comments: true
-categories: javascript
+categories: Javascript
 ---
 1. for 类循环
 
@@ -42,12 +42,12 @@ categories: javascript
             }
 
             // 例如：遍历 DOM 子元素
-            for ( node = parent.firstChild; node; node = node.nextSibling ) {  
-                if ( node.nodeType === 1 ) {  
-                    node.nodeIndex = ++count;  
-                }  
+            for ( node = parent.firstChild; node; node = node.nextSibling ) {
+                if ( node.nodeType === 1 ) {
+                    node.nodeIndex = ++count;
+                }
             }
-    
+
     5. 在迭代中，要尽可能少遍历，如果知道从 position 开始。
             var currentItem;
             for ( var i = position || 0, l = items.length; i < l; i++ ) {
@@ -57,10 +57,10 @@ categories: javascript
     6. 倒序遍历可以减少几个字符。
             for ( var i = items.length, currentItem; i; ) {
                 currentItem = items[--i];  // 合并了 i 自减和 i 取值的操作
-            }    
+            }
 
 2. while 循环
-    
+
 
     1. 通过 while 检测下标遍历。
             var l = arr.length, currentItem;
@@ -71,5 +71,5 @@ categories: javascript
     2. while 检测元素
             var findType, i = 0;
             while ( findType == arr[i++] ) {
-                // 一些操作 
+                // 一些操作
             }

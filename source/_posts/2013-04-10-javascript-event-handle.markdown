@@ -3,7 +3,7 @@ layout: post
 title: "像 html 模块化一样，模块化 javascript 事件处理程序，使之可维护！"
 date: 2013-04-10 12:49
 comments: true
-categories: javascript
+categories: Javascript
 ---
 一. 常用的事件处理程序
 
@@ -12,12 +12,12 @@ categories: javascript
 		var popWindow = document.getElementById("popWindow");
 
 		popWindow.style.left = event.clientX + "px";
-		popWindow.style.top = event.clientY + "px"; 
+		popWindow.style.top = event.clientY + "px";
 
 		popWindow.className = "visible";
 
 	}
-	addListener(element, "click", handleClcik);	
+	addListener(element, "click", handleClcik);
 
 上述程序功能：监听 "element" 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。
 
@@ -30,12 +30,12 @@ categories: javascript
 		var popWindow = document.getElementById("popWindow");
 
 		popWindow.style.left = event.clientX + "px";
-		popWindow.style.top = event.clientY + "px"; 
+		popWindow.style.top = event.clientY + "px";
 
 		popWindow.className = "visible";
 
 	}
-	addListener(element, "mousehover", handleMouseHover);		
+	addListener(element, "mousehover", handleMouseHover);
 
 	// mouseup
 	funciton handleMouseUp( event ) {
@@ -43,12 +43,12 @@ categories: javascript
 		var popWindow = document.getElementById("popWindow");
 
 		popWindow.style.left = event.clientX + "px";
-		popWindow.style.top = event.clientY + "px"; 
+		popWindow.style.top = event.clientY + "px";
 
 		popWindow.className = "visible";
 
 	}
-	addListener(element, "mousehover", handleMouseUp);		
+	addListener(element, "mousehover", handleMouseUp);
 
 	// 其他事件
 	......
@@ -61,19 +61,19 @@ categories: javascript
 		var popWindow = document.getElementById("popWindow");
 
 		popWindow.style.left = event.clientX + "px";
-		popWindow.style.top = event.clientY + "px"; 
+		popWindow.style.top = event.clientY + "px";
 
 		popWindow.className = "visible";
 
 	}
-	addListener(element, "click", eventHandle);	
-	addListener(element, "mousehover", eventHandle);		
-	addListener(element, "mousehover", eventHandle);	
+	addListener(element, "click", eventHandle);
+	addListener(element, "mousehover", eventHandle);
+	addListener(element, "mousehover", eventHandle);
 
 	// 其他监听事件
 	......
 
-恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件 
+恩恩，经过两次改进，我们将应用逻辑从事件处理程序中隔离了。但是，问题并没有解决，因为你监听的事件
 "click", "mousehover", "mouseup"等的处理程序大部分情况下是不一样的。于是有了如下方案：
 
 二. 隔离应用逻辑
@@ -85,14 +85,14 @@ categories: javascript
 			var popWindow = document.getElementById("popWindow");
 
 			popWindow.style.left = event.clientX + "px";
-			popWindow.style.top = event.clientY + "px";			
+			popWindow.style.top = event.clientY + "px";
 
 		},
 
 		handleClick: function (event) {
 
 			this.showPopWindow( event );
-			
+
 			// click 的其他代码
 			......
 		},
@@ -107,7 +107,7 @@ categories: javascript
 		}
 
 		// 其他事件处理函数
-		......		
+		......
 	};
 
 	addListener(element, "click", function (event) {
@@ -117,7 +117,7 @@ categories: javascript
 	addListener(element, "mousehover", function (event) {
 		app.handleMouseHover(event);
 	});
-	
+
 	// 其他事件的监听
 	......
 
@@ -134,14 +134,14 @@ categories: javascript
 			var popWindow = document.getElementById("popWindow");
 
 			popWindow.style.left = x + "px";
-			popWindow.style.top = y + "px";			
+			popWindow.style.top = y + "px";
 
 		},
 
 		handleClick: function ( event ) {
 
 			this.showPopWindow( event.clientX, event.clientY );
-			
+
 			// click 的其他代码
 			......
 		},
@@ -156,7 +156,7 @@ categories: javascript
 		}
 
 		// 其他事件处理函数
-		......		
+		......
 	};
 
 	addListener(element, "click", function (event) {
@@ -166,7 +166,7 @@ categories: javascript
 	addListener(element, "mousehover", function (event) {
 		app.handleMouseHover(event);
 	});
-	
+
 	// 其他事件的监听
 	......
 
@@ -183,7 +183,7 @@ categories: javascript
 			var popWindow = document.getElementById("popWindow");
 
 			popWindow.style.left = x + "px";
-			popWindow.style.top = y + "px";			
+			popWindow.style.top = y + "px";
 
 		},
 
@@ -192,9 +192,9 @@ categories: javascript
 			event.preventDefault();
 
 			// click 的其他代码
-			...... 
+			......
 
-			this.showPopWindow( event.clientX, event.clientY );						
+			this.showPopWindow( event.clientX, event.clientY );
 		},
 
 		handleMouseHover: function ( event ) {
@@ -209,7 +209,7 @@ categories: javascript
 		}
 
 		// 其他事件处理函数
-		......		
+		......
 	};
 
 	addListener(element, "click", function (event) {
@@ -219,6 +219,6 @@ categories: javascript
 	addListener(element, "mousehover", function (event) {
 		app.handleMouseHover(event);
 	});
-	
+
 	// 其他事件的监听
 	......

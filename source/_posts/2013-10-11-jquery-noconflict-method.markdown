@@ -3,7 +3,7 @@ layout: post
 title: "jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析"
 date: 2013-10-11 02:42
 comments: true
-categories: jQuery javascript
+categories: jQuery
 ---
 ###jQuery 中 noConflict() 方法如下：
 
@@ -40,7 +40,7 @@ categories: jQuery javascript
 	} else {
 		// 不是 module 模式，就把 jQuery 赋给全局
 		window.jQuery = window.$ = jQuery;
-		
+
 		// Register as a named AMD module, since jQuery can be concatenated with other
 		// files that may use define, but not via a proper concatenation script that
 		// understands anonymous AMD modules. A named AMD is safest and most robust

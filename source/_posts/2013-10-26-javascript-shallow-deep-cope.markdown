@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "javascript 对象与数组的浅拷贝和深拷贝"
+title: "Javascript 对象与数组的浅拷贝和深拷贝"
 date: 2013-10-26 17:15
 comments: true
-categories: javascript
+categories: Javascript
 ---
 
 一. 浅拷贝
