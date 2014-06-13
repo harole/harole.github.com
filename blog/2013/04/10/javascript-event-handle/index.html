@@ -112,12 +112,12 @@
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "click", handleClcik); 
+addListener(element, "click", handleClcik);
 </code></pre>
 
 <p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
@@ -133,12 +133,12 @@ funciton handleMouseHover( event ) {
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "mousehover", handleMouseHover);       
+addListener(element, "mousehover", handleMouseHover);
 
 // mouseup
 funciton handleMouseUp( event ) {
@@ -146,12 +146,12 @@ funciton handleMouseUp( event ) {
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "mousehover", handleMouseUp);      
+addListener(element, "mousehover", handleMouseUp);
 
 // 其他事件
 ......
@@ -165,14 +165,14 @@ funciton eventHandle( event ) {
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "click", eventHandle); 
-addListener(element, "mousehover", eventHandle);        
-addListener(element, "mousehover", eventHandle);    
+addListener(element, "click", eventHandle);
+addListener(element, "mousehover", eventHandle);
+addListener(element, "mousehover", eventHandle);
 
 // 其他监听事件
 ......
@@ -190,7 +190,7 @@ addListener(element, "mousehover", eventHandle);
         var popWindow = document.getElementById("popWindow");
 
         popWindow.style.left = event.clientX + "px";
-        popWindow.style.top = event.clientY + "px";         
+        popWindow.style.top = event.clientY + "px";
 
     },
 
@@ -212,7 +212,7 @@ addListener(element, "mousehover", eventHandle);
     }
 
     // 其他事件处理函数
-    ......      
+    ......
 };
 
 addListener(element, "click", function (event) {
@@ -240,7 +240,7 @@ addListener(element, "mousehover", function (event) {
         var popWindow = document.getElementById("popWindow");
 
         popWindow.style.left = x + "px";
-        popWindow.style.top = y + "px";         
+        popWindow.style.top = y + "px";
 
     },
 
@@ -262,7 +262,7 @@ addListener(element, "mousehover", function (event) {
     }
 
     // 其他事件处理函数
-    ......      
+    ......
 };
 
 addListener(element, "click", function (event) {
@@ -290,7 +290,7 @@ app.showPopWindow( "20", "20" );
         var popWindow = document.getElementById("popWindow");
 
         popWindow.style.left = x + "px";
-        popWindow.style.top = y + "px";         
+        popWindow.style.top = y + "px";
 
     },
 
@@ -299,9 +299,9 @@ app.showPopWindow( "20", "20" );
         event.preventDefault();
 
         // click 的其他代码
-        ...... 
+        ......
 
-        this.showPopWindow( event.clientX, event.clientY );                     
+        this.showPopWindow( event.clientX, event.clientY );
     },
 
     handleMouseHover: function ( event ) {
@@ -316,7 +316,7 @@ app.showPopWindow( "20", "20" );
     }
 
     // 其他事件处理函数
-    ......      
+    ......
 };
 
 addListener(element, "click", function (event) {
@@ -360,7 +360,7 @@ addListener(element, "mousehover", function (event) {
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>javascript</a>
+    <a class='category' href='/blog/categories/javascript/'>Javascript</a>
   
 </span>
 
@@ -410,15 +410,15 @@ var duoshuoQuery = {short_name:"harole"};
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">javascript 对象与数组的浅拷贝和深拷贝</a>
+        <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
+        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
+        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">Javascript 闭包原理的深入理解</a>
       </li>
     
   </ul>
@@ -432,7 +432,7 @@ var duoshuoQuery = {short_name:"harole"};
     	</div>
   	</div>
   	<footer role="contentinfo"><!-- <p>
-  Copyright &copy; 2013 - harole -
+  Copyright &copy; 2014 - harole -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p> -->
 

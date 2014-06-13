@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CSS3 | Harole's blog]]></title>
+  <link href="http://harole.github.com/blog/categories/css3/atom.xml" rel="self"/>
+  <link href="http://harole.github.com/"/>
+  <updated>2014-06-13T14:32:04+08:00</updated>
+  <id>http://harole.github.com/</id>
+  <author>
+    <name><![CDATA[harole]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSS3实现圆环百分比（动画）]]></title>
+    <link href="http://harole.github.com/blog/2014/06/12/round-percentage-css3/"/>
+    <updated>2014-06-12T19:19:00+08:00</updated>
+    <id>http://harole.github.com/blog/2014/06/12/round-percentage-css3</id>
+    <content type="html"><![CDATA[<blockquote><p>文章内容分为三个部分，实现方案、逻辑整理和代码实现。</p></blockquote>
+
+<p>一. 实现方案</p>
+
+<pre><code>&lt;!-- 外圆 --&gt;
+&lt;div id="roundBox"&gt;
+
+    &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt;
+    &lt;div class="roundLeft"&gt;&lt;/div&gt;
+
+    &lt;!-- 遮挡外圆右半部分，为动画准备 --&gt;
+    &lt;div class="roundRight"&gt;&lt;/div&gt;
+
+    &lt;!-- 内圆 遮挡 roundLeft 和 roundRight --&gt;
+    &lt;div class="roundInner"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>二. 逻辑整理
+<img src="/images/2014-06-12-logic.jpg" alt="CSS3实现圆环百分比逻辑图" /></p>
+
+<p>三. 代码实现</p>
+
+<p>该代码基于Jquery，仅支持chrome。<a href="http://jsfiddle.net/harole/5VRW5/embedded/result/">demo点击这里</a>，<a href="http://jsfiddle.net/harole/5VRW5/">完整代码点击这里</a>。</p>
+]]></content>
+  </entry>
+  
+</feed>

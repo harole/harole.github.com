@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string) - Harole's blog</title>
+  <title>CSS3实现圆环百分比（动画） - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate 总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp &hellip;">
+  <meta name="description" content="文章内容分为三个部分，实现方案、逻辑整理和代码实现。 一. 实现方案 &lt;!-- 外圆 --&gt;
+&lt;div id="roundBox"&gt; &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt; &lt;div class="roundLeft"&gt;&lt;/div&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string">
+  <link rel="canonical" href="http://harole.github.com/blog/2014/06/12/round-percentage-css3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -94,7 +95,7 @@
   
 
 
-<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
+<time datetime="2014-06-12T19:19:00+08:00" pubdate data-updated="true"><span class="tit_date">12th</span> <span class="tit_month">Jun</span></time>
           
         </div>
       
@@ -103,19 +104,32 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">Liquid Exception: Incompatible Encoding Regexp Match (ASCII-8BIT Regexp With UTF-8 String)</h3>
+      <h3 class="entry-title">CSS3实现圆环百分比（动画）</h3>
     </div>
-    <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
+    <div class="entry-content"><blockquote><p>文章内容分为三个部分，实现方案、逻辑整理和代码实现。</p></blockquote>
 
-<!-- more -->
+<p>一. 实现方案</p>
 
+<pre><code>&lt;!-- 外圆 --&gt;
+&lt;div id="roundBox"&gt;
 
-<p>有两种方法：</p>
+    &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt;
+    &lt;div class="roundLeft"&gt;&lt;/div&gt;
 
-<blockquote><p><1>直接将<a href="https://github.com/ctdk/octopress-category-list">github上插件中</a>的 category_list.rb 替换 plugins 中的 category_list.rb
-<2>在安装目录下修改 lib/jekyll/converters/markdown.rb，在将最后一个 html 改成 html = html.force_encoding(&#8216;utf-8&#8217;)</p></blockquote>
+    &lt;!-- 遮挡外圆右半部分，为动画准备 --&gt;
+    &lt;div class="roundRight"&gt;&lt;/div&gt;
 
-<p>第一种方法,确实可以成功；第二种，我实践了，但是没有成功，可能是问题有些差异。以上两种方法，分别来自 <a href="http://ayang1588.github.io/blog/2013/04/01/buildblog/">http://ayang1588.github.io/blog/2013/04/01/buildblog/</a> 和 <a href="http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/">http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/</a></p>
+    &lt;!-- 内圆 遮挡 roundLeft 和 roundRight --&gt;
+    &lt;div class="roundInner"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>二. 逻辑整理
+<img src="/images/2014-06-12-logic.jpg" alt="CSS3实现圆环百分比逻辑图" /></p>
+
+<p>三. 代码实现</p>
+
+<p>该代码基于Jquery，仅支持chrome。<a href="http://jsfiddle.net/harole/5VRW5/embedded/result/">demo点击这里</a>，<a href="http://jsfiddle.net/harole/5VRW5/">完整代码点击这里</a>。</p>
 </div>
   </div>  
   
@@ -141,12 +155,12 @@
   
 
 
-<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
+<time datetime="2014-06-12T19:19:00+08:00" pubdate data-updated="true"><span class="tit_date">12th</span> <span class="tit_month">Jun</span></time>
           
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/css3/'>CSS3</a>
   
 </span>
 
@@ -155,7 +169,7 @@
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" data-via="" data-counturl="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2014/06/12/round-percentage-css3/" data-via="" data-counturl="http://harole.github.com/blog/2014/06/12/round-percentage-css3/" >Tweet</a>
   
   
   
@@ -164,10 +178,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/05/19/input-ie67/" title="Previous Post: input ie6,7下双边距问题">&laquo;上一篇: input ie6,7下双边距问题</a>
+            <a class="basic-alignment left" href="/blog/2013/10/26/javascript-shallow-deep-cope/" title="Previous Post: Javascript 对象与数组的浅拷贝和深拷贝">&laquo;上一篇: Javascript 对象与数组的浅拷贝和深拷贝</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/09/29/func-method-call-and-apply/" title="Next Post: 函数方法call()和apply()的使用和区别">下一篇:函数方法call()和apply()的使用和区别 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->

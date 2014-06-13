@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string) - Harole's blog</title>
+  <title>Category: CSS3 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate 总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp &hellip;">
+  <meta name="description" content="Category: CSS3">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string">
+  <link rel="canonical" href="http://harole.github.comblog/categories/css3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -74,120 +74,39 @@
 	    <div id="content">			
       		<div id="header_section">
 </div>
-<div class="container_one clearfix blog_box">
-  <div class="blog-index">
-    <article class="hentry" role="article">
-      <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-  <div class="article_content">
-    <div class="article_header">
-      <h3 class="entry-title">Liquid Exception: Incompatible Encoding Regexp Match (ASCII-8BIT Regexp With UTF-8 String)</h3>
-    </div>
-    <div class="entry-content"><p>很久没有写文章，准备些文章时，突然发现 octopress 出问题了（呜呜~，都怪写文章太少了）。rake generate    总是报错&#8221;Liquid Exception: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)&#8221;，折腾了一上午，生不如死，总在 google 或 stackoverflow 。上看，还是英文查询！后来才发现我错了，中文搜索一下就出来了。真是不该不相信国人哈！</p>
-
-<!-- more -->
-
-
-<p>有两种方法：</p>
-
-<blockquote><p><1>直接将<a href="https://github.com/ctdk/octopress-category-list">github上插件中</a>的 category_list.rb 替换 plugins 中的 category_list.rb
-<2>在安装目录下修改 lib/jekyll/converters/markdown.rb，在将最后一个 html 改成 html = html.force_encoding(&#8216;utf-8&#8217;)</p></blockquote>
-
-<p>第一种方法,确实可以成功；第二种，我实践了，但是没有成功，可能是问题有些差异。以上两种方法，分别来自 <a href="http://ayang1588.github.io/blog/2013/04/01/buildblog/">http://ayang1588.github.io/blog/2013/04/01/buildblog/</a> 和 <a href="http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/">http://blog.t-xx.me/blog/2013/08/25/octopress-utf-8-ascii-8bit-conflict-error/</a></p>
-</div>
-  </div>  
-  
-</div>
-
-
-      <footer>
-        <p class="meta">
-          
-  
-
-<span class="byline author vcard">Posted by <span class="fn">harole</span></span>
-
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-26T15:05:00+08:00" pubdate data-updated="true"><span class="tit_date">26th</span> <span class="tit_month">Sep</span></time>
-          
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
-  
-</span>
-
-
-        </p>
-        <!-- 
-          <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" data-via="" data-counturl="http://harole.github.com/blog/2013/09/26/liquid-exception-incompatible-encoding-regexp-match-ascii-8bit-regexp-with-utf-8-string/" >Tweet</a>
-  
-  
-  
-</div>
-
-         -->
-        <p class="meta">
-          
-            <a class="basic-alignment left" href="/blog/2013/05/19/input-ie67/" title="Previous Post: input ie6,7下双边距问题">&laquo;上一篇: input ie6,7下双边距问题</a>
-          
-          
-            <a class="basic-alignment right" href="/blog/2013/09/29/func-method-call-and-apply/" title="Next Post: 函数方法call()和apply()的使用和区别">下一篇:函数方法call()和apply()的使用和区别 &raquo;</a>
-          
-        </p>
-        <!-- Duoshuo Comment BEGIN -->
-  <div class="ds-thread"></div>
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"harole"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = 'http://static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- Duoshuo Comment END -->
-      </footer>
-    </article>
+<div class="container clearfix blog_archives">
+  <article role="article" class="blog_list_box">
     
-  </div>
+    <header>
+      <h1 class="entry-title">Category: CSS3</h1>
+      
+    </header>
+    
+    <div id="blog-archives" class="category">
+
+
+
+  
+  <h2>2014</h2>
+
+<article>
+  
+<h1><a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a></h1>
+<time datetime="2014-06-12T19:19:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>12</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/css3/'>CSS3</a></span>
+</footer>
+
+
+</article>
+
+</div>
+
+    
+  </article>
+  
+
   
   <aside class="sidebar">
     
@@ -214,7 +133,6 @@ var duoshuoQuery = {short_name:"harole"};
   </aside>
   
 </div>
-
     	</div>
   	</div>
   	<footer role="contentinfo"><!-- <p>

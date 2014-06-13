@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-11-04T23:09:52+08:00</updated>
+  <updated>2014-06-13T14:32:04+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -14,7 +14,39 @@
 
   
   <entry>
-    <title type="html"><![CDATA[javascript 对象与数组的浅拷贝和深拷贝]]></title>
+    <title type="html"><![CDATA[CSS3实现圆环百分比（动画）]]></title>
+    <link href="http://harole.github.com/blog/2014/06/12/round-percentage-css3/"/>
+    <updated>2014-06-12T19:19:00+08:00</updated>
+    <id>http://harole.github.com/blog/2014/06/12/round-percentage-css3</id>
+    <content type="html"><![CDATA[<blockquote><p>文章内容分为三个部分，实现方案、逻辑整理和代码实现。</p></blockquote>
+
+<p>一. 实现方案</p>
+
+<pre><code>&lt;!-- 外圆 --&gt;
+&lt;div id="roundBox"&gt;
+
+    &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt;
+    &lt;div class="roundLeft"&gt;&lt;/div&gt;
+
+    &lt;!-- 遮挡外圆右半部分，为动画准备 --&gt;
+    &lt;div class="roundRight"&gt;&lt;/div&gt;
+
+    &lt;!-- 内圆 遮挡 roundLeft 和 roundRight --&gt;
+    &lt;div class="roundInner"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>二. 逻辑整理
+<img src="http://harole.github.com/images/2014-06-12-logic.jpg" alt="CSS3实现圆环百分比逻辑图" /></p>
+
+<p>三. 代码实现</p>
+
+<p>该代码基于Jquery，仅支持chrome。<a href="http://jsfiddle.net/harole/5VRW5/embedded/result/">demo点击这里</a>，<a href="http://jsfiddle.net/harole/5VRW5/">完整代码点击这里</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript 对象与数组的浅拷贝和深拷贝]]></title>
     <link href="http://harole.github.com/blog/2013/10/26/javascript-shallow-deep-cope/"/>
     <updated>2013-10-26T17:15:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/26/javascript-shallow-deep-cope</id>
@@ -169,7 +201,7 @@ console.log(arr);   // 输出 [1, 2, [2, 3], 4]
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 闭包原理的深入理解]]></title>
+    <title type="html"><![CDATA[Javascript 闭包原理的深入理解]]></title>
     <link href="http://harole.github.com/blog/2013/10/25/javascript-understand-closures-deeply/"/>
     <updated>2013-10-25T15:36:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/25/javascript-understand-closures-deeply</id>
@@ -235,7 +267,7 @@ console.log(returnFunVar2());    // 输出 5
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 简单闭包]]></title>
+    <title type="html"><![CDATA[Javascript 简单闭包]]></title>
     <link href="http://harole.github.com/blog/2013/10/25/javascript-simple-closures/"/>
     <updated>2013-10-25T15:26:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/25/javascript-simple-closures</id>
@@ -284,7 +316,7 @@ console.log(returnFunVar2());    // 输出 2
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 数组引用和对象引用]]></title>
+    <title type="html"><![CDATA[Javascript 数组引用和对象引用]]></title>
     <link href="http://harole.github.com/blog/2013/10/12/javascript-array-quote/"/>
     <updated>2013-10-12T23:22:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/12/javascript-array-quote</id>
@@ -480,7 +512,7 @@ alert( "this is harole's blog : " + result );
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 异步初始化大数组]]></title>
+    <title type="html"><![CDATA[Javascript 异步初始化大数组]]></title>
     <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
     <updated>2013-10-05T17:26:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
@@ -532,7 +564,7 @@ alert( "this is harole's blog : " + result );
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 循环（for，while）那些事儿！]]></title>
+    <title type="html"><![CDATA[Javascript 循环（for，while）那些事儿！]]></title>
     <link href="http://harole.github.com/blog/2013/10/05/looping-techniques-javascript/"/>
     <updated>2013-10-05T00:16:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/05/looping-techniques-javascript</id>
@@ -581,10 +613,10 @@ alert( "this is harole's blog : " + result );
  }
 
  // 例如：遍历 DOM 子元素
- for ( node = parent.firstChild; node; node = node.nextSibling ) {  
-     if ( node.nodeType === 1 ) {  
-         node.nodeIndex = ++count;  
-     }  
+ for ( node = parent.firstChild; node; node = node.nextSibling ) {
+     if ( node.nodeType === 1 ) {
+         node.nodeIndex = ++count;
+     }
  }
 </code></pre></li>
 <li><p>在迭代中，要尽可能少遍历，如果知道从 position 开始。</p>
@@ -598,7 +630,7 @@ alert( "this is harole's blog : " + result );
 
 <pre><code> for ( var i = items.length, currentItem; i; ) {
      currentItem = items[--i];  // 合并了 i 自减和 i 取值的操作
- }    
+ }
 </code></pre></li>
 </ol>
 </li>
@@ -616,7 +648,7 @@ alert( "this is harole's blog : " + result );
 
 <pre><code> var findType, i = 0;
  while ( findType == arr[i++] ) {
-     // 一些操作 
+     // 一些操作
  }
 </code></pre></li>
 </ol>
@@ -693,12 +725,12 @@ function a(){
 function f( a, b ) {
     console.log(a);
     console.log(b);
-}   
+}
 
 // call()方法的使用，当前 **this** 指向的是对象O
 f.call( O, 1, 2 );
 
-// call()方法的实现与下面代码实现相似，可以通过下面的代码来理解call()的使用。    
+// call()方法的实现与下面代码实现相似，可以通过下面的代码来理解call()的使用。
 O.m = f;
 O.m();
 delete O.m;
@@ -1045,12 +1077,12 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "click", handleClcik); 
+addListener(element, "click", handleClcik);
 </code></pre>
 
 <p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
@@ -1066,12 +1098,12 @@ funciton handleMouseHover( event ) {
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "mousehover", handleMouseHover);       
+addListener(element, "mousehover", handleMouseHover);
 
 // mouseup
 funciton handleMouseUp( event ) {
@@ -1079,12 +1111,12 @@ funciton handleMouseUp( event ) {
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "mousehover", handleMouseUp);      
+addListener(element, "mousehover", handleMouseUp);
 
 // 其他事件
 ......
@@ -1098,14 +1130,14 @@ funciton eventHandle( event ) {
     var popWindow = document.getElementById("popWindow");
 
     popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px"; 
+    popWindow.style.top = event.clientY + "px";
 
     popWindow.className = "visible";
 
 }
-addListener(element, "click", eventHandle); 
-addListener(element, "mousehover", eventHandle);        
-addListener(element, "mousehover", eventHandle);    
+addListener(element, "click", eventHandle);
+addListener(element, "mousehover", eventHandle);
+addListener(element, "mousehover", eventHandle);
 
 // 其他监听事件
 ......
@@ -1123,7 +1155,7 @@ addListener(element, "mousehover", eventHandle);
         var popWindow = document.getElementById("popWindow");
 
         popWindow.style.left = event.clientX + "px";
-        popWindow.style.top = event.clientY + "px";         
+        popWindow.style.top = event.clientY + "px";
 
     },
 
@@ -1145,7 +1177,7 @@ addListener(element, "mousehover", eventHandle);
     }
 
     // 其他事件处理函数
-    ......      
+    ......
 };
 
 addListener(element, "click", function (event) {
@@ -1173,7 +1205,7 @@ addListener(element, "mousehover", function (event) {
         var popWindow = document.getElementById("popWindow");
 
         popWindow.style.left = x + "px";
-        popWindow.style.top = y + "px";         
+        popWindow.style.top = y + "px";
 
     },
 
@@ -1195,7 +1227,7 @@ addListener(element, "mousehover", function (event) {
     }
 
     // 其他事件处理函数
-    ......      
+    ......
 };
 
 addListener(element, "click", function (event) {
@@ -1223,7 +1255,7 @@ app.showPopWindow( "20", "20" );
         var popWindow = document.getElementById("popWindow");
 
         popWindow.style.left = x + "px";
-        popWindow.style.top = y + "px";         
+        popWindow.style.top = y + "px";
 
     },
 
@@ -1232,9 +1264,9 @@ app.showPopWindow( "20", "20" );
         event.preventDefault();
 
         // click 的其他代码
-        ...... 
+        ......
 
-        this.showPopWindow( event.clientX, event.clientY );                     
+        this.showPopWindow( event.clientX, event.clientY );
     },
 
     handleMouseHover: function ( event ) {
@@ -1249,7 +1281,7 @@ app.showPopWindow( "20", "20" );
     }
 
     // 其他事件处理函数
-    ......      
+    ......
 };
 
 addListener(element, "click", function (event) {
@@ -1375,124 +1407,6 @@ addListener(element, "mousehover", function (event) {
 
 
 <p>“那些，曾经，刻骨铭心！”</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[爱的一种解释]]></title>
-    <link href="http://harole.github.com/blog/2013/04/08/love-explanation/"/>
-    <updated>2013-04-08T14:31:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/04/08/love-explanation</id>
-    <content type="html"><![CDATA[<p>爱是什么？</p>
-
-
-<p>一个精灵坐在碧绿的枝叶间沉思。</p>
-
-
-<p>风而若有若无。</p>
-
-
-<p>一只鸟儿飞过来，停在枝上，望着远处将要成熟的稻田。</p>
-
-
-<p>精灵取出一束黄澄澄的稻谷问道：“你爱这稻谷吗？”</p>
-
-
-<p>“爱。”</p>
-
-
-<p>“为什么？”</p>
-
-
-<!-- more -->
-
-
-<p>“它驱赶我的饥饿。”</p>
-
-
-<p>鸟儿啄完稻谷，轻轻梳理着光润的羽毛。</p>
-
-
-<p>“现在你爱这稻谷吗？”精灵又取出一束黄澄澄的稻谷。</p>
-
-
-<p>鸟儿抬头望着远处的一湾泉水回答：“现在我爱那一湾泉水，我有点渴了。”</p>
-
-
-<p>精灵摘下一片树叶，里面盛了一汪泉水。</p>
-
-
-<p>鸟儿喝完泉水，准备振翅飞去。</p>
-
-
-<p>“请再回答我一个问题，”精灵伸出指尖，鸟儿停在上面。</p>
-
-
-<p>“你要去做什么更重要的事吗？我这里又稻谷也有泉水。”</p>
-
-
-<p>“我要去那片开着风信子的山谷，去看那朵风信子。”</p>
-
-
-<p>“为什么？它能驱赶你的饥饿？”</p>
-
-
-<p>“不能。”</p>
-
-
-<p>“它能滋润你的干渴？”</p>
-
-
-<p>“不能。”</p>
-
-
-<p>“那你为什么要去看它呢？”</p>
-
-
-<p>“我需要它啊。”</p>
-
-
-<p>“为什么需要？”</p>
-
-
-<p>“我爱它啊。”</p>
-
-
-<p>“为什么爱它？”</p>
-
-
-<p>“我日日夜夜都在思念它。”</p>
-
-
-<p>“为什么思念它？”</p>
-
-
-<p>“我爱它。”</p>
-
-
-<p>精灵沉默了片刻，又提出一个问题：</p>
-
-
-<p>“你为什么只爱那一朵风信子呢？山谷里有无数朵风信子。”</p>
-
-
-<p>“因为它是唯一的一朵啊。”</p>
-
-
-<p>“为什么？它和其他所有的风信子有什么不同的地方吗？”</p>
-
-
-<p>“有的。”</p>
-
-
-<p>“哪里不同呢？”</p>
-
-
-<p>“只有它才是我爱的那一朵啊。”</p>
-
-
-<p>精灵忽然轻轻笑了起来，鸟儿振翅而去。</p>
 
 ]]></content>
   </entry>

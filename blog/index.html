@@ -9,8 +9,8 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 浅拷贝 对象浅拷贝的一般实现： // 赋值对象方法
-Object.prototype.clone = function () { var newObj = {}; for (var i in this) { newObj[i] = this[i]; } return newObj &hellip;">
+  <meta name="description" content="文章内容分为三个部分，实现方案、逻辑整理和代码实现。 一. 实现方案 &lt;!-- 外圆 --&gt;
+&lt;div id="roundBox"&gt; &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt; &lt;div class="roundLeft"&gt;&lt;/div&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,73 @@ Object.prototype.clone = function () { var newObj = {}; for (var i in this) { ne
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-12T19:19:00+08:00" pubdate data-updated="true"><span class="tit_date">12th</span> <span class="tit_month">Jun</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><blockquote><p>文章内容分为三个部分，实现方案、逻辑整理和代码实现。</p></blockquote>
+
+<p>一. 实现方案</p>
+
+<pre><code>&lt;!-- 外圆 --&gt;
+&lt;div id="roundBox"&gt;
+
+    &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt;
+    &lt;div class="roundLeft"&gt;&lt;/div&gt;
+
+    &lt;!-- 遮挡外圆右半部分，为动画准备 --&gt;
+    &lt;div class="roundRight"&gt;&lt;/div&gt;
+
+    &lt;!-- 内圆 遮挡 roundLeft 和 roundRight --&gt;
+    &lt;div class="roundInner"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>二. 逻辑整理
+<img src="/images/2014-06-12-logic.jpg" alt="CSS3实现圆环百分比逻辑图" /></p>
+
+<p>三. 代码实现</p>
+
+<p>该代码基于Jquery，仅支持chrome。<a href="http://jsfiddle.net/harole/5VRW5/embedded/result/">demo点击这里</a>，<a href="http://jsfiddle.net/harole/5VRW5/">完整代码点击这里</a>。</p>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -669,67 +736,6 @@ alert( "this is harole's blog : " + result );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-01T14:38:00+08:00" pubdate data-updated="true"><span class="tit_date">1st</span> <span class="tit_month">Oct</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/10/01/new-function/">Function()构造函数，即用 New Function() 方式构造函数</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. 下面是使用Functin()构造函数来创建一个函数的例子：</p>
-
-<pre><code>var f = new Function( "x", "y", "return x + y;" );
-</code></pre>
-
-<p>这行代码创建了一个新函数，这个函数和下面的定义基本相等</p>
-
-<pre><code>function f( x, y ){
-    return x + y;
-}
-</code></pre>
-
-<p>Function构造函数期待任意数目的 <strong>字符串</strong> 参数，其中最后一个参数（它可以包含任意多条 javascript 语句）是函数的函数体，其他均是函数的参数。如果需要定义一个没有参数的函数体，只需向构造函数传入一个字符串参数，也就是函数体。</p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/10/01/new-function/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -745,15 +751,15 @@ alert( "this is harole's blog : " + result );
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">javascript 对象与数组的浅拷贝和深拷贝</a>
+        <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">javascript 闭包原理的深入理解</a>
+        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/10/25/javascript-simple-closures/">javascript 简单闭包</a>
+        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">Javascript 闭包原理的深入理解</a>
       </li>
     
   </ul>
@@ -765,7 +771,7 @@ alert( "this is harole's blog : " + result );
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     
@@ -775,7 +781,7 @@ alert( "this is harole's blog : " + result );
     	</div>
   	</div>
   	<footer role="contentinfo"><!-- <p>
-  Copyright &copy; 2013 - harole -
+  Copyright &copy; 2014 - harole -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p> -->
 

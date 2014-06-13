@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: javascript | Harole's blog]]></title>
+  <title><![CDATA[Category: Javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2013-11-04T23:09:52+08:00</updated>
+  <updated>2014-06-13T14:32:04+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[javascript 对象与数组的浅拷贝和深拷贝]]></title>
+    <title type="html"><![CDATA[Javascript 对象与数组的浅拷贝和深拷贝]]></title>
     <link href="http://harole.github.com/blog/2013/10/26/javascript-shallow-deep-cope/"/>
     <updated>2013-10-26T17:15:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/26/javascript-shallow-deep-cope</id>
@@ -169,7 +169,7 @@ console.log(arr);   // 输出 [1, 2, [2, 3], 4]
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 闭包原理的深入理解]]></title>
+    <title type="html"><![CDATA[Javascript 闭包原理的深入理解]]></title>
     <link href="http://harole.github.com/blog/2013/10/25/javascript-understand-closures-deeply/"/>
     <updated>2013-10-25T15:36:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/25/javascript-understand-closures-deeply</id>
@@ -235,7 +235,7 @@ console.log(returnFunVar2());    // 输出 5
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 简单闭包]]></title>
+    <title type="html"><![CDATA[Javascript 简单闭包]]></title>
     <link href="http://harole.github.com/blog/2013/10/25/javascript-simple-closures/"/>
     <updated>2013-10-25T15:26:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/25/javascript-simple-closures</id>
@@ -284,7 +284,7 @@ console.log(returnFunVar2());    // 输出 2
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript 数组引用和对象引用]]></title>
+    <title type="html"><![CDATA[Javascript 数组引用和对象引用]]></title>
     <link href="http://harole.github.com/blog/2013/10/12/javascript-array-quote/"/>
     <updated>2013-10-12T23:22:00+08:00</updated>
     <id>http://harole.github.com/blog/2013/10/12/javascript-array-quote</id>
@@ -332,63 +332,54 @@ for ( number in a ) {
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析]]></title>
-    <link href="http://harole.github.com/blog/2013/10/11/jquery-noconflict-method/"/>
-    <updated>2013-10-11T02:42:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/10/11/jquery-noconflict-method</id>
-    <content type="html"><![CDATA[<h3>jQuery 中 noConflict() 方法如下：</h3>
+    <title type="html"><![CDATA[Javascript 异步初始化大数组]]></title>
+    <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
+    <updated>2013-10-05T17:26:00+08:00</updated>
+    <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
+    <content type="html"><![CDATA[<pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
+    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
+    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
 
-<pre><code>// jQuery 开头定义变量部分：
-var ....,
+    var THRESHOLD = 150, DELAY = 15;
 
-    _$ = window.$,
+    function initBigArrayAsync(max, cb) {
+        var r = [], i = 0;
 
-    _jQuery = window.jQuer,
+        function init(startTime) {
+            while (i &lt; max) {
 
-    ....;
-
-noConflict: function( deep ) {
-    if ( window.$ === jQuery ) {
-        window.$ = _$;
-    }
-
-    if ( deep &amp;&amp; window.jQuery === jQuery ) {
-        window.jQuery = _jQuery;
-    }
+                // 判断语句，函数执行的当前时间和开始执行时间差
+                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
+                // 当小于 THRESHOLD，可进行正常赋值
+                if (new Date - startTime &lt; THRESHOLD) {
+                    r[i++] = i;
+                } else {
 </code></pre>
 
 <!-- more -->
 
 
-<pre><code>    return jQuery;
-}
-...
+<pre><code>                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
+                    // 所以用一个很小的等待时间 DELAY，来从新调用 init() 进行赋值
+                    setTimeout(function() {
+                        init(new Date);
+                    }, DELAY);
+                    return;
+                }
+            }
 
-// jQuery 函数底部
-if ( typeof module === "object" &amp;&amp; module &amp;&amp; typeof module.exports === "object" ) {
-    // 在执行节点的加载器中，公开 jQuery 作为 module.exports,
-    // 因为 module 模式：不能创建全局变量，用户将会储存它作为局部变量
-    // 全局变量不能被 Node module 解析。
-    // 所以将 jQuery 赋给 module.exports
-    module.exports = jQuery;
-} else {
-    // 不是 module 模式，就把 jQuery 赋给全局
-    window.jQuery = window.$ = jQuery;
+            cb(r);
+        }
 
-    // Register as a named AMD module, since jQuery can be concatenated with other
-    // files that may use define, but not via a proper concatenation script that
-    // understands anonymous AMD modules. A named AMD is safest and most robust
-    // way to register. Lowercase jquery is used because AMD module names are
-    // derived from file names, and jQuery is normally delivered in a lowercase
-    // file name. Do this after creating the global so that if an AMD module wants
-    // to call noConflict to hide this version of jQuery, it will work.
-    if ( typeof define === "function" &amp;&amp; define.amd ) {
-        define( "jquery", [], function () { return jQuery; } );
+        init(new Date);
     }
-}
-</code></pre>
 
-<p>总结：在一般的浏览器中，我们看到的是 window.jQuery = window.$ = jQuery，jQuery是全局变量；当我们调用 noConflict 时，window.$ = window.$ 和 window.jQuery = window.jQuery，覆盖了window.jQuery = window.$ = jQuery，使得 jQuery 变成了局部变量，因此不会和其他类库使用的 $ 和 jQuery 这两个变量冲突；</p>
+    // 该函数用于检测，是否成功给大数组赋值
+    initBigArrayAsync(1000000, function(arr) {
+        console.log(arr.length);
+        console.log(arr[1000000 - 1]);
+    });
+</code></pre>
 ]]></content>
   </entry>
   
