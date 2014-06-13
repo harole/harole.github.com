@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-06-13T14:32:04+08:00</updated>
+  <updated>2014-06-13T14:42:56+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -35,6 +35,9 @@
     &lt;div class="roundInner"&gt;&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
+
+<!-- 阅读更多 -->
+
 
 <p>二. 逻辑整理
 <img src="http://harole.github.com/images/2014-06-12-logic.jpg" alt="CSS3实现圆环百分比逻辑图" /></p>
