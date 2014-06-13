@@ -22,7 +22,7 @@ categories: CSS3
         <!-- 内圆 遮挡 roundLeft 和 roundRight -->
         <div class="roundInner"></div>
     </div>
-
+<!-- more -->
 二. 逻辑整理
 ![CSS3实现圆环百分比逻辑图]({{ root_url }}/images/2014-06-12-logic.jpg)
 
