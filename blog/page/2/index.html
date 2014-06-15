@@ -9,8 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 下面是使用Functin()构造函数来创建一个函数的例子： var f = new Function( "x", "y", "return x + y;" ); 这行代码创建了一个新函数，这个函数和下面的定义基本相等 function f( x, y ){ return x + y;
-} &hellip;">
+  <meta name="description" content="for 类循环 for-in 循环的一般形式 // i 可以是数组的下标，也可以是对象的属性 // arr 可以是数组，也可以是对象 for ( i in arr ) { // 如需匹配特定的值 // 可以使用一个判断语句 // definited 为匹配值的变量 if ( arr[i &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,73 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-05T00:16:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/05/looping-techniques-javascript/">Javascript 循环（for，while）那些事儿！</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><ol>
+<li><p>for 类循环</p>
+
+<ol>
+<li><p>for-in 循环的一般形式</p>
+
+<pre><code> // i 可以是数组的下标，也可以是对象的属性
+ // arr 可以是数组，也可以是对象
+ for ( i in arr ) {
+
+     // 如需匹配特定的值
+     // 可以使用一个判断语句
+     // definited 为匹配值的变量
+     if ( arr[i] === definited ) {
+
+     }
+ }
+</code></pre>
+
+<p>总结：for-in 语句不仅可以对数组循环遍历，还可以对对象的属性循环遍历
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/05/looping-techniques-javascript/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -700,74 +766,6 @@ addListener(element, "click", handleClcik);
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T16:57:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/08/thoese-who-we-are/">那些，曾经</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>叶的离开，是风的追求，还是树的不挽留。</p>
-
-
-<p>你不是树，怎么知道树没有挽留？</p>
-
-
-<p>你不是树，怎么知道风不是叶的最好幸福？</p>
-
-
-<p>你不是树，怎么知道既然知道自己不再强大，又何必再用挽留去阻碍叶的幸福的无奈？</p>
-
-
-<p>或许，随风飘落，落叶归根便是叶的最好归宿。</p>
-
-
-<p>无意间，听到广播里诉说着普罗旺斯的薰衣草田，霎时间泪水从眼睛一滴一滴地滑落，落到脸上，落到心里，勾起了许久许久不曾触碰的那些，曾经。</p>
-
-
-<p>曾经那条走过无数次的小路，那张再心里无数遍复习过的笑脸，那抹无数次魂牵梦萦的身影，此刻都那么真实的想起，那安静而又冷冽的男孩，那快乐而又唯美的曾经。</p>
-
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/08/thoese-who-we-are/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -785,15 +783,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/15/jsonp-principle/">jsonp 跨域实现原理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">Javascript 闭包原理的深入理解</a>
       </li>
     
   </ul>
@@ -805,7 +803,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     

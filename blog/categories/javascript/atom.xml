@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-06-13T16:08:26+08:00</updated>
+  <updated>2014-06-15T21:32:22+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jsonp 跨域实现原理]]></title>
+    <link href="http://harole.github.com/blog/2014/06/15/jsonp-principle/"/>
+    <updated>2014-06-15T20:49:00+08:00</updated>
+    <id>http://harole.github.com/blog/2014/06/15/jsonp-principle</id>
+    <content type="html"><![CDATA[<p>通过script标签实现跨域请求，并带上回调函数作为参数，后台将json数据作为参数传给回调函数。需要配置环境：Apache + php</p>
+
+<p>一. 前端</p>
+
+<pre><code>function jsonp(url){
+    var script = document.createElement('script');
+    script.src = url;
+    document.body.insertBefore(script, document.body.firstChild);
+
+    // ie8 (包括ie8) 以下不支持 onload，所以这里增加了 onreadystatechange
+    script.onload = script.onreadystatechange = function() {
+
+        // 不同浏览器的 readyState 不一致
+        if(!script.readyState || script.readyState == "loaded" || script.readyState == "complete"){
+
+            // 释放内存，防止内存泄露
+            document.body.removeChild(script);
+            script.src = "";
+            script = null;
+        }
+    }
+}
+
+jsonp("http://baidu.com/api/jsonp.php?callback=responseFunc");
+
+function responseFunc(response){
+    // 对数据进行操作
+    console.log(response.name)
+}
+</code></pre>
+
+<p>二. 后端</p>
+
+<pre><code>&lt;?php
+    $data = array('name'=&gt;'harole',"years"=&gt;22);
+    $callback = $_GET['callback'];
+    echo $callback.'('.json_encode($data).')';
+ ?&gt;
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Javascript 对象与数组的浅拷贝和深拷贝]]></title>
@@ -328,58 +375,6 @@ for ( number in a ) {
 </code></pre>
 
 <p>总结：javascript 中两个变量之间赋值传递一个对象或数组，传递的是这个对象或数组的引用。但是在实际中我们希望的是进行拷贝。那么如何实现对象或数组间的拷贝呢？请看《<a href="http://www.harole.com/blog/2013/10/26/javascript-shallow-deep-cope/">javascript 对象与数组的浅拷贝和深拷贝</a>》</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Javascript 异步初始化大数组]]></title>
-    <link href="http://harole.github.com/blog/2013/10/05/initbigarrayasync/"/>
-    <updated>2013-10-05T17:26:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/10/05/initbigarrayasync</id>
-    <content type="html"><![CDATA[<pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
-    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
-    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
-
-    var THRESHOLD = 150, DELAY = 15;
-
-    function initBigArrayAsync(max, cb) {
-        var r = [], i = 0;
-
-        function init(startTime) {
-            while (i &lt; max) {
-
-                // 判断语句，函数执行的当前时间和开始执行时间差
-                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
-                // 当小于 THRESHOLD，可进行正常赋值
-                if (new Date - startTime &lt; THRESHOLD) {
-                    r[i++] = i;
-                } else {
-</code></pre>
-
-<!-- more -->
-
-
-<pre><code>                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
-                    // 所以用一个很小的等待时间 DELAY，来从新调用 init() 进行赋值
-                    setTimeout(function() {
-                        init(new Date);
-                    }, DELAY);
-                    return;
-                }
-            }
-
-            cb(r);
-        }
-
-        init(new Date);
-    }
-
-    // 该函数用于检测，是否成功给大数组赋值
-    initBigArrayAsync(1000000, function(arr) {
-        console.log(arr.length);
-        console.log(arr[1000000 - 1]);
-    });
-</code></pre>
 ]]></content>
   </entry>
   

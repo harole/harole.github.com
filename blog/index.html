@@ -9,8 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="文章内容分为三个部分，实现方案、逻辑整理和代码实现。 一. 实现方案 &lt;!-- 外圆 --&gt;
-&lt;div id="roundBox"&gt; &lt;!-- 遮挡外圆左半部分，为动画准备 --&gt; &lt;div class="roundLeft"&gt;&lt;/div&gt &hellip;">
+  <meta name="description" content="通过script标签实现跨域请求，并带上回调函数作为参数，后台将json数据作为参数传给回调函数。需要配置环境：Apache + php 一. 前端 function jsonp(url){ var script = document.createElement('script'); script &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,88 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-15T20:49:00+08:00" pubdate data-updated="true"><span class="tit_date">15th</span> <span class="tit_month">Jun</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2014/06/15/jsonp-principle/">Jsonp 跨域实现原理</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>通过script标签实现跨域请求，并带上回调函数作为参数，后台将json数据作为参数传给回调函数。需要配置环境：Apache + php</p>
+
+<p>一. 前端</p>
+
+<pre><code>function jsonp(url){
+    var script = document.createElement('script');
+    script.src = url;
+    document.body.insertBefore(script, document.body.firstChild);
+
+    // ie8 (包括ie8) 以下不支持 onload，所以这里增加了 onreadystatechange
+    script.onload = script.onreadystatechange = function() {
+
+        // 不同浏览器的 readyState 不一致
+        if(!script.readyState || script.readyState == "loaded" || script.readyState == "complete"){
+
+            // 释放内存，防止内存泄露
+            document.body.removeChild(script);
+            script.src = "";
+            script = null;
+        }
+    }
+}
+
+jsonp("http://baidu.com/api/jsonp.php?callback=responseFunc");
+
+function responseFunc(response){
+    // 对数据进行操作
+    console.log(response.name)
+}
+</code></pre>
+
+<p>二. 后端</p>
+
+<pre><code>&lt;?php
+    $data = array('name'=&gt;'harole',"years"=&gt;22);
+    $callback = $_GET['callback'];
+    echo $callback.'('.json_encode($data).')';
+ ?&gt;
+</code></pre>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -652,73 +733,6 @@ alert( "this is harole's blog : " + result );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-05T00:16:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/10/05/looping-techniques-javascript/">Javascript 循环（for，while）那些事儿！</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><ol>
-<li><p>for 类循环</p>
-
-<ol>
-<li><p>for-in 循环的一般形式</p>
-
-<pre><code> // i 可以是数组的下标，也可以是对象的属性
- // arr 可以是数组，也可以是对象
- for ( i in arr ) {
-
-     // 如需匹配特定的值
-     // 可以使用一个判断语句
-     // definited 为匹配值的变量
-     if ( arr[i] === definited ) {
-
-     }
- }
-</code></pre>
-
-<p>总结：for-in 语句不仅可以对数组循环遍历，还可以对对象的属性循环遍历
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/10/05/looping-techniques-javascript/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -734,15 +748,15 @@ alert( "this is harole's blog : " + result );
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/15/jsonp-principle/">jsonp 跨域实现原理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/25/javascript-understand-closures-deeply/">Javascript 闭包原理的深入理解</a>
       </li>
     
   </ul>
@@ -754,7 +768,7 @@ alert( "this is harole's blog : " + result );
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(9)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     
