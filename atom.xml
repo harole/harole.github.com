@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-06-15T21:32:22+08:00</updated>
+  <updated>2014-06-19T10:43:40+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -1018,7 +1018,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
         background: black;
         /* S-- 用于清除排版时 left 和 right 之间的间隙 */
         letter-spacing: -3px;
-        font-size: 0;       
+        font-size: 0;
         /* E-- 用于清除排版时 left 和 right 之间的间隙 */
     }
     .box .left {
@@ -1031,9 +1031,9 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
     .box .right {
         display: inline-block;
         width: 200px;
-        height: 100px;  
-        font-size: 50px;   
-        background: blue;       
+        height: 100px;
+        font-size: 50px;
+        background: blue;
     }
     &lt;/style&gt;
 &lt;/head&gt;
@@ -1041,7 +1041,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
     &lt;div class="box"&gt;
         &lt;div class="left"&gt;Left&lt;/div&gt;
         &lt;div class="right"&gt;Right&lt;/div&gt;
-    &lt;/div&gt;  
+    &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
@@ -1067,7 +1067,8 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 }
 .box .right {
     verical-align: top;
-} 
+}
+// vertical-align: bottom; 与vertical-align: top; 解决原理是一样的。
 </code></pre>
 
 <p>方案二：</p>
@@ -1077,7 +1078,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 }
 .box .right {
     verical-align: middle;
-} 
+}
 </code></pre>
 
 <p>方案三:</p>

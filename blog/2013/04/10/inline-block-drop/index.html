@@ -107,7 +107,7 @@
         background: black;
         /* S-- 用于清除排版时 left 和 right 之间的间隙 */
         letter-spacing: -3px;
-        font-size: 0;       
+        font-size: 0;
         /* E-- 用于清除排版时 left 和 right 之间的间隙 */
     }
     .box .left {
@@ -120,9 +120,9 @@
     .box .right {
         display: inline-block;
         width: 200px;
-        height: 100px;  
-        font-size: 50px;   
-        background: blue;       
+        height: 100px;
+        font-size: 50px;
+        background: blue;
     }
     &lt;/style&gt;
 &lt;/head&gt;
@@ -130,7 +130,7 @@
     &lt;div class="box"&gt;
         &lt;div class="left"&gt;Left&lt;/div&gt;
         &lt;div class="right"&gt;Right&lt;/div&gt;
-    &lt;/div&gt;  
+    &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
@@ -156,7 +156,8 @@
 }
 .box .right {
     verical-align: top;
-} 
+}
+// vertical-align: bottom; 与vertical-align: top; 解决原理是一样的。
 </code></pre>
 
 <p>方案二：</p>
@@ -166,7 +167,7 @@
 }
 .box .right {
     verical-align: middle;
-} 
+}
 </code></pre>
 
 <p>方案三:</p>
