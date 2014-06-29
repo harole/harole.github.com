@@ -3,8 +3,8 @@ layout: post
 title: "两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上"
 date: 2013-04-10 21:58
 comments: true
-categories: 
----	
+categories:
+---
 一. div.left 和 div.right 均有内容。
 	<!doctype html>
     <html lang="en">
@@ -19,7 +19,7 @@ categories:
             background: black;
             /* S-- 用于清除排版时 left 和 right 之间的间隙 */
             letter-spacing: -3px;
-            font-size: 0;       
+            font-size: 0;
             /* E-- 用于清除排版时 left 和 right 之间的间隙 */
         }
         .box .left {
@@ -32,9 +32,9 @@ categories:
         .box .right {
             display: inline-block;
             width: 200px;
-            height: 100px;  
-            font-size: 50px;   
-            background: blue;       
+            height: 100px;
+            font-size: 50px;
+            background: blue;
         }
         </style>
     </head>
@@ -42,7 +42,7 @@ categories:
         <div class="box">
             <div class="left">Left</div>
             <div class="right">Right</div>
-        </div>  
+        </div>
     </body>
     </html>
 预期效果：
@@ -61,28 +61,29 @@ categories:
     }
     .box .right {
         verical-align: top;
-    } 
+    }
+    // vertical-align: bottom; 与vertical-align: top; 解决原理是一样的。
 >方案二：
 	.box .left {
         verical-align: middle;
     }
     .box .right {
         verical-align: middle;
-    } 
+    }
 >方案三:
 	.box .left {
         verical-align: top;
     }
-或者    
+或者
     .box .right {
         verical-align: top;
     }
->    
+>
 
 总结（对方案的理解）：
 >对于方案一和方案二的解决，可能会好奇如果都 vertical-align：baseline; 能否解决，答案是否定的。
 
->vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div 
+>vertical-align 默认是 baseline，当 left 和 right 其中之一缺少内容，缺少内容的那个 div
 的 baseline 在容器本身的底部，另外一个有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来。
 
 >问题一：对于上面的“有内容的 div 和缺少内容的 div 的 baseline 对齐导致了有内容的 div 掉了下来”会有个疑问，即“为什么是有内容的 div 和没有内容 div 的对齐，而不是没有内容的和有内容的 div 对齐呢？”
