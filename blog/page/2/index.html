@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="for 类循环 for-in 循环的一般形式 // i 可以是数组的下标，也可以是对象的属性 // arr 可以是数组，也可以是对象 for ( i in arr ) { // 如需匹配特定的值 // 可以使用一个判断语句 // definited 为匹配值的变量 if ( arr[i &hellip;">
+  <meta name="description" content="// 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务 // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间 // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒 var &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,73 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-05T17:26:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/05/initbigarrayasync/">Javascript 异步初始化大数组</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
+    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
+    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
+
+    var THRESHOLD = 150, DELAY = 15;
+
+    function initBigArrayAsync(max, cb) {
+        var r = [], i = 0;
+
+        function init(startTime) {
+            while (i &lt; max) {
+
+                // 判断语句，函数执行的当前时间和开始执行时间差
+                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
+                // 当小于 THRESHOLD，可进行正常赋值
+                if (new Date - startTime &lt; THRESHOLD) {
+                    r[i++] = i;
+                } else {
+</code></pre>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/05/initbigarrayasync/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -701,71 +768,6 @@ addListener(element, "click", handleClcik);
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T18:34:00+08:00" pubdate data-updated="true"><span class="tit_date">8th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/08/becoming-your-story/">Becoming Your Story</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to hide it and drew pictures instead.</p>
-
-
-<p></p>
-
-<p>My parents were concerned and had me tested for learning disabilities. They even moved us to a new city. I was so far behind, it took me years to catch up. But, the school was better. In third grade, I started to read.</p>
-
-
-<p></p>
-
-<p>There&#8217;s something that became part of my ethos then. I was at the bottom. I had to do everything to work my way up. I remember constantly telling myself that I just needed to work harder than everyone.  I had to hustle.</p>
-
-
-<p></p>
-
-<p>I became my story. I worked hard and I hustled. </p>
-
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/08/becoming-your-story/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -783,15 +785,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/15/jsonp-principle/">jsonp 跨域实现原理</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a>
       </li>
     
   </ul>
@@ -803,7 +805,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     

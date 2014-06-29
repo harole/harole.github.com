@@ -9,7 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="通过script标签实现跨域请求，并带上回调函数作为参数，后台将json数据作为参数传给回调函数。需要配置环境：Apache + php 一. 前端 function jsonp(url){ var script = document.createElement('script'); script &hellip;">
+  <meta name="description" content="最近发现对 z-index 的理解不是很深刻，所以到 www.w3.org 上查看了相关内容，以下是个人在查看后对 z-index 的理解。 首先简单介绍一下关于页面上定位的元素，分为 x，y，z 轴的定位。在 position 后的 top 和 left 是对 y，x 轴的位置的定位。而子 z &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,112 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-29T09:56:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Jun</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2014/06/29/z-index-principle/">Z-index浅析</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>最近发现对 z-index 的理解不是很深刻，所以到 www.w3.org 上查看了相关内容，以下是个人在查看后对 z-index 的理解。</p>
+
+<p>首先简单介绍一下关于页面上定位的元素，分为 x，y，z 轴的定位。在 position 后的 top 和 left 是对 y，x 轴的位置的定位。而子 z 轴上的定位由 z-index 来决定那个层在上面。</p>
+
+<p>在 DOM 的根节点上默认有一个 root stacking context，当某个元素被设置 position（除了 static）都会生成一个 stacking context，每个 stacking context 中的元素 z-index 默认都是 0，宽度也会和浮动元素一样自适应宽度（不再想 block 元素一样占满正行）。设置 position 的元素，虽然默认值为 0，但是都会位于同一个 stacking context 其他元素之上。示例代码如下：</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;style&gt;
+  #text1 {
+    /*demo3*/
+    /*position: absolute;
+    z-index: 5;*/
+
+    background-color: red;
+  }
+  #text2 {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+    /* demo2
+     * 让当前的 stacking context 位于
+     * father stacking context 其他一般元素之上
+     */
+    /*z-index: -1;*/
+
+    /*demo3*/
+    /*z-index: 2;*/
+
+    background-color: blue;
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="text1"&gt;
+    this is text1 content.
+  &lt;/div&gt;
+  &lt;!-- demo3 --&gt;
+  &lt;!-- &lt;div class="text1Father"&gt;
+    &lt;div id="text1"&gt;
+      this is text1 content.
+    &lt;/div&gt;
+  &lt;/div&gt; --&gt;
+  &lt;div id="text2"&gt;
+    this is text2 content.
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>因为 #text2 新生成了一个 stacking context，而新生成的 stacking context 的背景是透明的。所以这里需要给 #text2 设置一个背景颜色。demo1 如下：</p>
+
+<p><img src="/images/2014-06-29_11-31-31.png" alt="" /></p>
+
+<p>因为 #text1 和 #text2 同时是位于 root stacking root 下的，所以会想到这里给 #text1 设置一个&#8221;z-index: 1;&#8221;时 #text1 会位于 #text2 层之上。但是事实上是不会的，因为这里的 #text2 生成了一个 stacking context，新生成的 stacking context 总是位于 father stacking context 之上的。如果希望这个新生成的 stacking context 位于其他一般元素之下，可以给新生成的 stacking context 的 z-index 赋负值。demo2 如下：</p>
+
+<p><img src="/images/2014-06-29_11-32-43.png" alt="" /></p>
+
+<p>当然，也可以给 #text1 设置 position 非 static 值生成一个 stacking context 然后让其 z-index 大于，#text2 的 z-index 值。这里就会有疑问了，可以确定的是两个兄弟元素 #text1 和 #text2 生成的 stacking context 的 father stacking context 都是 root stacking context。但是如果两个元素不是兄弟元素呢？答案也是肯定的，只要两个 stacking context 的第一个祖先 stacking context 是同一个，那么他们就可以使用 z-index 进行判断哪个在上层。</p>
+</div>
+      
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -666,73 +772,6 @@ alert( "this is harole's blog : " + result );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-05T17:26:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/10/05/initbigarrayasync/">Javascript 异步初始化大数组</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
-    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
-    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
-
-    var THRESHOLD = 150, DELAY = 15;
-
-    function initBigArrayAsync(max, cb) {
-        var r = [], i = 0;
-
-        function init(startTime) {
-            while (i &lt; max) {
-
-                // 判断语句，函数执行的当前时间和开始执行时间差
-                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
-                // 当小于 THRESHOLD，可进行正常赋值
-                if (new Date - startTime &lt; THRESHOLD) {
-                    r[i++] = i;
-                } else {
-</code></pre>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/10/05/initbigarrayasync/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -748,15 +787,15 @@ alert( "this is harole's blog : " + result );
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/15/jsonp-principle/">jsonp 跨域实现原理</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/26/javascript-shallow-deep-cope/">Javascript 对象与数组的浅拷贝和深拷贝</a>
       </li>
     
   </ul>
@@ -768,7 +807,7 @@ alert( "this is harole's blog : " + result );
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(3)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
   </ul>
 </section>
     

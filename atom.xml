@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-06-19T10:43:40+08:00</updated>
+  <updated>2014-06-29T11:54:09+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[z-index浅析]]></title>
+    <link href="http://harole.github.com/blog/2014/06/29/z-index-principle/"/>
+    <updated>2014-06-29T09:56:00+08:00</updated>
+    <id>http://harole.github.com/blog/2014/06/29/z-index-principle</id>
+    <content type="html"><![CDATA[<p>最近发现对 z-index 的理解不是很深刻，所以到 www.w3.org 上查看了相关内容，以下是个人在查看后对 z-index 的理解。</p>
+
+<p>首先简单介绍一下关于页面上定位的元素，分为 x，y，z 轴的定位。在 position 后的 top 和 left 是对 y，x 轴的位置的定位。而子 z 轴上的定位由 z-index 来决定那个层在上面。</p>
+
+<p>在 DOM 的根节点上默认有一个 root stacking context，当某个元素被设置 position（除了 static）都会生成一个 stacking context，每个 stacking context 中的元素 z-index 默认都是 0，宽度也会和浮动元素一样自适应宽度（不再想 block 元素一样占满正行）。设置 position 的元素，虽然默认值为 0，但是都会位于同一个 stacking context 其他元素之上。示例代码如下：</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;style&gt;
+  #text1 {
+    /*demo3*/
+    /*position: absolute;
+    z-index: 5;*/
+
+    background-color: red;
+  }
+  #text2 {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+    /* demo2
+     * 让当前的 stacking context 位于
+     * father stacking context 其他一般元素之上
+     */
+    /*z-index: -1;*/
+
+    /*demo3*/
+    /*z-index: 2;*/
+
+    background-color: blue;
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="text1"&gt;
+    this is text1 content.
+  &lt;/div&gt;
+  &lt;!-- demo3 --&gt;
+  &lt;!-- &lt;div class="text1Father"&gt;
+    &lt;div id="text1"&gt;
+      this is text1 content.
+    &lt;/div&gt;
+  &lt;/div&gt; --&gt;
+  &lt;div id="text2"&gt;
+    this is text2 content.
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>因为 #text2 新生成了一个 stacking context，而新生成的 stacking context 的背景是透明的。所以这里需要给 #text2 设置一个背景颜色。demo1 如下：</p>
+
+<p><img src="http://harole.github.com/images/2014-06-29_11-31-31.png" alt="" /></p>
+
+<p>因为 #text1 和 #text2 同时是位于 root stacking root 下的，所以会想到这里给 #text1 设置一个&#8221;z-index: 1;&#8221;时 #text1 会位于 #text2 层之上。但是事实上是不会的，因为这里的 #text2 生成了一个 stacking context，新生成的 stacking context 总是位于 father stacking context 之上的。如果希望这个新生成的 stacking context 位于其他一般元素之下，可以给新生成的 stacking context 的 z-index 赋负值。demo2 如下：</p>
+
+<p><img src="http://harole.github.com/images/2014-06-29_11-32-43.png" alt="" /></p>
+
+<p>当然，也可以给 #text1 设置 position 非 static 值生成一个 stacking context 然后让其 z-index 大于，#text2 的 z-index 值。这里就会有疑问了，可以确定的是两个兄弟元素 #text1 和 #text2 生成的 stacking context 的 father stacking context 都是 root stacking context。但是如果两个元素不是兄弟元素呢？答案也是肯定的，只要两个 stacking context 的第一个祖先 stacking context 是同一个，那么他们就可以使用 z-index 进行判断哪个在上层。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[jsonp 跨域实现原理]]></title>
@@ -1346,70 +1417,6 @@ addListener(element, "mousehover", function (event) {
 // 其他事件的监听
 ......
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Becoming your story]]></title>
-    <link href="http://harole.github.com/blog/2013/04/08/becoming-your-story/"/>
-    <updated>2013-04-08T18:34:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/04/08/becoming-your-story</id>
-    <content type="html"><![CDATA[<p>In second grade, I still didn&#8217;t know how to read. I remember sitting at Sunday school and not being able to read the assignment. I tried to hide it and drew pictures instead.</p>
-
-
-<p></p>
-
-<p>My parents were concerned and had me tested for learning disabilities. They even moved us to a new city. I was so far behind, it took me years to catch up. But, the school was better. In third grade, I started to read.</p>
-
-
-<p></p>
-
-<p>There&#8217;s something that became part of my ethos then. I was at the bottom. I had to do everything to work my way up. I remember constantly telling myself that I just needed to work harder than everyone.  I had to hustle.</p>
-
-
-<p></p>
-
-<p>I became my story. I worked hard and I hustled. </p>
-
-
-<!-- more -->
-
-
-<p>Everyone has a story. You repeat it in your head every day. It&#8217;s a story of how the world reacts to you and how you react to the world. It&#8217;s a story of patterns, where things are experienced over and over again. </p>
-
-
-<p>Just as it can be powerful and energizing, it can also be dangerous. If its a tragic story, you become a tragedy. </p>
-
-
-<p>I remember reading East of Eden and there was a passage that I&#8217;ll always remember. Cal&#8217;s father, trying a new venture, lost all of his money. Cal was smart; he executed on an idea and made a lot of money. When he tried to give it to his father, his father rejected it. Cal goes to his room and burns the money, one note at a time.</p>
-
-
-<p>His caretaker Lee comes in:  </p>
-
-
-<p>Are you taken pleasure from this whipping you&#8217;re giving yourself? Are you enjoying your despair?”</p>
-
-
-<p>“Lee!”</p>
-
-
-<p>“You’re pretty full of yourself. You’re marveling at the tragic spectacle of Caleb Trask—Caleb the magnificent, the unique. Caleb whose suffering should have its Homer. </p>
-
-
-<p>Maybe it was easier for Cal to become a tragedy. It was easier to think that what he experienced was uniquely painful.  It was hard to think that many others have suffered, often worse than him. Unique pain has more meaning. </p>
-
-
-<p>The danger is that you internalize the pain. You become someone who deserves the misfortune and can&#8217;t get away from it. You expect it and it happens. </p>
-
-
-<p>If your story is of success, of overcoming adversity, you become that story. As you try it, it validates itself and becomes more true. You expect it and it happens. </p>
-
-
-<p>We have words for these people in the startup world: hustlers, cockroaches (which is a compliment for people and companies that refuse to die), lucky. It&#8217;s the person that surprises us. It&#8217;s a person that shouldn&#8217;t succeed, who gets rejected and ignored, but somehow does and does it with energy. </p>
-
-
-<p>When you tell yourself your story, pause and think it over. Be a force, be a hustler, be creative, be lucky, but don&#8217;t be a tragedy. </p>
-
 ]]></content>
   </entry>
   

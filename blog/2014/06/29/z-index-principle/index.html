@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Javascript 异步初始化大数组 - Harole's blog</title>
+  <title>z-index浅析 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="// 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务 // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间 // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒 var &hellip;">
+  <meta name="description" content="最近发现对 z-index 的理解不是很深刻，所以到 www.w3.org 上查看了相关内容，以下是个人在查看后对 z-index 的理解。 首先简单介绍一下关于页面上定位的元素，分为 x，y，z 轴的定位。在 position 后的 top 和 left 是对 y，x 轴的位置的定位。而子 z &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/10/05/initbigarrayasync">
+  <link rel="canonical" href="http://harole.github.com/blog/2014/06/29/z-index-principle">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -79,7 +79,7 @@
   
 
 
-<time datetime="2013-10-05T17:26:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
+<time datetime="2014-06-29T09:56:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Jun</span></time>
           
         </div>
       
@@ -88,52 +88,71 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">Javascript 异步初始化大数组</h3>
+      <h3 class="entry-title">Z-index浅析</h3>
     </div>
-    <div class="entry-content"><pre><code>    // 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务
-    // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间
-    // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒
+    <div class="entry-content"><p>最近发现对 z-index 的理解不是很深刻，所以到 www.w3.org 上查看了相关内容，以下是个人在查看后对 z-index 的理解。</p>
 
-    var THRESHOLD = 150, DELAY = 15;
+<p>首先简单介绍一下关于页面上定位的元素，分为 x，y，z 轴的定位。在 position 后的 top 和 left 是对 y，x 轴的位置的定位。而子 z 轴上的定位由 z-index 来决定那个层在上面。</p>
 
-    function initBigArrayAsync(max, cb) {
-        var r = [], i = 0;
+<p>在 DOM 的根节点上默认有一个 root stacking context，当某个元素被设置 position（除了 static）都会生成一个 stacking context，每个 stacking context 中的元素 z-index 默认都是 0，宽度也会和浮动元素一样自适应宽度（不再想 block 元素一样占满正行）。设置 position 的元素，虽然默认值为 0，但是都会位于同一个 stacking context 其他元素之上。示例代码如下：</p>
 
-        function init(startTime) {
-            while (i &lt; max) {
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;style&gt;
+  #text1 {
+    /*demo3*/
+    /*position: absolute;
+    z-index: 5;*/
 
-                // 判断语句，函数执行的当前时间和开始执行时间差
-                // 与限定值（THRESHOLD，该值一般比超时时间小）比较
-                // 当小于 THRESHOLD，可进行正常赋值
-                if (new Date - startTime &lt; THRESHOLD) {
-                    r[i++] = i;
-                } else {
+    background-color: red;
+  }
+  #text2 {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+    /* demo2
+     * 让当前的 stacking context 位于
+     * father stacking context 其他一般元素之上
+     */
+    /*z-index: -1;*/
+
+    /*demo3*/
+    /*z-index: 2;*/
+
+    background-color: blue;
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="text1"&gt;
+    this is text1 content.
+  &lt;/div&gt;
+  &lt;!-- demo3 --&gt;
+  &lt;!-- &lt;div class="text1Father"&gt;
+    &lt;div id="text1"&gt;
+      this is text1 content.
+    &lt;/div&gt;
+  &lt;/div&gt; --&gt;
+  &lt;div id="text2"&gt;
+    this is text2 content.
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
 
-<!-- more -->
+<p>因为 #text2 新生成了一个 stacking context，而新生成的 stacking context 的背景是透明的。所以这里需要给 #text2 设置一个背景颜色。demo1 如下：</p>
 
+<p><img src="/images/2014-06-29_11-31-31.png" alt="" /></p>
 
-<pre><code>                    // 当不小于 THRESHOLD 时，继续执行函数可能会超时
-                    // 所以用一个很小的等待时间 DELAY，来从新调用 init() 进行赋值
-                    setTimeout(function() {
-                        init(new Date);
-                    }, DELAY);
-                    return;
-                }
-            }
+<p>因为 #text1 和 #text2 同时是位于 root stacking root 下的，所以会想到这里给 #text1 设置一个&#8221;z-index: 1;&#8221;时 #text1 会位于 #text2 层之上。但是事实上是不会的，因为这里的 #text2 生成了一个 stacking context，新生成的 stacking context 总是位于 father stacking context 之上的。如果希望这个新生成的 stacking context 位于其他一般元素之下，可以给新生成的 stacking context 的 z-index 赋负值。demo2 如下：</p>
 
-            cb(r);
-        }
+<p><img src="/images/2014-06-29_11-32-43.png" alt="" /></p>
 
-        init(new Date);
-    }
-
-    // 该函数用于检测，是否成功给大数组赋值
-    initBigArrayAsync(1000000, function(arr) {
-        console.log(arr.length);
-        console.log(arr[1000000 - 1]);
-    });
-</code></pre>
+<p>当然，也可以给 #text1 设置 position 非 static 值生成一个 stacking context 然后让其 z-index 大于，#text2 的 z-index 值。这里就会有疑问了，可以确定的是两个兄弟元素 #text1 和 #text2 生成的 stacking context 的 father stacking context 都是 root stacking context。但是如果两个元素不是兄弟元素呢？答案也是肯定的，只要两个 stacking context 的第一个祖先 stacking context 是同一个，那么他们就可以使用 z-index 进行判断哪个在上层。</p>
 </div>
   </div>  
   
@@ -159,12 +178,12 @@
   
 
 
-<time datetime="2013-10-05T17:26:00+08:00" pubdate data-updated="true"><span class="tit_date">5th</span> <span class="tit_month">Oct</span></time>
+<time datetime="2014-06-29T09:56:00+08:00" pubdate data-updated="true"><span class="tit_date">29th</span> <span class="tit_month">Jun</span></time>
           
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>Javascript</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -173,7 +192,7 @@
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/10/05/initbigarrayasync/" data-via="" data-counturl="http://harole.github.com/blog/2013/10/05/initbigarrayasync/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2014/06/29/z-index-principle/" data-via="" data-counturl="http://harole.github.com/blog/2014/06/29/z-index-principle/" >Tweet</a>
   
   
   
@@ -182,10 +201,8 @@
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/10/05/looping-techniques-javascript/" title="Previous Post: Javascript 循环（for，while）那些事儿！">&laquo;上一篇: Javascript 循环（for，while）那些事儿！</a>
+            <a class="basic-alignment left" href="/blog/2014/06/15/jsonp-principle/" title="Previous Post: jsonp 跨域实现原理">&laquo;上一篇: jsonp 跨域实现原理</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/10/07/regexp-test-exec-difference/" title="Next Post: 正则表达式（RegExp）方法，test() 和 exec() 区别。">下一篇:正则表达式（RegExp）方法，test() 和 exec() 区别。 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->
