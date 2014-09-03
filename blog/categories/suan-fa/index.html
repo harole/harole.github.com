@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Harole's blog</title>
+  <title>Category: 算法 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="欢迎来到 Harole 的个人博客 该个人博客仅是个人分享，欢迎大家拍砖，给建议！ 个人博文属于原创，望尊重版权，转载请注明原文出处 BLOG WITH RIGHT SIDEBAR Lorem ipsum dolor sit amet consecteur. Recent Project &hellip;">
+  <meta name="description" content="Category: 算法">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com">
+  <link rel="canonical" href="http://harole.github.comblog/categories/suan-fa">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -58,82 +58,44 @@
   	<div id="main">  	      
 	    <div id="content">			
       		<div id="header_section">
-	    <div id="sliderFrame">
-        <div id="slider">
-            <a href="http://www.menucool.com/javascript-image-slider" target="_blank">
-                <img src="/images/slider1.jpg" alt="#cap1" />
-            </a>
-            <img src="/images/slider1.jpg" alt="#cap2" />
-            <img src="/images/slider2.jpg" alt="#cap3" />
-            <img src="/images/slider3.jpg" alt="#cap4" />
-            <img src="/images/slider4.jpg" alt="#cap5" />
-        </div>
-        <div style="display: none;">
-            <div id="cap1">
-                欢迎来到 Harole 的个人博客
-            </div>
-            <div id="cap2">
-                该个人博客仅是个人分享，欢迎大家拍砖，给建议！
-            </div>
-            <div id="cap3">
-                个人博文属于原创，望尊重版权，转载请注明原文出处
-            </div>
-        </div>
-    </div>
 </div>
-<div class="container intro_text intro_blog">
-	<h4>BLOG WITH RIGHT SIDEBAR</h4>
-	<p>Lorem ipsum dolor sit amet consecteur.</p>
+<div class="container clearfix blog_archives">
+  <article role="article" class="blog_list_box">
+    
+    <header>
+      <h1 class="entry-title">Category: 算法</h1>
+      
+    </header>
+    
+    <div id="blog-archives" class="category">
+
+
+
+  
+  <h2>2014</h2>
+
+<article>
+  
+<h1><a href="/blog/2014/09/02/find-same-element-form-two-array/">求两个数组的交集</a></h1>
+<time datetime="2014-09-02T23:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>02</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/suan-fa/'>算法</a></span>
+</footer>
+
+
+</article>
+
 </div>
-<div class="recent_project">
-	<h2>Recent Project</h2>
-	<ul class="clearfix">
-		<li>
-			<img src="/images/yfmy.png" alt="">
-			<a href="http://yifanmuye.com/" target="_blank">一帆牧业</a>
-		</li>
-		<li>
-			<img src="/images/ydfdc.png" alt="">
-			<a href="http://psydfdc.com/index.php/home" target="_blank">永达发地产</a>
-		</li>
-		<li>
-			<img src="/images/test.jpg" alt="">
-			<a href="http://github.com/harole/harole.github.com.git">test</a>
-		</li>
-	</ul>
-</div>
-<div class="container_one clearfix home_ft">
-	<div class="active_project">
-		<h3>Technical Ability</h3>
-		<ul>
-			<li class="myskill html clearfix">
-				<div class="tit">
-					HTML
-				</div>
-				<div class="slider_bar">
-					<div class="slider_bar_html"></div>
-				</div>
-			</li>
-			<li class="myskill css clearfix">
-				<div class="tit">
-					CSS
-				</div>
-				<div class="slider_bar">
-					<div class="slider_bar_css"></div>
-				</div>
-			</li>
-			<li class="myskill javascript clearfix">
-				<div class="tit">
-					JAVASCRIPT
-				</div>
-				<div class="slider_bar">
-					<div class="slider_bar_javascript"></div>
-				</div>
-			</li>
-		</ul>
-	</div>
-	<aside class="sidebar">
-	    <section>
+
+    
+  </article>
+  
+
+  
+  <aside class="sidebar">
+    
+      <section>
   <h3>Recent Posts</h3>
   <ul id="recent_posts">
     
@@ -152,54 +114,10 @@
   </ul>
 </section>
 
-	</aside>
+    
+  </aside>
+  
 </div>
-
-<script type="text/javascript">
-	function setSliderBar(className, width, overWidth, delay) {
-		var klass = "." + className;
-
-		this.delay = delay;
-		this.self = $(klass);
-		this.width = width;
-		this.overWidth = width-overWidth + "px";
-
-	}
-	setSliderBar.prototype.moverSliderBar = function () {
-		var sliderBarInterval;
-		var self = this.self;
-		var overWidth =this.overWidth;
-		function changeX() {
-
-			if ( self.css("right") === overWidth ) {
-				clearInterval(sliderBarInterval);
-			}
-			else {
-				self.css("right", "-=5");
-
-			}
-
-		}
-		sliderBarInterval = setInterval(changeX, this.delay);
-	};
-	var clearHello;
-	function hello() {
-		var active_project = $(".active_project");
-		var scrolltop = $("body").scrollTop();
-
-		if ( scrolltop >= 500 ) {
-			var sliderBar01 = new setSliderBar("slider_bar_html", 450, 200, 30);
-			var sliderBar02 = new setSliderBar("slider_bar_css", 450, 150, 50);
-			var sliderBar03 = new setSliderBar("slider_bar_javascript", 450, 300, 30);
-			sliderBar01.moverSliderBar();
-			sliderBar02.moverSliderBar();
-			sliderBar03.moverSliderBar();
-			clearInterval(clearHello);
-		}
-	}
-	clearHello = setInterval(hello, 50);
-
-</script>
     	</div>
   	</div>
   	<footer role="contentinfo"><!-- <p>

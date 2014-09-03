@@ -9,7 +9,9 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="// 任何情况下，创建一个定时器造成UI线程暂停，如同它从一个任务切换到下一个任务 // THRESHOLD 用于防止 javascript 运行超时，DELAY 用来设置函数调用等待时间 // 为什么 DELAY 设置为15呢？因为 windows 系统上定时器分辨率为 15 毫秒 var &hellip;">
+  <meta name="description" content="test() 方法。 语法：RegExpObject.test(string)；
+作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；
+返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。 实例： var &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +68,70 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T19:10:00+08:00" pubdate data-updated="true"><span class="tit_date">7th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/07/regexp-test-exec-difference/">正则表达式（RegExp）方法，test() 和 Exec() 区别。</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><h4>test() 方法。</h4>
+
+<blockquote><ol>
+<li>语法：RegExpObject.test(string)；</li>
+<li>作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；</li>
+<li>返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。</li>
+</ol>
+</blockquote>
+
+<p>实例：</p>
+
+<pre><code>var str = "this is harole's blog.";
+var pattern = new RegExp( "harole" );
+var result = pattern.test( "sam harole freestyle" );
+alert( "this is harole's blog : " + result );
+</code></pre>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/07/regexp-test-exec-difference/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -702,72 +768,6 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-10T12:49:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/10/javascript-event-handle/">像 Html 模块化一样，模块化 Javascript 事件处理程序，使之可维护！</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. 常用的事件处理程序</p>
-
-<pre><code>funciton handleClick( event ) {
-
-    var popWindow = document.getElementById("popWindow");
-
-    popWindow.style.left = event.clientX + "px";
-    popWindow.style.top = event.clientY + "px";
-
-    popWindow.className = "visible";
-
-}
-addListener(element, "click", handleClcik);
-</code></pre>
-
-<p>上述程序功能：监听 &#8220;element&#8221; 元素的 click 事件，当触发 click 事件时，显示一个窗口到当前鼠标位置。</p>
-
-<p>缺点：事件处理程序包含了应用逻辑，即应用逻辑只和 click 事件相关。但是 mousehover，mouseup 等其他事件也要实现同样的功能。会有如下实现：</p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/10/javascript-event-handle/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -785,15 +785,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/02/find-same-element-form-two-array/">求两个数组的交集</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/06/15/jsonp-principle/">jsonp 跨域实现原理</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/12/round-percentage-css3/">CSS3实现圆环百分比（动画）</a>
       </li>
     
   </ul>
@@ -805,7 +805,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(10)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(11)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
   </ul>
 </section>
     
