@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ie6 下 png 图片透明，滤镜解决方案 - Harole's blog</title>
+  <title>Category: requirejs - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. 正常情况下（ie6下回出现半透明）： /* 注：这里一般使用 png24 */
-background: url("../images/test.png"); 二. 解决方案： /* 注： 图片的路径使用的是相对路径 */
-background: url("../images/test.png &hellip;">
+  <meta name="description" content="Category: requirejs">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ background: url("../images/test.png &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/04/21/ie6-png">
+  <link rel="canonical" href="http://harole.github.comblog/categories/requirejs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -61,141 +59,39 @@ background: url("../images/test.png &hellip;">
 	    <div id="content">			
       		<div id="header_section">
 </div>
-<div class="container_one clearfix blog_box">
-  <div class="blog-index">
-    <article class="hentry" role="article">
-      <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T23:36:00+08:00" pubdate data-updated="true"><span class="tit_date">21st</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-  <div class="article_content">
-    <div class="article_header">
-      <h3 class="entry-title">Ie6 下 Png 图片透明，滤镜解决方案</h3>
-    </div>
-    <div class="entry-content"><p>一. 正常情况下（ie6下回出现半透明）：</p>
-
-<pre><code>/* 注：这里一般使用 png24 */
-background: url("../images/test.png");
-</code></pre>
-
-<p>二. 解决方案：</p>
-
-<pre><code>/* 注： 图片的路径使用的是相对路径 */
-background: url("../images/test.png");
-
-/* ie6 下将背景移除 */
-_background:none;   
-
-/* 使用AlphaImageLoader滤镜重新加载图片 */
-_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
-</code></pre>
-
-<!-- more -->
-
-
-<p>三. 注：上述解决方案在ie6下，有时图片会覆盖文本导致文本消失。</p>
-
-<pre><code>/* 我们需要给滤镜加上一行设置, 即sizingMethod="crop"
- * 使得剪切图片以适应对象的尺寸边界。  
- */
-_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png", sizingMethod="crop");    
-</code></pre>
-
-<p><strong>
-<a href="http://hi.baidu.com/zygalcn/item/6f9946b8900c33d385dd79e6">更多关于ALphaImageLoader滤镜的属性</a>
-</strong></p>
-</div>
-  </div>  
-  
-</div>
-
-
-      <footer>
-        <p class="meta">
-          
-  
-
-<span class="byline author vcard">Posted by <span class="fn">harole</span></span>
-
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T23:36:00+08:00" pubdate data-updated="true"><span class="tit_date">21st</span> <span class="tit_month">Apr</span></time>
-          
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/ie6/'>IE6</a>
-  
-</span>
-
-
-        </p>
-        <!-- 
-          <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/04/21/ie6-png/" data-via="" data-counturl="http://harole.github.com/blog/2013/04/21/ie6-png/" >Tweet</a>
-  
-  
-  
-</div>
-
-         -->
-        <p class="meta">
-          
-            <a class="basic-alignment left" href="/blog/2013/04/10/inline-block-drop/" title="Previous Post: 两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上">&laquo;上一篇: 两个块级元素 display:inline-block，其中一个没有内容导致两元素不在一条直线上</a>
-          
-          
-            <a class="basic-alignment right" href="/blog/2013/04/23/alphamageloader-problem/" title="Next Post: AlphamageLoader滤镜解决ie6下png图片透明带来的问题">下一篇:AlphamageLoader滤镜解决ie6下png图片透明带来的问题 &raquo;</a>
-          
-        </p>
-        <!-- Duoshuo Comment BEGIN -->
-        <div class="ds-thread"></div>
-        <script type="text/javascript">
-        var duoshuoQuery = {short_name:"harole"};
-          (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'http://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0]
-            || document.getElementsByTagName('body')[0]).appendChild(ds);
-          })();
-        </script>
-        <!-- Duoshuo Comment END -->
-      </footer>
-    </article>
+<div class="container clearfix blog_archives">
+  <article role="article" class="blog_list_box">
     
-  </div>
+    <header>
+      <h1 class="entry-title">Category: Requirejs</h1>
+      
+    </header>
+    
+    <div id="blog-archives" class="category">
+
+
+
+  
+  <h2>2014</h2>
+
+<article>
+  
+<h1><a href="/blog/2014/09/02/requirejs-principle/">requirejs原理</a></h1>
+<time datetime="2014-09-02T23:57:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>02</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/requirejs/'>requirejs</a></span>
+</footer>
+
+
+</article>
+
+</div>
+
+    
+  </article>
+  
+
   
   <aside class="sidebar">
     
@@ -222,7 +118,6 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
   </aside>
   
 </div>
-
     	</div>
   	</div>
   	<footer role="contentinfo"><!-- <p>

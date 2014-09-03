@@ -9,9 +9,8 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="test() 方法。 语法：RegExpObject.test(string)；
-作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；
-返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。 实例： var &hellip;">
+  <meta name="description" content="jQuery 中 noConflict() 方法如下： // jQuery 开头定义变量部分：
+var ...., _$ = window.$, _jQuery = window.jQuer, ....; noConflict: function( deep ) { if ( window &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,74 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T02:42:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/11/jquery-noconflict-method/">jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法&#8212;noConflict()解析</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><h3>jQuery 中 noConflict() 方法如下：</h3>
+
+<pre><code>// jQuery 开头定义变量部分：
+var ....,
+
+    _$ = window.$,
+
+    _jQuery = window.jQuer,
+
+    ....;
+
+noConflict: function( deep ) {
+    if ( window.$ === jQuery ) {
+        window.$ = _$;
+    }
+
+    if ( deep &amp;&amp; window.jQuery === jQuery ) {
+        window.jQuery = _jQuery;
+    }
+</code></pre>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/11/jquery-noconflict-method/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -672,102 +739,6 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-10T21:58:00+08:00" pubdate data-updated="true"><span class="tit_date">10th</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/10/inline-block-drop/">两个块级元素 Display:inline-block，其中一个没有内容导致两元素不在一条直线上</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. div.left 和 div.right 均有内容。</p>
-
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;inline-cblock&lt;/title&gt;
-    &lt;style type="text/css"&gt;
-    .box {
-        width: 400px;
-        height: 100px;
-        margin: 50px auto;
-        background: black;
-        /* S-- 用于清除排版时 left 和 right 之间的间隙 */
-        letter-spacing: -3px;
-        font-size: 0;
-        /* E-- 用于清除排版时 left 和 right 之间的间隙 */
-    }
-    .box .left {
-        display: inline-block;
-        width: 200px;
-        height: 100px;
-        font-size: 50px;
-        background: yellow;
-    }
-    .box .right {
-        display: inline-block;
-        width: 200px;
-        height: 100px;
-        font-size: 50px;
-        background: blue;
-    }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="box"&gt;
-        &lt;div class="left"&gt;Left&lt;/div&gt;
-        &lt;div class="right"&gt;Right&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>预期效果：
-<img src="/images/inline-block-01.png" alt="all have content" /></p>
-
-<p>二. 仅把 div.left 中的内容去掉，效果：
-<img src="/images/inline-block-02.png" alt="all have content" /></p>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/10/inline-block-drop/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -785,15 +756,15 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/02/requirejs-principle/">requirejs原理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/02/find-same-element-form-two-array/">求两个数组的交集</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/15/jsonp-principle/">jsonp 跨域实现原理</a>
       </li>
     
   </ul>
@@ -805,7 +776,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(11)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(11)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/requirejs'>requirejs(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
   </ul>
 </section>
     
