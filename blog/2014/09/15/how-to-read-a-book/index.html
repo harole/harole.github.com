@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>正则表达式（RegExp）方法，test() 和 exec() 区别。 - Harole's blog</title>
+  <title>《如何阅读一本书》读后感 - Harole's blog</title>
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="test() 方法。 语法：RegExpObject.test(string)；
-作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；
-返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。 实例： var &hellip;">
+  <meta name="description" content="最近读了《如何阅读一本书》，本文会简单的介绍一下该书的内容、对该书的个人评价和个人阅读后的收获。 一. 主要内容：开始以形象的比喻描述了阅读这么艺术，接着讲述阅读的不同层次的方法和技巧，最后介绍阅读不同类型的书籍的方法。 阅读的艺术： 1）阅读被很多人认为是被动的。其实阅读是需要主动的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://harole.github.com/blog/2013/10/07/regexp-test-exec-difference">
+  <link rel="canonical" href="http://harole.github.com/blog/2014/09/15/how-to-read-a-book">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Harole's blog" type="application/atom+xml">
@@ -81,7 +79,7 @@
   
 
 
-<time datetime="2013-10-07T19:10:00+08:00" pubdate data-updated="true"><span class="tit_date">7th</span> <span class="tit_month">Oct</span></time>
+<time datetime="2014-09-15T18:59:00+08:00" pubdate data-updated="true"><span class="tit_date">15th</span> <span class="tit_month">Sep</span></time>
           
         </div>
       
@@ -90,45 +88,44 @@
   
   <div class="article_content">
     <div class="article_header">
-      <h3 class="entry-title">正则表达式（RegExp）方法，test() 和 Exec() 区别。</h3>
+      <h3 class="entry-title">《如何阅读一本书》读后感</h3>
     </div>
-    <div class="entry-content"><h4>test() 方法。</h4>
+    <div class="entry-content"><p>最近读了《如何阅读一本书》，本文会简单的介绍一下该书的内容、对该书的个人评价和个人阅读后的收获。</p>
 
-<blockquote><ol>
-<li>语法：RegExpObject.test(string)；</li>
-<li>作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；</li>
-<li>返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。</li>
+<p>一. 主要内容：开始以形象的比喻描述了阅读这么艺术，接着讲述阅读的不同层次的方法和技巧，最后介绍阅读不同类型的书籍的方法。</p>
+
+<ol>
+<li><p>阅读的艺术：</p>
+
+<p> 1）阅读被很多人认为是被动的。其实阅读是需要主动的，越主动就能与作者达成共识，获取更多的知识。就想棒球一样，作者是投手，读者是捕手。强调读者和作者是个合作的关系，读者只有主动才能把阅读这件事做好。</p></li>
 </ol>
-</blockquote>
 
-<p>实例：</p>
-
-<pre><code>var str = "this is harole's blog.";
-var pattern = new RegExp( "harole" );
-var result = pattern.test( "sam harole freestyle" );
-alert( "this is harole's blog : " + result );
-</code></pre>
 
 <!-- more -->
 
 
-<h4>exec() 方法。</h4>
+<pre><code>2）阅读的目标有两个，一个是为获取资讯，另一个是为了提高理解能力。
 
-<pre><code>1. 语法：RegExpObject.test(string)；
-2. 作用：用来获取字符串匹配某个模式（该模式由 RegExpObject 设置）的内容；
-3. 返回值：如果存在满足 RegExpObject，则把匹配到的结果依次存入一个数组中，并返回数组；如果没有找到匹配的字符串，则返回 null。
+3）换个角度看待阅读，书籍就是老师，只不过是个不会说话的老师，不会替你解答你的问题。所以需要在你阅读的过程中思考并提出问题，然后独自解答问题。
 </code></pre>
 
-<h4>match() 方法。</h4>
+<ol>
+<li><p>阅读的层次：</p>
 
-<pre><code>1. 语法：RegExpObject.test(string)；
-2. 作用：用来检测字符串是否匹配某个模式（该模式由 RegExpObject 设置）；
-3. 返回值：当 string 含有与 RegExpObject匹配的文本，则返回 true，否则返回 false。
-</code></pre>
+<p> 1）基础阅读：具备基本的语言能力，例如：在阅读英文文章时，需要认识英文单词和了解英文语法。事实上，应该还需要具备语言文化，否则没办法把基础阅读做好。想起一个笑话：一个中国老师给老外上中文课，问：“小明破门而入，门破了没”。老外回答“破了”。</p>
 
-<p>总结：1. test() 和 exec() 比较：</p>
+<p> 2）审视阅读：审视阅读需要确认的几个问题，一本书是什么类型的？主要内容是什么？全书是的架构是怎么样的？作者是如何传达自己要表达的意思的？审视阅读分为两部分，一是略读，简单的浏览目录和序言基本确认这本书的类型。二是粗浅的阅读，阅读每个章节的摘要，摘要不明确时快速阅读部分内容，基本可以确认书籍的主要内容、全书的架构以及作者构思和写书的思路。</p>
 
-<p>未完成，请耐心等待。。。</p>
+<p> 3）分析阅读：主要是阅读文章内容时的一些技巧，一是阅读速度的控制，有自我判断的意识，哪里是需要仔细阅读的（慢点），哪里是需要略看的（快点）；二是拥有自我意识，不能作者说什么就是什么，判断哪里是作者的主观意识，这就像是人与人交流的过程，需要有自己的立场，需要有自己的观点，甚至是质疑作者；三是阅读的技巧，阅读过程中积极发现一些阅读技巧（符号标记、文字上述和使用合适的符号进行标记等）。</p>
+
+<p> 4）主题阅读：针对特定的问题，同一个主题进行的阅读，而不是以书本为中心的阅读。此阅读基于两本以上的书籍，比较他们所谈主题的关系，得出自己的结论。</p></li>
+<li><p>如何阅读不同类型的书籍：这部分主要讲了文学、科学和数学等类型书籍的阅读方法，个人看了部分觉得干货不是很多，有“为了写书而写书的嫌疑”。所以个人是跳着看的，只停留在略读层次，所以就不做分析了。</p></li>
+</ol>
+
+
+<p>二. 个人评价：该书在阅读层次部分做的比较好，书籍越往后，内容越虚胖。所以根据该书的介绍，一本书有快读和慢读的部分。在后半部分，深圳前部分，过多冗余例子的部分都采取了快速阅读的方式。</p>
+
+<p>三. 个人收获：部分已在上述“主要内容”里说明，这里在简单的说几点吧。一是阅读是个学习的过程，读后感是个总结的过程。而且本人一直认为总结是学习中获取知识最多的部分。所以总结仅限与老师指导型的学习，也可以是阅读式的非指导型的学习。阅读能力和习惯是个人最珍贵的财富，这样的学习是自己提问、自己解答、自己总结的过程。做自己的老师，从阅读开始。</p>
 </div>
   </div>  
   
@@ -154,21 +151,15 @@ alert( "this is harole's blog : " + result );
   
 
 
-<time datetime="2013-10-07T19:10:00+08:00" pubdate data-updated="true"><span class="tit_date">7th</span> <span class="tit_month">Oct</span></time>
+<time datetime="2014-09-15T18:59:00+08:00" pubdate data-updated="true"><span class="tit_date">15th</span> <span class="tit_month">Sep</span></time>
           
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/regexp/'>RegExp</a>
-  
-</span>
 
 
         </p>
         <!-- 
           <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2013/10/07/regexp-test-exec-difference/" data-via="" data-counturl="http://harole.github.com/blog/2013/10/07/regexp-test-exec-difference/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://harole.github.com/blog/2014/09/15/how-to-read-a-book/" data-via="" data-counturl="http://harole.github.com/blog/2014/09/15/how-to-read-a-book/" >Tweet</a>
   
   
   
@@ -177,10 +168,8 @@ alert( "this is harole's blog : " + result );
          -->
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2013/10/05/initbigarrayasync/" title="Previous Post: Javascript 异步初始化大数组">&laquo;上一篇: Javascript 异步初始化大数组</a>
+            <a class="basic-alignment left" href="/blog/2014/09/02/requirejs-principle/" title="Previous Post: requirejs原理">&laquo;上一篇: requirejs原理</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/10/11/jquery-noconflict-method/" title="Next Post: jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析">下一篇:jQuery中解决名字（jQuery）和 $ 与其他类库冲突方法---noConflict()解析 &raquo;</a>
           
         </p>
         <!-- Duoshuo Comment BEGIN -->

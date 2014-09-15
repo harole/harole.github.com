@@ -9,9 +9,9 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="一. div.left 和 div.right 均有内容。 &lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;inline-cblock&lt;/ &hellip;">
+  <meta name="description" content="一. 正常情况下（ie6下回出现半透明）： /* 注：这里一般使用 png24 */
+background: url("../images/test.png"); 二. 解决方案： /* 注： 图片的路径使用的是相对路径 */
+background: url("../images/test.png &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,71 @@
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-21T23:36:00+08:00" pubdate data-updated="true"><span class="tit_date">21st</span> <span class="tit_month">Apr</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/04/21/ie6-png/">Ie6 下 Png 图片透明，滤镜解决方案</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>一. 正常情况下（ie6下回出现半透明）：</p>
+
+<pre><code>/* 注：这里一般使用 png24 */
+background: url("../images/test.png");
+</code></pre>
+
+<p>二. 解决方案：</p>
+
+<pre><code>/* 注： 图片的路径使用的是相对路径 */
+background: url("../images/test.png");
+
+/* ie6 下将背景移除 */
+_background:none;   
+
+/* 使用AlphaImageLoader滤镜重新加载图片 */
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
+</code></pre>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/04/21/ie6-png/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -503,15 +568,15 @@ addListener(element, "click", handleClcik);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/15/how-to-read-a-book/">《如何阅读一本书》读后感</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/02/requirejs-principle/">requirejs原理</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/09/02/find-same-element-form-two-array/">求两个数组的交集</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
       </li>
     
   </ul>
@@ -523,7 +588,7 @@ addListener(element, "click", handleClcik);
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(11)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/requirejs'>requirejs(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(12)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/requirejs'>requirejs(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
   </ul>
 </section>
     

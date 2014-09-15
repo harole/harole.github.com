@@ -96,6 +96,9 @@
 
 <p>在 DOM 的根节点上默认有一个 root stacking context，当某个元素被设置 position（除了 static）都会生成一个 stacking context，每个 stacking context 中的元素 z-index 默认都是 0，宽度也会和浮动元素一样自适应宽度（不再想 block 元素一样占满正行）。设置 position 的元素，虽然默认值为 0，但是都会位于同一个 stacking context 其他元素之上。示例代码如下：</p>
 
+<!-- more -->
+
+
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -233,15 +236,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/15/how-to-read-a-book/">《如何阅读一本书》读后感</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/02/requirejs-principle/">requirejs原理</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/09/02/find-same-element-form-two-array/">求两个数组的交集</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
       </li>
     
   </ul>

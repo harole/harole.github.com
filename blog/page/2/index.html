@@ -9,8 +9,7 @@
   <meta name="author" content="harole">
 
   
-  <meta name="description" content="jQuery 中 noConflict() 方法如下： // jQuery 开头定义变量部分：
-var ...., _$ = window.$, _jQuery = window.jQuer, ....; noConflict: function( deep ) { if ( window &hellip;">
+  <meta name="description" content="最近学习了汇编语言，和一些反汇编调试程序的方法，对语言的实现有了更深的认识。也明白了C语言的数组下标为什么从零开始。有两种理解方式，一般理解和从反汇编代码的角度理解。 首先要理解什么是物理地址： CPU 被划分为不同的段，物理地址由 CS 和 IP 构成，对内存地址进行控制。CS 是基地址（段基址 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,59 @@ var ...., _$ = window.$, _jQuery = window.jQuer, ....; noConflict: function( dee
 <div class="container_one clearfix blog_box">
   <div class="blog-index">
     
+    
+    
+      <article class="clearfix">
+        <div class="clearfix">
+  
+    <div class="date_and_month">    
+      
+        <div class="meta">
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T20:49:00+08:00" pubdate data-updated="true"><span class="tit_date">11th</span> <span class="tit_month">Oct</span></time>
+          
+        </div>
+      
+    </div>
+  
+  
+    <div class="article_content">
+      <div class="article_header">
+        
+            <h3 class="entry-title"><a href="/blog/2013/10/11/c-language-array-start-zero/">为什么C语言中数组下标从0开始？</a></h3>
+                  
+      </div>
+  
+      <div class="entry-content"><p>最近学习了汇编语言，和一些反汇编调试程序的方法，对语言的实现有了更深的认识。也明白了C语言的数组下标为什么从零开始。有两种理解方式，一般理解和从反汇编代码的角度理解。</p>
+
+<p>首先要理解什么是物理地址：</p>
+
+<blockquote><p>CPU 被划分为不同的段，物理地址由 CS 和 IP 构成，对内存地址进行控制。CS 是基地址（段基址），IP 是偏移地址。CPU 以8086为例：假设 CS 为 2000（16进制），IP 为 0001（16进制），那么物理地址为 CS<em>16 + IP, CS</em>16 即 2000 左移一位 20000， 故物理地址 = 20000 + 0001 = 20001（构成20位的物理地址）。</p></blockquote>
+
+</div>
+      
+      
+        <footer>
+          <a rel="full-article" href="/blog/2013/10/11/c-language-array-start-zero/">阅读更多</a>
+        </footer>
+      
+    </div>      
+  
+</div>
+
+
+      </article>
     
     
       <article class="clearfix">
@@ -674,71 +726,6 @@ f.apply( O, [1,2] );
 
       </article>
     
-    
-      <article class="clearfix">
-        <div class="clearfix">
-  
-    <div class="date_and_month">    
-      
-        <div class="meta">
-          
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T23:36:00+08:00" pubdate data-updated="true"><span class="tit_date">21st</span> <span class="tit_month">Apr</span></time>
-          
-        </div>
-      
-    </div>
-  
-  
-    <div class="article_content">
-      <div class="article_header">
-        
-            <h3 class="entry-title"><a href="/blog/2013/04/21/ie6-png/">Ie6 下 Png 图片透明，滤镜解决方案</a></h3>
-                  
-      </div>
-  
-      <div class="entry-content"><p>一. 正常情况下（ie6下回出现半透明）：</p>
-
-<pre><code>/* 注：这里一般使用 png24 */
-background: url("../images/test.png");
-</code></pre>
-
-<p>二. 解决方案：</p>
-
-<pre><code>/* 注： 图片的路径使用的是相对路径 */
-background: url("../images/test.png");
-
-/* ie6 下将背景移除 */
-_background:none;   
-
-/* 使用AlphaImageLoader滤镜重新加载图片 */
-_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.png");
-</code></pre>
-
-</div>
-      
-      
-        <footer>
-          <a rel="full-article" href="/blog/2013/04/21/ie6-png/">阅读更多</a>
-        </footer>
-      
-    </div>      
-  
-</div>
-
-
-      </article>
-    
     <div class="pagination">
       
         <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -756,15 +743,15 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/15/how-to-read-a-book/">《如何阅读一本书》读后感</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/02/requirejs-principle/">requirejs原理</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/09/02/find-same-element-form-two-array/">求两个数组的交集</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/29/z-index-principle/">z-index浅析</a>
       </li>
     
   </ul>
@@ -776,7 +763,7 @@ _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/test.p
 <section>
   <h3>Categories</h3>
   <ul id="categories">
-    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(11)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/requirejs'>requirejs(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
+    <li><a href='/blog/categories/css'>CSS(4)</a></li><li><a href='/blog/categories/css3'>CSS3(1)</a></li><li><a href='/blog/categories/c言语'>C言语(1)</a></li><li><a href='/blog/categories/ie6'>IE6(2)</a></li><li><a href='/blog/categories/javascript'>Javascript(12)</a></li><li><a href='/blog/categories/jquery'>jQuery(1)</a></li><li><a href='/blog/categories/octopress'>octopress(1)</a></li><li><a href='/blog/categories/regexp'>RegExp(1)</a></li><li><a href='/blog/categories/requirejs'>requirejs(1)</a></li><li><a href='/blog/categories/算法'>算法(1)</a></li>
   </ul>
 </section>
     
