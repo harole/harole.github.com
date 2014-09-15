@@ -11,6 +11,7 @@ categories: CSS
 首先简单介绍一下关于页面上定位的元素，分为 x，y，z 轴的定位。在 position 后的 top 和 left 是对 y，x 轴的位置的定位。而子 z 轴上的定位由 z-index 来决定那个层在上面。
 
 在 DOM 的根节点上默认有一个 root stacking context，当某个元素被设置 position（除了 static）都会生成一个 stacking context，每个 stacking context 中的元素 z-index 默认都是 0，宽度也会和浮动元素一样自适应宽度（不再想 block 元素一样占满正行）。设置 position 的元素，虽然默认值为 0，但是都会位于同一个 stacking context 其他元素之上。示例代码如下：
+<!-- more -->
     <!DOCTYPE html>
     <html lang="en">
     <head>

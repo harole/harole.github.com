@@ -27,7 +27,7 @@ categories: Javascript
             }
         }
     }
-
+<!-- more -->
     jsonp("http://baidu.com/api/jsonp.php?callback=responseFunc");
 
     function responseFunc(response){
