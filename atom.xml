@@ -4,7 +4,7 @@
   <title><![CDATA[Harole's blog]]></title>
   <link href="http://harole.github.com/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-09-15T20:43:28+08:00</updated>
+  <updated>2014-09-20T01:48:39+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[每三个数字加入一个逗号（正则表达式）]]></title>
+    <link href="http://harole.github.com/blog/2014/09/20/per-three-number-joincomma/"/>
+    <updated>2014-09-20T00:00:00+08:00</updated>
+    <id>http://harole.github.com/blog/2014/09/20/per-three-number-joincomma</id>
+    <content type="html"><![CDATA[<p>一. 实现</p>
+
+<p>先把实现的正则表达式贴上来</p>
+
+<pre><code>exp = /(?=(?!\b)(?:\d{3})+(?!\d))/g
+</code></pre>
+
+<p>可以将表达式分为两个部分。第一部分，最外层的 “(?= )” 正向肯定预查；第二部分，分为三个 “(?!\b)”、“(?:\d{3})+”、“(?!\d)”；第二部分被第一部分包裹着。强调一点：javascript中的正则表达式不支持反向查找。</p>
+
+<p>之前找到上述的匹配表达式，确实是云里雾里的，在和一个同学交流之后才发现彼此的理解都有些问题。再深刻的探讨后才深刻理会其中的精髓。<!-- more --></p>
+
+<p>二. 基础</p>
+
+<p>1.正向预查</p>
+
+<p>(?=pattern)，在任何匹配pattern的字符串开始处匹配查找字符串。（这是百科的解释，百科上的实例，我这里就不重复了）</p>
+
+<p>(?!pattern)，是正向否定预查，这里不赘述了。</p>
+
+<p>2.疑问：正向预查和非获取匹配“(?:pattern)”有什么关系？</p>
+
+<p>根据文案的介绍，觉得二者功能上就是一样的，没什么差别哈。那么就没有理解“预查”和“匹配”的意思，当然个人觉得上面的文案解释也是存在一些问题的。通过下面的实例就可以理解了：</p>
+
+<pre><code>    var str = "harole";
+    var exp = /(?=harole)/
+        , exp1 = /(?:harole)/;
+
+    console.log(str.replace(exp, ','));  // 输出：",harole"
+    console.log(str.replace(exp1, ',')); // 输出：","
+</code></pre>
+
+<p>3.分析</p>
+
+<p>上面的实例中，为什么会输出&#8221;,harole&#8221;？因为在正向预查之前，并没有匹配任何字符串，而预查的字符串是不可消耗的（仅供查找）。所以就上述例子中就没有可替换的字符串，那么替换一个空字符（相当于在满足预查正则的字符串之前插入&#8221;,&#8221;）。</p>
+
+<p>三. 解剖</p>
+
+<p>在有了上述&#8221;基础&#8221;之后，就可以解剖表达式了。在&#8221;实现&#8221;里，整个表达式是包括在一个正向肯定预查里的，而正向肯定预查之前并没有匹配任何表达式。所以，预查会从整个字符串头部开始，直到最后一个字符串（因为表达式加了&#8221;g&#8221;参数）。例如：</p>
+
+<pre><code>var str = "harole"
+    , exp = /(?=)/g;
+
+console.log(str.replace(exp, ',')); // 输出：",h,a,r,o,l,e,"
+</code></pre>
+
+<p>(?!\b)(?:\d{3})+(?!\d)，表示的意思是预查首字符不能为边界(例如：上面例子&#8221;harole&#8221;中的&#8221;h&#8221;)，接着预查满足数字的个数是3的整数倍，接着一个字符不能是数字。实例如下：</p>
+
+<pre><code>var str = "123456789"
+    , exp = /(?=(?!\b)(?:\d{3})+(?!\d))/g;
+
+console.log(str.replace(exp, ",")); // 输出："123,456,789"
+</code></pre>
+
+<p> 预查顺序：</p>
+
+<blockquote><p>预查第一次的首字符串为&#8221;1&#8221;，不满足表达式，因为预查的字符&#8221;1234&#8221;处于边界，不满足预查表达式。</p>
+
+<p>预查第二次的首字符串为&#8221;2&#8221;，不处于边界，预查的字符串&#8221;23456789&#8221;，匹配了3的整数倍个数字后的那个字符是&#8221;9&#8221;数字，不满足预查表达式。</p>
+
+<p>预查第三次的首字符串为&#8221;3&#8221;，不处于边界，预查的字符串&#8221;3456789&#8221;，匹配了3的整数倍个数字后的那个字符是&#8221;9&#8221;数字，不满足预查表达式。</p>
+
+<p>预查第四次的首字符串为&#8221;4&#8221;，不处于边界，预查的字符串&#8221;456789&#8221;，匹配了3的整数倍个数字后的那个字符不是数字，满足预查表达式。所以，在&#8221;4&#8221;之前插入一个&#8221;,&#8221;，依次类推得出结果。</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《如何阅读一本书》读后感]]></title>
@@ -1111,38 +1181,6 @@ f.apply( O, [1,2] );
 
 
 <p><strong>原文请链接:</strong><a href="http://www.positioniseverything.net/explorer/inherited_margin.html">http://www.positioniseverything.net/explorer/inherited_margin.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AlphamageLoader滤镜解决ie6下png图片透明带来的问题]]></title>
-    <link href="http://harole.github.com/blog/2013/04/23/alphamageloader-problem/"/>
-    <updated>2013-04-23T22:45:00+08:00</updated>
-    <id>http://harole.github.com/blog/2013/04/23/alphamageloader-problem</id>
-    <content type="html"><![CDATA[<p>一. 图片定位</p>
-
-<blockquote><ol>
-<li><1>无法使用backgroun-position对图片定位;</li>
-<li><2>因为“<1>”导致无法使用CSS Sprite，无法减少http请求;</li>
-<li><3>当前大多数网站使用的图片较多，特别在大型网站，因为 “<2>”
-将会严重影响页面的加载速度。</li>
-</ol>
-</blockquote>
-
-<!-- more -->
-
-
-<p>二. 冻结浏览器</p>
-
-<blockquote><ol>
-<li><1> 使用滤镜之后，页面不在支持CSS的渐进渲染了;</li>
-<li><2> 在所有必须的组件下载完成之前，页面都是一片空白；</li>
-<li><3> ie6会再所以CSS都下载完成后才开始渲染，但是CSS缺依赖于一张经过滤镜处理的图片，所以渲染要等到图片（经过滤镜处理的）加载完成才开始;</li>
-<li><4> 如果一个页面上有10张滤镜处理的图片，每张图片加载需要2秒，那么页面的渲染就需要停滞20秒。</li>
-</ol>
-</blockquote>
-
-<p>总结：在页面中少使用滤镜，否则性能会大大的降低。</p>
 ]]></content>
   </entry>
   

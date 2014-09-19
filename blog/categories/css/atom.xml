@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-09-15T20:44:08+08:00</updated>
+  <updated>2014-09-20T01:48:39+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -77,11 +77,11 @@
 
 <p>因为 #text2 新生成了一个 stacking context，而新生成的 stacking context 的背景是透明的。所以这里需要给 #text2 设置一个背景颜色。demo1 如下：</p>
 
-<p><img src="{{%20root_url%20}}/images/2014-06-29_11-31-31.png" alt="" /></p>
+<p><img src="/images/2014-06-29_11-31-31.png" alt="" /></p>
 
 <p>因为 #text1 和 #text2 同时是位于 root stacking root 下的，所以会想到这里给 #text1 设置一个"z-index: 1;"时 #text1 会位于 #text2 层之上。但是事实上是不会的，因为这里的 #text2 生成了一个 stacking context，新生成的 stacking context 总是位于 father stacking context 之上的。如果希望这个新生成的 stacking context 位于其他一般元素之下，可以给新生成的 stacking context 的 z-index 赋负值。demo2 如下：</p>
 
-<p><img src="{{%20root_url%20}}/images/2014-06-29_11-32-43.png" alt="" /></p>
+<p><img src="/images/2014-06-29_11-32-43.png" alt="" /></p>
 
 <p>当然，也可以给 #text1 设置 position 非 static 值生成一个 stacking context 然后让其 z-index 大于，#text2 的 z-index 值。这里就会有疑问了，可以确定的是两个兄弟元素 #text1 和 #text2 生成的 stacking context 的 father stacking context 都是 root stacking context。但是如果两个元素不是兄弟元素呢？答案也是肯定的，只要两个 stacking context 的第一个祖先 stacking context 是同一个，那么他们就可以使用 z-index 进行判断哪个在上层。</p>
 ]]></content>
@@ -153,14 +153,14 @@
 
 <p>ie6，7 下 input 和 .has-margin 之间多了 80px（即 .box 的 margin-left 的同时也复制给了 input），如下图:</p>
 
-<p><img src="{{%20root_url%20}}/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
+<p><img src="/images/2013-05-19-input-ie67.png" alt="all have content" /></p>
 
 <!-- more -->
 
 
 <p>如果将之前的form注释掉，使用注释二中的代码，会得到下图：</p>
 
-<p><img src="{{%20root_url%20}}/images/2013-06-02-input-ie67-01.png" alt="all have content" /></p>
+<p><img src="/images/2013-06-02-input-ie67-01.png" alt="all have content" /></p>
 
 <p>出现上述bug的原因是，.has-layout 中的 CSS “width: 30em” 出发了 haslayout 让 input 具有继承所有祖先元素的 margin-left 的总和的特性！所以有了上述情况，同理可以将 “width: 30em” 换成 “zoom: 1;”等触发 haslayout ，可以达到同样的结果！</p>
 

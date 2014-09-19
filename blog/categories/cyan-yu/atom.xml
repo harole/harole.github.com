@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C言语 | Harole's blog]]></title>
   <link href="http://harole.github.com/blog/categories/cyan-yu/atom.xml" rel="self"/>
   <link href="http://harole.github.com/"/>
-  <updated>2014-09-15T20:44:08+08:00</updated>
+  <updated>2014-09-20T01:48:39+08:00</updated>
   <id>http://harole.github.com/</id>
   <author>
     <name><![CDATA[harole]]></name>
@@ -32,22 +32,22 @@
 
 <p> 如果下标 i（用下标表示偏移地址）是从 1 开始的，则赋值时我们需要，获得的物理地址 = CS * 16 + (i - 1)，即每次赋值都需要多执行一次减法；</p>
 
-<p> <img src="{{%20root_url%20}}/images/2013-10-11-22-39-57.png" alt="all have content" /></p>
+<p> <img src="/images/2013-10-11-22-39-57.png" alt="all have content" /></p>
 
 <p> 如果下标 i（用下标表示偏移地址）是从 0 开始的，则赋值时，获取的物理地址 = CS * 16 + i;</p>
 
-<p> <img src="{{%20root_url%20}}/images/2013-10-11-cpu.png" alt="all have content" /></p>
+<p> <img src="/images/2013-10-11-cpu.png" alt="all have content" /></p>
 
 <p> 总结：如果数组比较大，则两种方式在时间复杂度上，数组下标从零开始更优！故数组从 0 开始。</p></li>
 <li><p>从反汇编的角度来理解（细节理解）</p>
 
-<p> <img src="{{%20root_url%20}}/images/2013-10-11-22-46-40.png" alt="all have content" /></p>
+<p> <img src="/images/2013-10-11-22-46-40.png" alt="all have content" /></p>
 
 <p> 001813F6 8B 45 DC             mov         eax,dword ptr [ebp-24h] ，这语句将 [ebp-24h] （即 i 的值）赋给 eax 寄存器；</p>
 
 <p> 001813FC 89 4C 85 E8          mov         dword ptr [ebp+eax<em>4-18h],ecx ，这句将寄存器 ecx 中的值赋给 [ebp+eax</em>4-18h] （即 a[i]），其中 ebp-18h 可以看做 CS，eax*4 为 IP；这里的 4 是4字节（int 类型的长度），这个长度随数组类型的变化而变化。</p>
 
-<p> <img src="{{%20root_url%20}}/images/2013-10-11-23-14-57.png" alt="all have content" /></p>
+<p> <img src="/images/2013-10-11-23-14-57.png" alt="all have content" /></p>
 
 <p> 同一般理解中的解释一样，如果数组是从 1 开始，即这里的寄存器每次都要做一次减法，同样带来时间复杂度的增加。</p></li>
 </ol>
